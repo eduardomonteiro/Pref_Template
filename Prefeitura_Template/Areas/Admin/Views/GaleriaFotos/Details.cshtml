@@ -1,0 +1,229 @@
+﻿@using Prefeitura_Template.Models;
+@using Prefeitura_Template.Areas.Admin.Enums;
+@using Prefeitura_Template.Areas.Admin.Utils;
+@using GridMvc.Html
+@model GaleriaFoto
+
+@{
+    ViewBag.Title = "Detalhes da Galeria de Fotos";
+    ViewBag.AreaTitle = "Detalhes da Galeria de Fotos";
+    ViewBag.AreaDescription = "";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .tagit
+    {
+        min-width:740px;
+        max-width:740px;
+    }
+
+
+</style>
+
+<div class="col-md-12">
+    <div class="box box-warning">
+        @if (!string.IsNullOrEmpty(ViewBag.Retorno))
+        {
+            if (ViewBag.Retorno.Contains("sucesso"))
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+
+            else
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+        }
+        <div class="box-body">
+            <table class="table table-bordered table-striped responsive">
+                <tbody>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.GaleriaFotoCategoriaId)</td>
+                        <td>@Html.DisplayFor(model => model.GaleriaFotoCategoria.Descricao)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Titulo)</td>
+                        <td>@Html.DisplayFor(model => model.Titulo)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Descricao)</td>
+                        <td>@Html.DisplayFor(model => model.Descricao)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Fotografo)</td>
+                        <td>@Html.DisplayFor(model => model.Fotografo)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.DataPublicacao)</td>
+                        <td>@Html.Raw(Model.DataPublicacao.Value.ToString("dd/MM/yyyy hh:mm"))</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Destaque)</td>
+                        <td>@Html.Raw(Model.Destaque ? "Sim" : "Não")</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Status)</td>
+                        <td>@Html.DisplayFor(model => model.NomeStatus)</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="box-footer">
+            <a href="@Url.Action("Index", "GaleriaFotos")" class="btn btn-info">< Voltar</a>
+            <a href="@Url.Action("Edit", "GaleriaFotos", new { id = Model.Id })" class="btn btn-warning">Editar</a>
+            
+        </div>
+    </div>
+</div>
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Fotos <small id="totalizador"></small></h3>
+    </div>
+    <div class="box-body">
+        <form action="@Url.Action("UploadFiles", "GaleriaFotos")" id="frmArquivo" method="POST" enctype="multipart/form-data" style="width:880px">
+            <div class="row" style="display:-webkit-inline-box; margin-right:0px;margin-left:0px">
+                <input type="hidden" id="Id" name="Id" value="0" />
+                <input type="hidden" id="GaleriaFotoId" name="GaleriaFotoId" value="@Model.Id" />
+                Tags &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input name="Tags" id="Tags" value="@ViewBag.Tag" class="form-control">
+            </div>
+            <div class="row" style="display:-webkit-inline-box; margin-right:0px;margin-left:0px;margin-top:15px">
+                Legenda
+                <input style="height:33px;width:180px;" type="text" id="Legenda" name="Legenda" />
+                Crédito
+                <input style="height:33px;width:180px;" type="text" id="Credito" name="Credito" />
+                <input type="text" id="Arquivo" name="Arquivo" style="display:none" />
+                <input style="margin-left:10px;width:41%;" type="file" class="arquivo form-control" name="Arquivo" title="Arquivo" id="CampoArquivo" onchange="VerificaTamanho(this);" />
+                <button type="button" class="btn btn-danger" id="BtnCancelar" value="Cancelar" style="display:none;">
+                    <span>Cancelar</span>
+                </button>
+                <button type="button" class="btn btn-primary start" id="BtnAnexarArquivo" value="Anexar Imagem">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span id="lblbtn">Anexar Imagem</span>
+                </button> 
+            </div>
+            <span style="display:none;color:red;margin-left:475px" id="ErrorArquivo"><br/>Tamanho máximo permitido 15 MB<br /></span>
+            <span style="color:blue;margin-left:475px">Tamanho: 272x191 / Formatos Aceitos: .jpg, .jpeg, .gif, .png</span>
+        </form>
+
+        @if (Model.GaleriaFotoGaleria != null && Model.GaleriaFotoGaleria.Count > 0)
+        {
+            <div class="content-body" style="margin-top:15px;">
+                @Html.Grid(Model.GaleriaFotoGaleria).Columns(columns =>
+                {
+                    columns.Add(m => m.Imagem).Html().Titled("Imagem").SetWidth(120).RenderValueAs(m => @Html.Image(m.CaminhoLogicoImagem, m.Imagem));
+                    columns.Add(m => m.Legenda).SetWidth(200).Titled("Legenda");
+                    columns.Add(m => m.Credito).SetWidth(200).Titled("Credito");
+                    columns.Add(m => m.Tag).Html().Titled("Tags").SetWidth(400).RenderValueAs(m => String.Join(",", m.Tag.Select(x => x.Descricao).ToArray()));
+                    columns.Add(m => m.DataCadastro.Date).RenderValueAs(m => m.DataCadastro.ToString("dd/MM/yyyy")).Titled("Dt.Cadastro").FormatDate().Filterable(false);
+                    columns.Add(m => m.NomeStatus).Titled("Status").Label().RenderValueAs(m => HtmlExtensions.Label(m.NomeStatus, "Ativo")).SetFilterWidgetType("EnumFilter-Status");
+                    columns.Add(m => m.Id).Html().SetWidth(300).NoHeader().RenderValueAs(m => @Html.BotoesPadroesAnexos(Url, m.Status == 1, m.Id, "GaleriaFotos", "BlockArquivo", "UnBlockArquivo", "DeleteArquivo", "EditArquivo"));
+                }).DefaultOptions().Filterable(true).WithPaging(20).WithGridItemsCount("")
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<div class="col-xs-12">
+    @{Html.RenderAction("LogsHistory", "Logs", new { AreaId = ViewBag.codAreaAtual , id = Model.Id });}
+</div>
+
+@section Scripts {
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="@Url.Content("~/Areas/Admin/js/plugins/tagIT/tag-it.min.js")" type="text/javascript"></script>
+    <script>
+        var sampleTags = @Html.Raw(Json.Encode(ViewBag.AutoCompleteTags));
+
+        $('#Tags').tagit({
+            availableTags: sampleTags
+        });
+
+        function VerificaTamanho(evt) {
+            $("#ErrorArquivo").hide();
+
+            var file = evt.files;
+                
+
+            if (file && file.length) {
+                if (file[0].size > 15000000) {
+                    $("#ErrorArquivo").show();
+                    $("#CampoArquivo").val('');
+                }
+                else {
+                    $('#Arquivo').val($(evt).val().split('\\').pop());
+                }
+            }
+        };
+
+        $("#BtnCancelar").click(function () {
+            $("#Id").val("0");
+            $("#Legenda").val("");
+            $("#Credito").val("");
+            $("#Tags").val("");
+            $('#Tags').tagit('removeAll')
+            $("#BtnAnexarArquivo").val("Anexar Imagem");
+            $("#lblbtn").text("Anexar Imagem");
+            $("#BtnCancelar").hide();
+        });
+
+        function editarquivo(url, id) {
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: { id: id },
+                dataType: 'json',
+                success: function (data) {
+                    $("#Id").val(data.Id);
+                    $("#Legenda").val(data.Legenda);
+                    $("#Credito").val(data.Credito);
+
+                    data.Tag.forEach(function(entry) {
+                        $('#Tags').tagit("createTag", entry.Descricao);
+                    });
+
+                    $("#BtnAnexarArquivo").val("Salvar");
+                    $("#lblbtn").text("Salvar");
+                    $("#BtnCancelar").show();
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        };
+
+        $(document).ready(function () {
+            pageGrids.mainGrid.addFilterWidget(new EnumFilter("Status", "@typeof(StatusPadrao).FullName"));
+        });
+        if (typeof $('.grid-itemscount-caption').html() != "undefined") {
+            $('#totalizador').append('(' + $('.grid-itemscount-caption').html() + ")");
+        }
+
+        $('#BtnAnexarArquivo').click(function () {
+            $('.arquivo').removeClass('customerror');
+
+            var a = $('#Arquivo').val();
+            var b = $("#Id").val();
+            if ($('#Arquivo').val() == "" && $("#Id").val() == "0") {
+                $('.arquivo').addClass('customerror');
+                return false;
+            }
+
+            $("#frmArquivo").submit();
+        });
+    </script>
+}
+

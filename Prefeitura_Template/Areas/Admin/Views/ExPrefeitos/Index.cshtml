@@ -1,0 +1,88 @@
+﻿@using Prefeitura_Template.Areas.Admin.Enums;
+@using Prefeitura_Template.Areas.Admin.Utils;
+@using Prefeitura_Template.Models;
+@using GridMvc.Html
+@model List<Prefeitura_Template.Models.ExPrefeito>
+@{
+    ViewBag.Title = "Ex-Prefeitos";
+    ViewBag.AreaTitle = "Ex-Prefeitos";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xs-12">
+    <div class="box">
+        @if (!string.IsNullOrEmpty(ViewBag.Retorno))
+        {
+            if (ViewBag.Retorno.Contains("sucesso"))
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+
+            else
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+        }
+        
+        
+        @using (Html.BeginForm("EditaPage", "ExPrefeitos", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+        {
+
+            <div class="box-header">
+                <div class="box-tools pull-right">
+                    <input id="btnCadastrar" type="submit" value="Atualizar Informações" class="btn btn-primary" />
+                </div>
+            </div>
+
+            @Html.AntiForgeryToken()
+            <div class="box-body">
+                <div class="editor-label" style="font-weight: 700;">
+                    Descrição da Página de Ex-Prefeitos
+                </div>
+                <div class="form-group">
+                    <textarea id="DescricaoExPrefeitos" name="DescricaoExPrefeitos" class="form-control">@ViewBag.Pagina</textarea>
+                </div>
+            </div>
+        }
+
+        <div class="box-header">
+            <h3 class="box-title">Ex-Prefeitos <small id="totalizador"></small></h3>
+            <div class="box-tools pull-right">
+                <a href="@Url.Action("Create")" class="btn btn-success btn-sm bg-green">Cadastrar Ex-Prefeito</a>
+            </div>
+        </div>
+        <div class="content-body">
+            @Html.Grid(Model).Columns(columns =>
+           {
+               columns.Add(m => m.Nome).Titled("Nome");
+               columns.Add(m => m.DataInicioLegislatura).Titled("Início Legislatura");
+               columns.Add(m => m.DataFimLegislatura).Titled("Fim Legislatura");
+               columns.Add(m => m.DataCadastro.Date).RenderValueAs(m => m.DataCadastro.ToString("dd/MM/yyyy")).Titled("Dt.Cadastro").FormatDate().Filterable(false);
+               columns.Add(m => m.NomeStatus).Titled("Status").Label().RenderValueAs(m => HtmlExtensions.Label(m.NomeStatus, "Ativo")).SetFilterWidgetType("EnumFilter-Status");
+               columns.Add(m => m.Id).Html().SetWidth(300).NoHeader().RenderValueAs(m => @Html.BotoesPadroes(Url, m.Id, m.Nome, m.Status == 1));
+           }).DefaultOptions().Filterable(true).WithPaging(20).WithGridItemsCount("")
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        jQuery.support.cors = true;
+        $(document).ready(function () {
+            pageGrids.mainGrid.addFilterWidget(new EnumFilter("Status", "@typeof(StatusPadrao).FullName"));
+        });
+        if (typeof $('.grid-itemscount-caption').html() != "undefined") {
+            $('#totalizador').append('(' + $('.grid-itemscount-caption').html() + ")");
+        }
+        ApplyCkEditor('DescricaoExPrefeitos');
+    </script>
+
+}

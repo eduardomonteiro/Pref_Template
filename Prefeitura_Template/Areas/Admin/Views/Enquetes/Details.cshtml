@@ -1,0 +1,91 @@
+﻿@using Prefeitura_Template.Models;
+@model Enquete
+
+@{
+    ViewBag.Title = "Detalhes da Enquete";
+    ViewBag.AreaTitle = "Detalhes da Enquete";
+    ViewBag.AreaDescription = "";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="box box-warning">
+        @if (!string.IsNullOrEmpty(ViewBag.Retorno))
+        {
+            if (ViewBag.Retorno.Contains("sucesso"))
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+
+            else
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+        }
+        <div class="box-body">
+            <table class="table table-bordered table-striped responsive">
+                <tbody>
+                    <tr>
+                        <td width="200">@Html.DisplayNameFor(model => model.Pergunta)</td>
+                        <td>@Html.DisplayFor(model => model.Pergunta)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.DataInicial)</td>
+                        <td>@Model.DataInicial.ToShortDateString()</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.DataEncerramento)</td>
+                        <td>@Model.DataEncerramento.ToShortDateString()</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Status)</td>
+                        <td>@Html.DisplayFor(model => model.NomeStatus)</td>
+                    </tr>
+
+                    @if (Model.EnqueteOpcao != null && Model.EnqueteOpcao.Count > 0)
+                    {
+                        int Cont = 1;
+                        foreach (var Opcao in Model.EnqueteOpcao)
+                        {
+                            if (!string.IsNullOrEmpty(Opcao.Opcao))
+                            {
+                                <tr>
+                                    <td>Opção @Html.Raw(Cont)</td>
+                                    <td>@Html.Raw(Opcao.Opcao + " - Marcada " + Opcao.QuantidadeResposta + "x (" + Opcao.PorcentagemResposta + "%)")</td>
+                                </tr>
+                            }
+                            Cont++;
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="box-footer">
+            <a href="@Url.Action("Index", "Enquetes")" class="btn btn-info">< Voltar</a>
+            <a href="@Url.Action("Edit", "Enquetes", new { id = Model.Id })" class="btn btn-warning">Editar</a>
+           
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="col-xs-12">
+    @{Html.RenderAction("LogsHistory", "Logs", new { AreaId = ViewBag.codAreaAtual , id = Model.Id });}
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -1,0 +1,397 @@
+﻿@model Prefeitura_Template.Models.Servico
+@{
+    ViewBag.AreaTitle = "Cadastrar Serviço";
+    ViewBag.Title = "Cadastrar Serviço";
+}
+
+@using (Html.BeginForm("Create", "Servicos", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            <input type="hidden" value="@ViewBag.Latitudes" id="Latitudes" name="Latitudes" />
+            <input type="hidden" value="@ViewBag.Longitudes" id="Longitudes" name="Longitudes" />
+            
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.ServicoCategoriaId)
+                </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.ServicoCategoriaId, (IEnumerable<SelectListItem>)ViewBag.Categorias, new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(model => model.ServicoCategoriaId)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Nome)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Chamada)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Chamada, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Chamada, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Descricao)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.LinkExterno)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.LinkExterno, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LinkExterno, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            @Html.LabelFor(model => model.Icone, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Icone, new { @style = "display: none;" })
+                            <input type="file" class="form-control" name="Icone" title="Icone" id="CampoIcone" onchange="VerificaTamanhoIcone(this);" />
+                            @Html.ValidationMessageFor(model => model.Icone)
+                            <span style="display:none;color:red" id="ErrorIcone">Tamanho máximo permitido 15 MB</span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="callout callout-info">
+                                <h4>Recomenda&ccedil;&otilde;es</h4>
+                                <div id="Tamanho"></div>
+                                <p>Formatos aceitos: <b>jpg, gif e png</b></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            @Html.LabelFor(model => model.Imagem, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Imagem, new { @style = "display: none;" })
+                            <input type="file" class="form-control" name="Imagem" title="Imagem" id="CampoArquivo" onchange="VerificaTamanho(this);" />
+                            @Html.ValidationMessageFor(model => model.Imagem)
+                            <span style="display:none;color:red" id="ErrorArquivo">Tamanho máximo permitido 15 MB</span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="callout callout-info">
+                                <h4>Recomenda&ccedil;&otilde;es</h4>
+                                <div id="Tamanho">Tamanho: 1599x470</div>
+                                <p>Formatos aceitos: <b>jpg, gif e png</b></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Destaque)
+                </div>
+                <div class="form-group">
+                    @Html.EditorFor(m => m.Destaque, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Destaque, "", new { @class = "text-danger" })
+                </div>
+
+                @*<input id="txtLocation" type="hidden" class="element-input" name="">
+                <div class="content-padding">
+                    <label for="txtLocation">* Selecione o Local</label>
+                    <input id="pac-input" class="controls" type="text" placeholder="Digite um endereço.." onkeydown="if (window.event.keyCode == 13) { return false; }">
+                    <input onclick="deleteMarkers();" type=button value="Deletar Pins" id="deletar-pins" style="font-size:12px;margin-top:10px;margin-right:13px;height:32px">
+                    <div id="map" class="map"></div>
+                    <span style="display:none;color:red" id="ErroMapa">É necessário ter ao menos 1 pin</span>
+                </div>*@
+            </div>
+            <div class="box-footer">
+                <a href="@Url.Action("Index", "Servicos")" class="btn btn-warning">Cancelar</a>
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+    <script>
+        var markers = [];
+        var uniqueId = 0;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                scrollwheel: false,
+                zoom: 16,
+                mapTypeControl: false,
+                streetViewControl: false
+            });
+
+
+            var geocoder = new google.maps.Geocoder;
+            var infowindow = new google.maps.InfoWindow;
+
+            //opções do mapa
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
+
+
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+
+                    @if(string.IsNullOrEmpty(ViewBag.Latitudes))
+                    {
+                        <text>
+                            var pos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            };
+                            Posiciona(pos);
+                    </text>
+                    }
+                    else
+                    {
+                        string[] latitudes = ViewBag.Latitudes.Split(new char[] { '@' });
+                        string[] longitudes = ViewBag.Longitudes.Split(new char[] { '@' });
+
+                        for (int I = 0; I < latitudes.Count(); I++)
+                        {
+                            <text>
+                                var pos = {
+                                    lat: @latitudes[I],
+                                    lng: @longitudes[I]
+                                };
+                                addMarker(pos);
+                            </text>
+                            if (I == 0)
+                            {
+                                <text>
+                                    Posiciona(pos);
+                                </text>
+                            }
+                        }
+                    }
+                }, function () {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                }, options);
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+
+
+
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            var input2 = document.getElementById('deletar-pins');
+            var searchBox = new google.maps.places.SearchBox(input2);
+            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input2);
+
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function () {
+                searchBox.setBounds(map.getBounds());
+            });
+
+
+
+            //evento de click no mapa
+            map.addListener('click', function (e) {
+                var pos = {
+                    lat: e.latLng.lat(),
+                    lng: e.latLng.lng()
+                }
+                addMarker(pos);
+            });
+
+
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function () {
+                var places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+
+                // Clear out the old markers.
+                markers.forEach(function (marker) {
+                    marker.setMap(null);
+                });
+                markers = [];
+
+                // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+
+                if (places.length > 0) {
+                    var pos = {
+                        lat: places[0].geometry.location.lat(),
+                        lng: places[0].geometry.location.lng()
+                    };
+
+
+                    addMarker(pos);
+                }
+
+                map.fitBounds(bounds);
+            });
+
+            //função para adicionar uma nova marcação no mapa
+            function Posiciona(latLng) {
+                //removendo os markers anteriores
+                //deleteMarkers();
+                //adicionando um novo
+                geocoder.geocode({ 'location': latLng }, function (results, status) {
+                    if (status === 'OK') {
+                        if (results[0]) {
+                            map.setZoom(16);
+                            map.setCenter(latLng);
+                        } else {
+                            window.alert('No results found');
+                        }
+                    } else {
+                        window.alert('Geocoder failed due to: ' + status);
+                    }
+                });
+            }
+
+            //função para adicionar uma nova marcação no mapa
+            function addMarker(latLng) {
+                //adicionando um novo
+                geocoder.geocode({ 'location': latLng }, function (results, status) {
+                    if (status === 'OK') {
+                        if (results[0]) {
+                            map.setZoom(16);
+
+                            var marker = new google.maps.Marker({
+                                position: latLng,
+                                map: map,
+                                title: results[0].formatted_address,
+                                animation: google.maps.Animation.DROP,
+                                draggable: true
+                            });
+                            document.getElementById("txtLocation").value = results[0].formatted_address;
+                            document.getElementById("pac-input").value = results[0].formatted_address;
+
+                            map.panTo(latLng);
+                            marker.id = uniqueId;
+
+                            google.maps.event.addListener(marker, "click", function (point) { id = marker.id; delMarker(marker.id) });
+
+                            markers.push(marker);
+                            map.setCenter(latLng);
+                            uniqueId++;
+                        } else {
+                            window.alert('No results found');
+                        }
+                    } else {
+                        window.alert('Geocoder failed due to: ' + status);
+                    }
+                });
+            }
+
+            var delMarker = function (id) {
+                marker = markers[id];
+                marker.setMap(null);
+            }
+
+           
+           
+        }
+
+        // Sets the map on all markers in the array.
+        function setMapOnAll(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+
+        // Removes the markers from the map, but keeps them in the array.
+        function clearMarkers() {
+            setMapOnAll(null);
+        }
+        // Deletes all markers in the array by removing references to them.
+        function deleteMarkers() {
+            clearMarkers();
+            markers = [];
+        }
+
+        jQuery(function () {
+            $('#map').fadeIn(600);
+        });
+
+        $(document).ready(function(){
+            $('#Icone').val("");
+            $('#Imagem').val("");
+        });
+
+        function VerificaTamanhoIcone(evt) {
+            $('#Icone').val("");
+            $("#ErrorIcone").hide();
+
+            var file = evt.files;
+
+            if (file && file.length) {
+                if (file[0].size > 15000000) {
+                    $("#ErrorIcone").show();
+                    $("#CampoIcone").val('');
+                }
+                else {
+                    $('#Icone').val($(evt).val().split('\\').pop());
+                }
+            }
+        };
+
+        function VerificaTamanho(evt) {
+            $('#Imagem').val("");
+            $("#ErrorArquivo").hide();
+
+            var file = evt.files;
+                
+
+            if (file && file.length) {
+                if (file[0].size > 15000000) {
+                    $("#ErrorArquivo").show();
+                    $("#CampoArquivo").val('');
+                }
+                else {
+                    $('#Imagem').val($(evt).val().split('\\').pop());
+                }
+            }
+        };
+        ApplyCkEditor('Descricao');
+
+        //$('form').on("submit", function () {
+        //    $("#ErroMapa").hide();
+        //    $("#Latitudes").val("");
+        //    $("#Longitudes").val("");
+        //    var TemPin = false;
+        //    for (var i = 0; i < markers.length; i++) {
+        //        var Pin = markers[i];
+        //        if (Pin.map != null) {
+        //            TemPin = true;
+        //            $("#Latitudes").val($("#Latitudes").val() + Pin.position.lat() + "@@");
+        //            $("#Longitudes").val($("#Longitudes").val() + Pin.position.lng() + "@@");
+        //        }
+        //    }
+        //    if (TemPin == false) {
+        //        $("#ErroMapa").show();
+        //        return false;
+        //    }
+        //});
+</script>
+}

@@ -1,0 +1,279 @@
+﻿@model Prefeitura_Template.Models.Cidade
+@{
+    ViewBag.Title = "Editar Informações da Cidade";
+    ViewBag.AreaTitle = "Editar Informações da Cidade";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-12">
+    <div class="box box-warning">
+        @using (Html.BeginForm("Edit", "Cidade", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.ExPrefeito)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Descricao)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Descricao)
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            @Html.LabelFor(model => model.ImagemDescricao, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.ImagemDescricao, new { @style = "display: none;" })
+                            <input type="file" class="form-control" name="ImagemDescricao" title="ImagemDescricao" id="ImagemDescricao" onchange="javascript: $('#ImagemDescricao').val($(this).val().split('\\').pop());" />
+                            @Html.ValidationMessageFor(model => model.ImagemDescricao)
+                            @if (!string.IsNullOrEmpty(Model.ImagemDescricao))
+                            {
+                                <div id="BotoesImagemDescricao">
+                                    <a href="@Url.Content(Model.CaminhoLogicoImagemDescricao)" class='btn btn-info btn-sm' alt='Visualizar' title='Visualizar' style="margin-top:5px;" target="_blank">Visualizar</a>
+                                    <a href="#" onclick="javascript:mensagemexcluirarquivo('@Url.Action("DeleteImagemDescricao", "Cidade", new { id= Model.Id })' , 'ImagemDescricao')" style="margin-top:5px;" class='btn btn-danger btn-sm' alt='Excluir' title='Excluir'>Remover</a>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="callout callout-info">
+                                <h4>Recomenda&ccedil;&otilde;es</h4>
+                                <div id="Tamanho"></div>
+                                <p>Formatos aceitos: <b>jpg, gif e png</b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.DescricaoBandeira)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.DescricaoBandeira, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DescricaoBandeira)
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            @Html.LabelFor(model => model.ImagemBandeira, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.ImagemBandeira, new { @style = "display: none;" })
+                            <input type="file" class="form-control" name="ImagemBandeira" title="ImagemBandeira" id="ImagemBandeira" onchange="javascript: $('#ImagemBandeira').val($(this).val().split('\\').pop());" />
+                            @Html.ValidationMessageFor(model => model.ImagemBandeira)
+                            @if (!string.IsNullOrEmpty(Model.ImagemBandeira))
+                            {
+                                <div id="BotoesImagemBandeira">
+                                    <a href="@Url.Content(Model.CaminhoLogicoImagemBandeira)" class='btn btn-info btn-sm' alt='Visualizar' title='Visualizar' style="margin-top:5px;" target="_blank">Visualizar</a>
+                                    <a href="#" onclick="javascript:mensagemexcluirarquivo('@Url.Action("DeleteImagemBandeira", "Cidade", new { id= Model.Id })' , 'ImagemBandeira')" style="margin-top:5px;" class='btn btn-danger btn-sm' alt='Excluir' title='Excluir'>Remover</a>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="callout callout-info">
+                                <h4>Recomenda&ccedil;&otilde;es</h4>
+                                <div id="Tamanho"></div>
+                                <p>Formatos aceitos: <b>jpg, gif e png</b></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.DescricaoBrasao)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.DescricaoBrasao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DescricaoBrasao)
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            @Html.LabelFor(model => model.ImagemBrasao, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.ImagemBrasao, new { @style = "display: none;" })
+                            <input type="file" class="form-control" name="ImagemBrasao" title="ImagemBrasao" id="ImagemBrasao" onchange="javascript: $('#ImagemBrasao').val($(this).val().split('\\').pop());" />
+                            @Html.ValidationMessageFor(model => model.ImagemBrasao)
+                            @if (!string.IsNullOrEmpty(Model.ImagemBrasao))
+                            {
+                                <div id="BotoesImagemBrasao">
+                                    <a href="@Url.Content(Model.CaminhoLogicoImagemBrasao)" class='btn btn-info btn-sm' alt='Visualizar' title='Visualizar' style="margin-top:5px;" target="_blank">Visualizar</a>
+                                    <a href="#" onclick="javascript:mensagemexcluirarquivo('@Url.Action("DeleteImagemBrasao", "Cidade", new { id= Model.Id })' , 'ImagemBrasao')" style="margin-top:5px;" class='btn btn-danger btn-sm' alt='Excluir' title='Excluir'>Remover</a>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="callout callout-info">
+                                <h4>Recomenda&ccedil;&otilde;es</h4>
+                                <div id="Tamanho"></div>
+                                <p>Formatos aceitos: <b>jpg, gif e png</b></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.DescricaoInvista)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.DescricaoInvista, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DescricaoInvista)
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            @Html.LabelFor(model => model.ImagemInvista, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.ImagemInvista, new { @style = "display: none;" })
+                            <input type="file" class="form-control" name="ImagemInvista" title="ImagemInvista" id="ImagemInvista" onchange="javascript: $('#ImagemInvista').val($(this).val().split('\\').pop());" />
+                            @Html.ValidationMessageFor(model => model.ImagemInvista)
+                            @if (!string.IsNullOrEmpty(Model.ImagemInvista))
+                            {
+                                <div id="BotoesImagemInvista">
+                                    <a href="@Url.Content(Model.CaminhoLogicoImagemInvista)" class='btn btn-info btn-sm' alt='Visualizar' title='Visualizar' style="margin-top:5px;" target="_blank">Visualizar</a>
+                                    <a href="#" onclick="javascript:mensagemexcluirarquivo('@Url.Action("DeleteImagemInvista", "Cidade", new { id= Model.Id })' , 'ImagemInvista')" style="margin-top:5px;" class='btn btn-danger btn-sm' alt='Excluir' title='Excluir'>Remover</a>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="callout callout-info">
+                                <h4>Recomenda&ccedil;&otilde;es</h4>
+                                <div id="Tamanho"></div>
+                                <p>Formatos aceitos: <b>jpg, gif e png</b></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.DescricaoHino)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.DescricaoHino, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DescricaoHino)
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            @Html.LabelFor(model => model.AudioHino, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.AudioHino, new { @style = "display: none;" })
+                            <input type="file" class="form-control" name="AudioHino" title="AudioHino" id="AudioHino" onchange="javascript: $('#AudioHino').val($(this).val().split('\\').pop());" />
+                            @Html.ValidationMessageFor(model => model.AudioHino)
+                            @if (!string.IsNullOrEmpty(Model.AudioHino))
+                            {
+                                <div id="BotoesAudioHino">
+                                    <a href="@Url.Content(Model.CaminhoLogicoAudioHino)" class='btn btn-info btn-sm' alt='Visualizar' title='Visualizar' style="margin-top:5px;" target="_blank">Visualizar</a>
+                                    <a href="#" onclick="javascript:mensagemexcluirarquivo('@Url.Action("DeleteAudioHino", "Cidade", new { id= Model.Id })' , 'AudioHino')" style="margin-top:5px;" class='btn btn-danger btn-sm' alt='Excluir' title='Excluir'>Remover</a>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="callout callout-info">
+                                <h4>Recomenda&ccedil;&otilde;es</h4>
+                                <div id="Tamanho"></div>
+                                <p>Formatos aceitos: <b>jpg, gif e png</b></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.DataFundacao, new { @class = "form-label" })
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.DataFundacao, new { @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.DataFundacao)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.AtualPrefeito)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.AtualPrefeito, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AtualPrefeito, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Populacao)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Populacao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Populacao, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Clima)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Clima, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Clima, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Area)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Area, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Densidade)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Densidade, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Densidade, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Altitude)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Altitude, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Altitude, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Telefone)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Email)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="box-footer">
+                    <a href="@Url.Action("Index", "Cidade")" class="btn btn-warning">Cancelar</a>
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/admin-jqueryval")
+    <script>
+        ApplyCkEditor('Descricao');
+        ApplyCkEditor('DescricaoBandeira');
+        ApplyCkEditor('DescricaoBrasao');
+        ApplyCkEditor('DescricaoInvista');
+        ApplyCkEditor('DescricaoHino');
+    </script>
+}

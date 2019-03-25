@@ -1,0 +1,30 @@
+﻿@model Prefeitura_Template.Models.Bairro
+@{
+    ViewBag.AreaTitle = "Cadastrar Bairro";
+    ViewBag.Title = "Cadastrar Bairro";
+}
+
+@using (Html.BeginForm("Create", "Bairros", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Descricao)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Descricao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="box-footer">
+                <a href="@Url.Action("Index", "Bairros")" class="btn btn-warning">Cancelar</a>
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}

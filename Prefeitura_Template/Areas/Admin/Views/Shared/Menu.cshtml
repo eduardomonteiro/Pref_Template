@@ -1,0 +1,37 @@
+﻿@using Prefeitura_Template.Models
+@using Prefeitura_Template.Areas.Admin.Utils;
+
+@model List<Area>
+@{
+    string controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+    string action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+    var areaPai = Model.Where(x => x.AreaPai != 0 && x.Action == action && x.Nome == controller).Select(x => x.AreaPai).FirstOrDefault();
+}
+
+<section class="sidebar">
+    <ul class="sidebar-menu">
+        @foreach (var area in Model.Where(a => a.AreaPai == 0).OrderBy(x => x.Ordem))
+        {
+            if (!Model.Where(x => x.AreaPai == area.Id).Any())
+            {
+                @Html.SetMenu(area.Nome, area.Action, area.LinkClass, area.Descricao, false)
+            }
+            else
+            {
+                if (areaPai == area.Id)
+                {
+                    @Html.SetMenu(area.Nome, area.Action, area.LinkClass, area.Descricao, true, true)
+                }
+                else
+                {
+                    @Html.SetMenu(area.Nome, area.Action, area.LinkClass, area.Descricao, true)
+                }
+                foreach (var subArea in Model.Where(a => a.AreaPai == area.Id).OrderBy(a => a.Ordem).ThenBy(a => a.Id))
+                {
+                    @Html.SetMenuChild(subArea.Nome, subArea.Action, subArea.LinkClass, subArea.Descricao)
+                }
+                @Html.Raw("</ul></li>");
+            }
+        }
+    </ul>
+</section>

@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.ClienteDiretorio = ViewBag.Diretorio;
+    ViewBag.ClienteLogo = ViewBag.Logo;
+
+    ViewBag.Title = "Erro Inesperado";
+    ViewBag.AreaTitle = "Erro Inesperado";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" style="padding:0px 0px">
+        <div class="error-page">
+            <h2 class="headline text-yellow"> Oops!</h2>
+
+
+        </div><!-- /.error-page -->
+    </section><!-- /.content -->
+    <section class="content">
+        <div class="error-page">
+            <div class="error-content" style="margin:0px">
+                <h3><i class="fa fa-warning text-yellow"></i>  Ocorreu um erro inesperado.</h3>
+                <p>
+                    <a href="@Url.Action("Index", "Home")">Clique aqui </a> e retorne à página principal.
+                </p>
+            </div><!-- /.error-content -->
+        </div>
+    </section>
+</div><!-- /.content-wrapper -->

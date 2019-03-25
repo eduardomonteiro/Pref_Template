@@ -1,0 +1,101 @@
+﻿@model Prefeitura_Template.Models.PatrimonioHistoricoCultural
+@{
+    ViewBag.AreaTitle = "Cadastrar Patrimônio Histórico Cultural";
+    ViewBag.AreaTitle = "Cadastrar Patrimônio Histórico Cultural";
+}
+
+@using (Html.BeginForm("Create", "PatrimonioHistoricoCultural", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.PatrimonioHistoricoCulturalCategoriaId)
+                </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.PatrimonioHistoricoCulturalCategoriaId, (IEnumerable<SelectListItem>)ViewBag.Categorias, new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(model => model.PatrimonioHistoricoCulturalCategoriaId)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Nome)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Descricao)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.LinkMaps)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.LinkMaps, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LinkMaps, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            @Html.LabelFor(model => model.Imagem, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Imagem, new { @style = "display: none;" })
+                            <input type="file" class="form-control" name="Imagem" title="Imagem" id="CampoArquivo" onchange="VerificaTamanho(this);" />
+                            @Html.ValidationMessageFor(model => model.Imagem)
+                            <span style="display:none;color:red" id="ErrorArquivo">Tamanho máximo permitido 15 MB</span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="callout callout-info">
+                                <h4>Recomenda&ccedil;&otilde;es</h4>
+                                <div id="Tamanho">Tamanho: 348x348</div>
+                                <p>Formatos aceitos: <b>jpg, gif e png</b></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <a href="@Url.Action("Index", "PatrimonioHistoricoCultural")" class="btn btn-warning">Cancelar</a>
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#Imagem').val("");
+        });
+        function VerificaTamanho(evt) {
+            $('#Imagem').val("");
+            $("#ErrorArquivo").hide();
+
+            var file = evt.files;
+                
+
+            if (file && file.length) {
+                if (file[0].size > 15000000) {
+                    $("#ErrorArquivo").show();
+                    $("#CampoArquivo").val('');
+                }
+                else {
+                    $('#Imagem').val($(evt).val().split('\\').pop());
+                }
+            }
+        };
+        ApplyCkEditor('Descricao');
+    </script>
+}

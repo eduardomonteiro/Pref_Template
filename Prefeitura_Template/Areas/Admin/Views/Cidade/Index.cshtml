@@ -1,0 +1,156 @@
+﻿@using Prefeitura_Template.Models;
+@model Cidade
+
+@{
+    ViewBag.Title = "A Cidade";
+    ViewBag.AreaTitle = "A Cidade";
+    ViewBag.AreaDescription = "";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="box box-warning">
+        @if (!string.IsNullOrEmpty(ViewBag.Retorno))
+        {
+            if (ViewBag.Retorno.Contains("sucesso"))
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+
+            else
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+        }
+        <div class="box-body">
+            <table class="table table-bordered table-striped responsive">
+                <tbody>
+                    <tr>
+                        <td style="width:200px;">@Html.DisplayNameFor(model => model.Descricao)</td>
+                        <td>@Html.Raw(Model.Descricao)</td>
+                    </tr>
+                    @if (!string.IsNullOrEmpty(Model.ImagemDescricao))
+                    {
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.ImagemDescricao)</td>
+                            <td><img src="@Url.Content(Model.CaminhoLogicoImagemDescricao)" width="423" title="@Model.ImagemDescricao" /></td>
+                        </tr>
+                    }
+                    <tr>
+                        <td style="width">@Html.DisplayNameFor(model => model.DescricaoBandeira)</td>
+                        <td>@Html.Raw(Model.DescricaoBandeira)</td>
+                    </tr>
+                     @if (!string.IsNullOrEmpty(Model.ImagemBandeira))
+                     {
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.ImagemBandeira)</td>
+                            <td><img src="@Url.Content(Model.CaminhoLogicoImagemBandeira)" width="423" title="@Model.ImagemBandeira" /></td>
+                        </tr>
+                     }
+                    <tr>
+                        <td style="width">@Html.DisplayNameFor(model => model.DescricaoBrasao)</td>
+                        <td>@Html.Raw(Model.DescricaoBrasao)</td>
+                    </tr>
+                     @if (!string.IsNullOrEmpty(Model.ImagemBrasao))
+                     {
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.ImagemBrasao)</td>
+                            <td><img src="@Url.Content(Model.CaminhoLogicoImagemBrasao)" width="423" title="@Model.ImagemBrasao" /></td>
+                        </tr>
+                     }
+                    <tr>
+                        <td style="width">@Html.DisplayNameFor(model => model.DescricaoInvista)</td>
+                        <td>@Html.Raw(Model.DescricaoInvista)</td>
+                    </tr>
+                     @if (!string.IsNullOrEmpty(Model.ImagemInvista))
+                     {
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.ImagemInvista)</td>
+                            <td><img src="@Url.Content(Model.CaminhoLogicoImagemInvista)" width="423" title="@Model.ImagemInvista" /></td>
+                        </tr>
+                     }
+                    <tr>
+                        <td style="width">@Html.DisplayNameFor(model => model.DescricaoHino)</td>
+                        <td>@Html.Raw(Model.DescricaoHino)</td>
+                    </tr>
+                     @if (!string.IsNullOrEmpty(Model.AudioHino))
+                     {
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.AudioHino)</td>
+                            <td>
+                                <audio controls>
+                                    <source src="@Url.Content(Model.CaminhoLogicoAudioHino)" >
+                                </audio>
+                            </td>
+                        </tr>
+                     }
+                      @if (Model.DataFundacao != null)
+                      {
+                        <tr>
+                            <td style="width">@Html.DisplayNameFor(model => model.DataFundacao)</td>
+                            <td>@Html.Raw(Model.DataFundacao.Value.ToShortDateString())</td>
+                        </tr>
+                      }
+                    <tr>
+                        <td style="width">@Html.DisplayNameFor(model => model.AtualPrefeito)</td>
+                        <td>@Html.DisplayFor(m => m.AtualPrefeito)</td>
+                    </tr>
+                    <tr>
+                        <td style="width">@Html.DisplayNameFor(model => model.Populacao)</td>
+                        <td>@Html.DisplayFor(m => m.Populacao)</td>
+                    </tr>
+                    <tr>
+                        <td style="width">@Html.DisplayNameFor(model => model.Clima)</td>
+                        <td>@Html.DisplayFor(m => m.Clima)</td>
+                    </tr>
+                    <tr>
+                        <td style="width">@Html.DisplayNameFor(model => model.Area)</td>
+                        <td>@Html.DisplayFor(m => m.Area)</td>
+                    </tr>
+                    <tr>
+                        <td style="width">@Html.DisplayNameFor(model => model.Densidade)</td>
+                        <td>@Html.DisplayFor(m => m.Densidade)</td>
+                    </tr>
+                    <tr>
+                        <td style="width">@Html.DisplayNameFor(model => model.Altitude)</td>
+                        <td>@Html.DisplayFor(m => m.Altitude)</td>
+                    </tr>
+                    <tr>
+                        <td style="width">@Html.DisplayNameFor(model => model.Telefone)</td>
+                        <td>@Html.DisplayFor(m => m.Telefone)</td>
+                    </tr>
+                    <tr>
+                        <td style="width">@Html.DisplayNameFor(model => model.Email)</td>
+                        <td>@Html.DisplayFor(m => m.Email)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="box-footer">
+            <a href="@Url.Action("Edit", "Cidade", new { id = Model.Id })" class="btn btn-warning">Editar</a>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="col-xs-12">
+    @{Html.RenderAction("LogsHistory", "Logs", new { AreaId = ViewBag.codAreaAtual });}
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

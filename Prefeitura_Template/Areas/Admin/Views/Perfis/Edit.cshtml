@@ -1,0 +1,157 @@
+﻿@model Prefeitura_Template.Models.Perfil
+@{
+    ViewBag.Title = "Editar Perfil";
+    ViewBag.AreaTitle = "Editar Perfil";
+}
+
+@section css {
+    <link href="@Url.Content("~/Areas/Admin/css/datatables/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Areas/Admin/css/alertify/alertify.core.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Areas/Admin/css/alertify/alertify.default.css")" rel="stylesheet" type="text/css" />
+}
+
+@using (Html.BeginForm("Edit", "Perfis", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.DataCadastro)
+            @Html.HiddenFor(model => model.Status)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Descricao)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Descricao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-body no-padding">
+                                <div class="fc fc-ltr">
+                                    <table class="table table-striped responsive table-hover dataTable">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30px; text-align: center;"></th>
+                                                <th style="width: 150px;">Área</th>
+                                                <th style="width: 20px; text-align: center;">Leitura<br /><input id="allleitura" type="checkbox" value="true" style = "width:20px;height:20px"></th>
+                                                <th style="width: 20px; text-align: center;">Criação<br /><input id="allcriacao" type="checkbox" value="true" style = "width:20px;height:20px"></th>
+                                                <th style="width: 20px; text-align: center;">Alteração<br /><input id="allalteracao" type="checkbox" value="true" style = "width:20px;height:20px"></th>
+                                                <th style="width: 20px; text-align: center;">Exclusão<br /><input id="allexclusao" type="checkbox" value="true" style = "width:20px;height:20px"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.Perfil_Area.Any())
+                                            {
+
+                                                for (int i = 0; i < Model.Perfil_Area.Count; i++)
+                                                {
+                                                    if (Model.Perfil_Area.ToList()[i].Area.AreaPai == 0)
+                                                    {
+                                                        string rot = Model.Perfil_Area.ToList()[i].Area.Descricao;
+
+                                                        <tr>
+
+                                                            <td style="text-align: center;"><i class="fa fa-lock"></i></td>
+                                                            <td>@rot</td>
+
+                                                            <td style="width: 20px; text-align: center;">@Html.CheckBoxFor(model => Model.Perfil_Area.ToList()[i].Leitura, new { @class = "cLeitura", @style = "width:20px;height:20px" })</td>
+                                                            <td style="width: 20px; text-align: center;">@Html.CheckBoxFor(model => Model.Perfil_Area.ToList()[i].Criacao, new { @class = "cCriacao", @style = "width:20px;height:20px" })</td>
+                                                            <td style="width: 20px; text-align: center;">@Html.CheckBoxFor(model => Model.Perfil_Area.ToList()[i].Alteracao, new { @class = "cAlteracao", @style = "width:20px;height:20px" })</td>
+                                                            <td style="width: 20px; text-align: center;">@Html.CheckBoxFor(model => Model.Perfil_Area.ToList()[i].Exclusao, new { @class = "cExclusao", @style = "width:20px;height:20px" })</td>
+                                                            <td style="width: 20px; text-align: center;">
+                                                                @Html.HiddenFor(model => Model.Perfil_Area.ToList()[i].PerfilId)
+                                                                @Html.HiddenFor(model => Model.Perfil_Area.ToList()[i].AreaId)
+                                                                @Html.HiddenFor(model => Model.Perfil_Area.ToList()[i].Id)
+                                                            </td>
+
+                                                        </tr>
+                                                        for (int i2 = 0; i2 < Model.Perfil_Area.Count; i2++)
+                                                        {
+                                                            if (Model.Perfil_Area.ToList()[i2].Area.AreaPai == Model.Perfil_Area.ToList()[i].Area.Id)
+                                                            {
+                                                                rot = Model.Perfil_Area.ToList()[i2].Area.Descricao;
+
+                                                                <tr>
+
+                                                                    <td style="text-align: center;"><i class="fa fa-lock"></i></td>
+                                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@rot</td>
+
+                                                                    <td style="width: 20px; text-align: center;">@Html.CheckBoxFor(model => Model.Perfil_Area.ToList()[i2].Leitura, new { @class = "cLeitura", @style = "width:20px;height:20px" })</td>
+                                                                    <td style="width: 20px; text-align: center;">@Html.CheckBoxFor(model => Model.Perfil_Area.ToList()[i2].Criacao, new { @class = "cCriacao", @style = "width:20px;height:20px" })</td>
+                                                                    <td style="width: 20px; text-align: center;">@Html.CheckBoxFor(model => Model.Perfil_Area.ToList()[i2].Alteracao, new { @class = "cAlteracao", @style = "width:20px;height:20px" })</td>
+                                                                    <td style="width: 20px; text-align: center;">@Html.CheckBoxFor(model => Model.Perfil_Area.ToList()[i2].Exclusao, new { @class = "cExclusao", @style = "width:20px;height:20px" })</td>
+                                                                    <td style="width: 20px; text-align: center;">
+                                                                        @Html.HiddenFor(model => Model.Perfil_Area.ToList()[i2].PerfilId)
+                                                                        @Html.HiddenFor(model => Model.Perfil_Area.ToList()[i2].AreaId)
+                                                                        @Html.HiddenFor(model => Model.Perfil_Area.ToList()[i2].Id)
+                                                                    </td>
+
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <a href="@Url.Action("Details", "Perfis", new { id= Model.Id })" class="btn btn-warning">Cancelar</a>
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    <!-- DATA TABLES SCRIPT -->
+    <script src="@Url.Content("~/Areas/Admin/js/plugins/datatables/jquery.dataTables.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Admin/js/plugins/datatables/dataTables.bootstrap.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Admin/js/plugins/alertify/alertify.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(".chosen-select").chosen({ width: "100%" });
+
+        $('#allleitura').on('change', function (evt, params) {
+            var e = document.getElementById("allleitura");
+            var strUser = e.checked;
+            $(".cLeitura").each(function (index) {
+                $(this).prop('checked', strUser);
+            });
+        });
+
+        $('#allcriacao').on('change', function (evt, params) {
+            var e = document.getElementById("allcriacao");
+            var strUser = e.checked;
+            $(".cCriacao").each(function (index) {
+                $(this).prop('checked', strUser);
+            });
+        });
+
+        $('#allalteracao').on('change', function (evt, params) {
+            var e = document.getElementById("allalteracao");
+            var strUser = e.checked;
+            $(".cAlteracao").each(function (index) {
+                $(this).prop('checked', strUser);
+            });
+        });
+
+        $('#allexclusao').on('change', function (evt, params) {
+            var e = document.getElementById("allexclusao");
+            var strUser = e.checked;
+            $(".cExclusao").each(function (index) {
+                $(this).prop('checked', strUser);
+            });
+        });
+    </script>
+}

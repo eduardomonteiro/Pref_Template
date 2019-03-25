@@ -1,0 +1,225 @@
+﻿@using Prefeitura_Template.Models;
+@using Prefeitura_Template.Areas.Admin.Enums;
+@using Prefeitura_Template.Areas.Admin.Utils;
+@using GridMvc.Html
+@model Secretaria
+
+@{
+    ViewBag.Title = "Detalhes da Secretaria";
+    ViewBag.AreaTitle = "Detalhes da Secretaria";
+    ViewBag.AreaDescription = "";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="box box-warning">
+        @if (!string.IsNullOrEmpty(ViewBag.Retorno))
+        {
+            if (ViewBag.Retorno.Contains("sucesso"))
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+
+            else
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+        }
+        <div class="box-body">
+            <table class="table table-bordered table-striped responsive">
+                <tbody>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.SecretariaCategoriaId)</td>
+                        <td>@Html.DisplayFor(model => model.SecretariaCategoria.Descricao)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Nome)</td>
+                        <td>@Html.Raw(Model.NomeComPrefixo)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.PincipaisServicos)</td>
+                        <td>@Html.DisplayFor(model => model.PincipaisServicos)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Icone)</td>
+                        <td><img src="@Url.Content(Model.CaminhoLogicoIcone)" title="@Model.Icone" /></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.NomeResponsavel)</td>
+                        <td>@Html.DisplayFor(model => model.NomeResponsavel)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.ImagemResponsavel)</td>
+                        <td><img src="@Url.Content(Model.CaminhoLogicoImagemResponsavel)" title="@Model.ImagemResponsavel" /></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Cargo)</td>
+                        <td>@Html.DisplayFor(model => model.Cargo)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Email)</td>
+                        <td>@Html.DisplayFor(model => model.Email)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Telefone)</td>
+                        <td>@Html.DisplayFor(model => model.Telefone)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.HorarioAtendimento)</td>
+                        <td>@Html.DisplayFor(model => model.HorarioAtendimento)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Endereco)</td>
+                        <td>@Html.DisplayFor(model => model.Endereco)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Atribuicao)</td>
+                        <td>@Html.DisplayFor(model => model.Atribuicao)</td>
+                    </tr>
+                    @if (!string.IsNullOrEmpty(Model.ImagemLocal))
+                    {
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.ImagemLocal)</td>
+                            <td><img src="@Url.Content(Model.CaminhoLogicoImagemLocal)" width="423" title="@Model.ImagemLocal" /></td>
+                        </tr>
+                    }
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Latitude)</td>
+                        <td>@Html.DisplayFor(model => model.Latitude)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Longitude)</td>
+                        <td>@Html.DisplayFor(model => model.Longitude)</td>
+                    </tr>
+                    @if (Model.Tag != null && Model.Tag.Count > 0)
+                    {
+                        <tr>
+                            <td style="width:200px">@Html.DisplayNameFor(model => model.Tag)</td>
+                            <td>@Html.Raw(String.Join(", ", Model.Tag.Select(x => x.Descricao).ToArray()))</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Status)</td>
+                        <td>@Html.DisplayFor(model => model.NomeStatus)</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="box-footer">
+            <a href="@Url.Action("Index", "Secretarias")" class="btn btn-info">< Voltar</a>
+            <a href="@Url.Action("Edit", "Secretarias", new { id = Model.Id })" class="btn btn-warning">Editar</a>
+            
+        </div>
+    </div>
+</div>
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Serviços <small id="totalizadorpin"></small></h3>
+    </div>
+    <div class="box-body">
+        <form action="@Url.Action("CreateSecretariaServico", "Secretarias")" id="frmServico" method="POST" enctype="multipart/form-data">
+            <div class="row" style="display:-webkit-inline-box; margin-right:0px;margin-left:0px;width:1000px">
+                <input type="hidden" id="Id" name="Id" value="0" />
+                <input type="hidden" id="SecretariaId" name="SecretariaId" value="@Model.Id" />
+                <label style="display:block;margin-top:5px">Serviço</label>
+                @Html.DropDownList("ServicoId", (IEnumerable<SelectListItem>)ViewBag.Servicos, "Selecione...", new { @class = "form-control chosen-select", @style = "width:500px;" })
+                <label>Ordem</label>
+                <input style="height:33px;width:100px;" type="number" value="1" min="1" id="Ordem" name="Ordem" />
+                <button type="button" class="btn btn-danger" id="BtnCancelar" value="Cancelar" style="display:none">
+                    <span>Cancelar</span>
+                </button>
+                <button type="button" class="btn btn-primary start" id="BtnSalvar" value="Salvar">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span id="lblbtn">Salvar</span>
+                </button>
+            </div>
+        </form>
+        @if (Model.SecretariaServico != null && Model.SecretariaServico.Count > 0)
+            {
+            <div class="content-body" style="margin-top:15px;">
+                @Html.Grid(Model.SecretariaServico).Columns(columns =>
+               {
+                   columns.Add(m => m.ServicoNome).Titled("Serviço");
+                   columns.Add(m => m.Ordem).Titled("Ordem");
+                   columns.Add(m => m.DataCadastro.Date).RenderValueAs(m => m.DataCadastro.ToString("dd/MM/yyyy")).Titled("Dt.Cadastro").FormatDate().Filterable(false);
+                   columns.Add(m => m.NomeStatus).Titled("Status").Label().RenderValueAs(m => HtmlExtensions.Label(m.NomeStatus, "Ativo")).SetFilterWidgetType("EnumFilter-Status");
+                   columns.Add(m => m.Id).Html().SetWidth(300).NoHeader().RenderValueAs(m => @Html.BotoesPadroesAnexos(Url, m.Status == 1, m.Id, "Secretarias", "BlockSecretariaServico", "UnBlockSecretariaServico", "DeleteSecretariaServico", "EditSecretariaServico"));
+               }).DefaultOptions().Filterable(true).WithPaging(20).WithGridItemsCount("")
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<div class="col-xs-12">
+    @{Html.RenderAction("LogsHistory", "Logs", new { AreaId = ViewBag.codAreaAtual , id = Model.Id });}
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#BtnCancelar").click(function () {
+            $("#Id").val("0");
+            $("#Ordem").val("");
+            $("#ServicoId").val("");
+            $("#BtnCancelar").hide();
+        });
+
+        function editarquivo(url, id) {
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: { id: id },
+                dataType: 'json',
+                success: function (data) {
+                    $("#Id").val(data.Id);
+                    $("#Ordem").val(data.Ordem);
+                    $("#ServicoId").val(data.ServicoId);
+                    $("#BtnCancelar").show();
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        };
+
+        $('#BtnSalvar').click(function () {
+            $('#Ordem').removeClass('customerror');
+            $('#ServicoId').removeClass('customerror');
+
+            if ($('#ServicoId').val() == "") {
+                $('#ServicoId').addClass('customerror');
+                return false;
+            }
+
+            if ($('#Ordem').val() == "" || $('#Ordem').val() == "0") {
+                $('#Ordem').addClass('customerror');
+                return false;
+            }
+            
+
+            $("#frmServico").submit();
+        });
+
+        $(document).ready(function () {
+            pageGrids.mainGrid.addFilterWidget(new EnumFilter("Status", "@typeof(StatusPadrao).FullName"));
+        });
+        if (typeof $('.grid-itemscount-caption').html() != "undefined") {
+            $('#totalizador').append('(' + $('.grid-itemscount-caption').html() + ")");
+        }
+    </script>
+}
+

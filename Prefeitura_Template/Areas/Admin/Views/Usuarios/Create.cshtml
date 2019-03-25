@@ -1,0 +1,82 @@
+﻿@model Prefeitura_Template.Areas.Admin.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Cadastrar Usuário";
+    ViewBag.AreaTitle = "Cadastrar Usuário";
+}
+
+@using (Html.BeginForm("Create", "Usuarios", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Nome)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Email)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.PerfilId)
+                </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.PerfilId, (IEnumerable<SelectListItem>)ViewBag.Perfis, new { @class = "form-control chosen-select"})
+                    @Html.ValidationMessageFor(model => model.PerfilId)
+                </div>
+
+
+                <div class="form-group" style="margin-top:50px">
+                    <div class="row">
+                        <div class="col-md-8" style="width:64%;">
+                            <div class="editor-label">
+                                @Html.LabelFor(m => m.Password)
+                            </div>
+                            <div class="form-group">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="editor-label">
+                                @Html.LabelFor(m => m.ConfirmPassword)
+                            </div>
+                            <div class="form-group">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="width:36%;">
+                            <div class="callout callout-success">
+                                <h4><i class="fa fa-key" aria-hidden="true" style="color:gold"></i>&nbsp;Regras de Senha</h4>
+                                <p>As senhas devem conter no mínimo 6 caracteres.</p>
+                                <p>As senhas devem ter pelo menos um dígito ('0'-'9').</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <a href="@Url.Action("Index", "Usuarios")" class="btn btn-warning">Cancelar</a>
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}
+
+
+
+
+
+

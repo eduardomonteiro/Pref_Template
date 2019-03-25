@@ -1,0 +1,44 @@
+﻿@if (ViewBag.logCriacao != null || ViewBag.logEdicao != null || ViewBag.logAtivacao != null || ViewBag.logDesativacao != null)
+{
+    <div class="box box-solid box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Histórico de Alterações</h3>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-condensed">
+                <tbody>
+
+                    @if (ViewBag.logCriacao != null)
+                    {
+                        <tr>
+                            <td>Cadastrado por <strong> @ViewBag.logCriacao.Usuario.Nome </strong> em <strong> @ViewBag.logCriacao.DataCadastro </strong></td>
+                        </tr>
+                    }
+
+                    @if (ViewBag.logEdicao != null)
+                    {
+                        <tr>
+                            <td>Última edição por <strong> @ViewBag.logEdicao.Usuario.Nome</strong> em <strong> @ViewBag.logEdicao.DataCadastro </strong></td>
+                        </tr>
+                    }
+
+
+                    @if (ViewBag.logAtivacao != null)
+                    {
+                        <tr>
+                            <td>Ativado por <strong> @ViewBag.logAtivacao.Usuario.Nome</strong> em <strong> @ViewBag.logAtivacao.DataCadastro </strong></td>
+                        </tr>
+                    }
+
+                    @if (ViewBag.logDesativacao != null)
+                    {
+                        <tr>
+                            <td>Desativado por <strong> @ViewBag.logDesativacao.Usuario.Nome</strong> em <strong> @ViewBag.logDesativacao.DataCadastro </strong></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

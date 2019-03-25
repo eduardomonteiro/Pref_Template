@@ -1,0 +1,88 @@
+﻿@model Prefeitura_Template.Models.Concurso
+@{
+    ViewBag.Title = "Editar Concurso";
+    ViewBag.AreaTitle = "Editar Concurso";
+}
+
+@using (Html.BeginForm("Edit", "Concursos", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.DataCadastro)
+            @Html.HiddenFor(model => model.Status)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.ConcursoModalidadeId)
+                </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.ConcursoModalidadeId, (IEnumerable<SelectListItem>)ViewBag.Modalidades, new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(model => model.ConcursoModalidadeId)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.StatusPublicacaoId)
+                </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.StatusPublicacaoId, (IEnumerable<SelectListItem>)ViewBag.Status, new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(model => model.StatusPublicacaoId)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Titulo)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Titulo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Descricao)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Numero)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Numero, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.DataInicio, new { @class = "form-label" })
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.DataInicio, new { @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.DataInicio)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.DataFim, new { @class = "form-label" })
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.DataFim, new { @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.DataFim)
+                </div>
+            </div>
+            <div class="box-footer">
+                <a href="@Url.Action("Details", "Concursos", new { id= Model.Id })" class="btn btn-warning">Cancelar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/admin-jqueryval")
+    <script>
+        ApplyCkEditor('Descricao');
+    </script>
+}

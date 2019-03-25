@@ -1,0 +1,80 @@
+﻿@using Prefeitura_Template.Models;
+@model Timeline
+
+@{
+    ViewBag.Title = "Detalhes da Timeline";
+    ViewBag.AreaTitle = "Detalhes da Timeline";
+    ViewBag.AreaDescription = "";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="box box-warning">
+        @if (!string.IsNullOrEmpty(ViewBag.Retorno))
+        {
+            if (ViewBag.Retorno.Contains("sucesso"))
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+
+            else
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+        }
+        <div class="box-body">
+            <table class="table table-bordered table-striped responsive">
+                <tbody>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Ano)</td>
+                        <td>@Html.DisplayFor(model => model.Ano)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Ordem)</td>
+                        <td>@Html.DisplayFor(model => model.Ordem)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Descricao)</td>
+                        <td>@Html.DisplayFor(model => model.Descricao)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Imagem)</td>
+                        <td><img src="@Url.Content(Model.CaminhoLogicoImagem)" width="423" title="@Model.Imagem" /></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Status)</td>
+                        <td>@Html.DisplayFor(model => model.NomeStatus)</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="box-footer">
+            <a href="@Url.Action("Index", "Timeline")" class="btn btn-info">< Voltar</a>
+            <a href="@Url.Action("Edit", "Timeline", new { id = Model.Id })" class="btn btn-warning">Editar</a>
+            
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="col-xs-12">
+    @{Html.RenderAction("LogsHistory", "Logs", new { AreaId = ViewBag.codAreaAtual , id = Model.Id });}
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -1,0 +1,114 @@
+﻿@using Prefeitura_Template.Areas.Admin.Enums;
+@using Prefeitura_Template.Areas.Admin.Utils;
+@using Prefeitura_Template.Models;
+@using GridMvc.Html
+@model List<Secretaria>
+@{
+    ViewBag.Title = "Secretarias";
+    ViewBag.AreaTitle = "Secretarias";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xs-12">
+    <div class="box">
+        @if (!string.IsNullOrEmpty(ViewBag.Retorno))
+        {
+            if (ViewBag.Retorno.Contains("sucesso"))
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+
+            else
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+        }
+        <div class="box-header">
+            <h3 class="box-title">Secretarias <small id="totalizador"></small></h3>
+            <div class="box-tools pull-right">
+                <a href="@Url.Action("Create")" class="btn btn-success btn-sm bg-green">Cadastrar Secretaria</a>
+            </div>
+        </div>
+        <div class="content-body">
+            @Html.Grid(Model).Columns(columns =>
+           {
+               columns.Add(m => m.Nome).Titled("Nome").RenderValueAs(m => m.Prefixo + " " + m.Nome);
+               columns.Add(m => m.SecretariaCategoria.Descricao).Titled("Categoria").SetFilterWidgetType("FiltroCategoriaCustomizado");
+               columns.Add(m => m.DataCadastro.Date).RenderValueAs(m => m.DataCadastro.ToString("dd/MM/yyyy")).Titled("Dt.Cadastro").FormatDate().Filterable(false);
+               columns.Add(m => m.NomeStatus).Titled("Status").Label().RenderValueAs(m => HtmlExtensions.Label(m.NomeStatus, "Ativo")).SetFilterWidgetType("EnumFilter-Status");
+               columns.Add(m => m.Id).Html().SetWidth(300).NoHeader().RenderValueAs(m => @Html.BotoesPadroes(Url, m.Id, m.Nome, m.Status == 1));
+           }).DefaultOptions().Filterable(true).WithPaging(20).WithGridItemsCount("")
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            pageGrids.mainGrid.addFilterWidget(new EnumFilter("Status", "@typeof(StatusPadrao).FullName"));
+            pageGrids.mainGrid.addFilterWidget(new FiltroCategoria())
+        });
+        if (typeof $('.grid-itemscount-caption').html() != "undefined") {
+            $('#totalizador').append('(' + $('.grid-itemscount-caption').html() + ")");
+        }
+         function FiltroCategoria() {
+            this.getAssociatedTypes = function () {
+                return ["FiltroCategoriaCustomizado"];
+            };
+
+            this.showClearFilterButton = function () {
+                return true;
+            };
+
+            this.onRender = function (container, lang, typeName, values, cb, data) {
+                this.cb = cb;
+                this.container = container;
+                this.lang = lang;
+
+                this.value = values.length > 0 ? values[0] : { filterType: 1, filterValue: "" };
+
+                this.renderWidget();
+                this.loadCustomers();
+                this.registerEvents();
+            };
+            this.renderWidget = function () {
+                var html = '<p>Categoria:</p>\
+                    <select style="width:250px;" class="grid-filter-type customerslist form-control">\
+                    </select>';
+                this.container.append(html);
+            };
+
+            this.loadCustomers = function () {
+                var $this = this;
+                var items = @Html.Raw(Json.Encode(@ViewBag.Categorias));
+                $this.fillCustomers(items);
+
+            };
+
+            this.fillCustomers = function (items) {
+                var customerList = this.container.find(".customerslist");
+                for (var i = 0; i < items.length; i++) {
+                    customerList.append('<option ' + (items[i] == this.value.filterValue ? 'selected="selected"' : '') + ' value="' + items[i] + '">' + items[i] + '</option>');
+                }
+            };
+
+            this.registerEvents = function () {
+                var customerList = this.container.find(".customerslist");
+                var $context = this;
+                customerList.change(function () {
+                    var values = [{ filterValue: $(this).val(), filterType: 1 }];
+                    $context.cb(values);
+                });
+            };
+
+        }
+</script>
+}

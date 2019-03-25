@@ -1,0 +1,213 @@
+﻿@using Prefeitura_Template.Models;
+@using Prefeitura_Template.Areas.Admin.Enums;
+@using Prefeitura_Template.Areas.Admin.Utils;
+@using GridMvc.Html
+@model Evento
+
+@{
+    ViewBag.Title = "Detalhes do Evento";
+    ViewBag.AreaTitle = "Detalhes do Evento";
+    ViewBag.AreaDescription = "";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="box box-warning">
+        @if (!string.IsNullOrEmpty(ViewBag.Retorno))
+        {
+            if (ViewBag.Retorno.Contains("sucesso"))
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+        }
+        <div class="box-body">
+            <table class="table table-bordered table-striped responsive">
+                <tbody>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.EventoCategoriaId)</td>
+                        <td>@Html.DisplayFor(model => model.EventoCategoria.Descricao)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Titulo)</td>
+                        <td>@Html.DisplayFor(model => model.Titulo)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.SubTitulo)</td>
+                        <td>@Html.DisplayFor(model => model.SubTitulo)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.SubTitulo)</td>
+                        <td>@Html.Raw(Model.Texto)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Imagem)</td>
+                        <td><img src="@Url.Content(Model.CaminhoLogicoImagem)" width="423" title="@Model.Imagem" /></td>
+                    </tr>
+                    @if (Model.DataHorarioEvento != null)
+                    {
+                        <tr>
+                            <td style="width:200px">@Html.DisplayNameFor(model => model.DataHorarioEvento)</td>
+                            <td>@Html.Raw(Model.DataHorarioEvento.Value.ToString("dd/MM/yyyy hh:mm"))</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.LinkVideo)</td>
+                        <td>@Html.DisplayFor(model => model.LinkVideo)</td>
+                    </tr>
+                    @if (Model.Tag != null && Model.Tag.Count > 0)
+                    {
+                        <tr>
+                            <td style="width:200px">@Html.DisplayNameFor(model => model.Tag)</td>
+                            <td>@Html.Raw(String.Join(", ", Model.Tag.Select(x => x.Descricao).ToArray()))</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Status)</td>
+                        <td>@Html.DisplayFor(model => model.NomeStatus)</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="box-footer">
+            <a href="@Url.Action("Index", "Eventos")" class="btn btn-info">< Voltar</a>
+            <a href="@Url.Action("Edit", "Eventos", new { id = Model.Id })" class="btn btn-warning">Editar</a>
+            
+        </div>
+    </div>
+</div>
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Mídias <small id="totalizador"></small></h3>
+    </div>
+    <div class="box-body">
+        <form action="@Url.Action("UploadFiles", "Eventos")" id="frmArquivo" method="POST" enctype="multipart/form-data">
+            <div class="row" style="display:-webkit-inline-box; margin-right:0px;margin-left:0px">
+                <input type="hidden" id="Id" name="Id" value="0" />
+                <input type="hidden" id="EventoId" name="EventoId" value="@Model.Id" />
+                Legenda
+                <input style="height:33px;width:180px;" type="text" id="Legenda" name="Legenda" />
+                Crédito
+                <input style="height:33px;width:180px;" type="text" id="Credito" name="Credito" />
+                <input type="text" id="Arquivo" name="Arquivo" style="display:none" />
+                <input style="margin-left:10px;width:41%;" type="file" class="arquivo form-control" name="Arquivo" title="Arquivo" id="CampoArquivo" onchange="VerificaTamanho(this);" />
+                <button type="button" class="btn btn-danger" id="BtnCancelar" value="Cancelar" style="display:none">
+                    <span>Cancelar</span>
+                </button>
+                <button type="button" class="btn btn-primary start" id="BtnAnexarArquivo" value="Anexar Arquivo">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span id="lblbtn">Anexar Mídia</span>
+                </button>
+            </div>
+            <span style="display:none;color:red;margin-left:470px" id="ErrorArquivo">Tamanho máximo permitido 15 MB<br/></span>
+            <span style="color:blue;margin-left:470px">Tamanho: 845x407 / Formatos Aceitos: .jpg, .jpeg, .gif, .png</span>
+        </form>
+
+        @if (Model.EventoGaleria != null && Model.EventoGaleria.Count > 0)
+            {
+            <div class="content-body" style="margin-top:15px;">
+                @Html.Grid(Model.EventoGaleria).Columns(columns =>
+               {
+                   columns.Add(m => m.Midia).Html().Titled("Mídia").SetWidth(120).RenderValueAs(m => @Html.Image(m.CaminhoLogicoMidia, m.Midia));
+                   columns.Add(m => m.Legenda).SetWidth(300).Titled("Legenda");
+                   columns.Add(m => m.Credito).SetWidth(300).Titled("Credito");
+                   columns.Add(m => m.DataCadastro.Date).RenderValueAs(m => m.DataCadastro.ToString("dd/MM/yyyy")).Titled("Dt.Cadastro").FormatDate().Filterable(false);
+                   columns.Add(m => m.NomeStatus).Titled("Status").Label().RenderValueAs(m => HtmlExtensions.Label(m.NomeStatus, "Ativo")).SetFilterWidgetType("EnumFilter-Status");
+                   columns.Add(m => m.Id).Html().SetWidth(300).NoHeader().RenderValueAs(m => @Html.BotoesPadroesAnexos(Url, m.Status == 1, m.Id, "Eventos", "BlockArquivo", "UnBlockArquivo", "DeleteArquivo", "EditArquivo"));
+               }).DefaultOptions().Filterable(true).WithPaging(20).WithGridItemsCount("")
+            </div>
+        }
+    </div>
+</div>
+
+<div class="col-xs-12">
+    @{Html.RenderAction("LogsHistory", "Logs", new { AreaId = ViewBag.codAreaAtual , id = Model.Id });}
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function VerificaTamanho(evt) {
+            $("#ErrorArquivo").hide();
+
+            var file = evt.files;
+                
+
+            if (file && file.length) {
+                if (file[0].size > 15000000) {
+                    $("#ErrorArquivo").show();
+                    $("#CampoArquivo").val('');
+                }
+                else {
+                    $('#Arquivo').val($(evt).val().split('\\').pop());
+                }
+            }
+        };
+
+        $("#BtnCancelar").click(function () {
+            $("#Id").val("0");
+            $("#Legenda").val("");
+            $("#Credito").val("");
+            $("#BtnAnexarArquivo").val("Anexar Arquivo");
+            $("#lblbtn").text("Anexar Arquivo");
+            $("#BtnCancelar").hide();
+        });
+
+        function editarquivo(url, id) {
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: { id: id },
+                dataType: 'json',
+                success: function (data) {
+                    $("#Id").val(data.Id);
+                    $("#Legenda").val(data.Legenda);
+                    $("#Credito").val(data.Credito);
+                    $("#BtnAnexarArquivo").val("Salvar");
+                    $("#lblbtn").text("Salvar");
+                    $("#BtnCancelar").show();
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        };
+
+        $(document).ready(function () {
+            pageGrids.mainGrid.addFilterWidget(new EnumFilter("Status", "@typeof(StatusPadrao).FullName"));
+        });
+        if (typeof $('.grid-itemscount-caption').html() != "undefined") {
+            $('#totalizador').append('(' + $('.grid-itemscount-caption').html() + ")");
+        }
+
+        $('#BtnAnexarArquivo').click(function () {
+            $('.arquivo').removeClass('customerror');
+
+            var a = $('#Arquivo').val();
+            var b = $("#Id").val();
+            if ($('#Arquivo').val() == "" && $("#Id").val() == "0") {
+                $('.arquivo').addClass('customerror');
+                return false;
+            }
+
+            $("#frmArquivo").submit();
+        });
+    </script>
+}
+

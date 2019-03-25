@@ -1,0 +1,109 @@
+﻿@using Prefeitura_Template.Areas.Admin.Enums;
+@using Prefeitura_Template.Areas.Admin.Utils;
+@using Prefeitura_Template.Models;
+@using GridMvc.Html
+@model List<Contato>
+@{
+    ViewBag.Title = "Sugestões";
+    ViewBag.AreaTitle = "Sugestões";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="col-xs-12">
+    <div class="box">
+        @if (!string.IsNullOrEmpty(ViewBag.Retorno))
+        {
+            if (ViewBag.Retorno.Contains("sucesso"))
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+
+            else
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+        }
+        <div class="box-header">
+            <h3 class="box-title">Contatos <small id="totalizador"></small></h3>
+        </div>
+        <div class="content-body">
+            @Html.Grid(Model).Columns(columns =>
+       {
+           columns.Add(m => m.Nome).Titled("Nome");
+           columns.Add(m => m.Email).Titled("E-mail");
+           columns.Add(m => m.ContatoTipo.Descricao).Titled("Tipo").SetFilterWidgetType("FiltroTipoCustomizado");
+           columns.Add(m => m.DataCadastro.Date).RenderValueAs(m => m.DataCadastro.ToString("dd/MM/yyyy")).Titled("Dt.Cadastro").FormatDate().Filterable(false);
+           columns.Add(m => m.Id).Html().SetWidth(300).NoHeader().RenderValueAs(m => @Html.BotoesPadroes(Url, m.Id, m.Nome, m.Status == 1, edit: false, delete: false, enableDisable: false));
+       }).DefaultOptions().Filterable(true).WithPaging(20).WithGridItemsCount("")
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+       $(document).ready(function () {
+            pageGrids.mainGrid.addFilterWidget(new FaleConoscoFilter("Status", "@typeof(StatusFaleConosco).FullName"));
+            pageGrids.mainGrid.addFilterWidget(new FiltroTipo())
+        });
+        if (typeof $('.grid-itemscount-caption').html() != "undefined") {
+            $('#totalizador').append('(' + $('.grid-itemscount-caption').html() + ")");
+        }
+        function FiltroTipo() {
+            this.getAssociatedTypes = function () {
+                return ["FiltroTipoCustomizado"];
+            };
+
+            this.showClearFilterButton = function () {
+                return true;
+            };
+
+            this.onRender = function (container, lang, typeName, values, cb, data) {
+                this.cb = cb;
+                this.container = container;
+                this.lang = lang;
+
+                this.value = values.length > 0 ? values[0] : { filterType: 1, filterValue: "" };
+
+                this.renderWidget();
+                this.loadCustomers();
+                this.registerEvents();
+            };
+            this.renderWidget = function () {
+                var html = '<p>Tipo:</p>\
+                    <select style="width:250px;" class="grid-filter-type customerslist form-control">\
+                    </select>';
+                this.container.append(html);
+            };
+
+            this.loadCustomers = function () {
+                var $this = this;
+                var items = @Html.Raw(Json.Encode(@ViewBag.Tipos));
+                $this.fillCustomers(items);
+
+            };
+
+            this.fillCustomers = function (items) {
+                var customerList = this.container.find(".customerslist");
+                for (var i = 0; i < items.length; i++) {
+                    customerList.append('<option ' + (items[i] == this.value.filterValue ? 'selected="selected"' : '') + ' value="' + items[i] + '">' + items[i] + '</option>');
+                }
+            };
+
+            this.registerEvents = function () {
+                var customerList = this.container.find(".customerslist");
+                var $context = this;
+                customerList.change(function () {
+                    var values = [{ filterValue: $(this).val(), filterType: 1 }];
+                    $context.cb(values);
+                });
+            };
+
+        }
+    </script>
+}

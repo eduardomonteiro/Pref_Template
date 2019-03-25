@@ -1,0 +1,84 @@
+﻿@model Prefeitura_Template.Models.Licitacao
+@{
+    ViewBag.Title = "Editar Licitações";
+    ViewBag.AreaTitle = "Editar Licitações";
+}
+
+@using (Html.BeginForm("Edit", "Licitacoes", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.DataCadastro)
+            @Html.HiddenFor(model => model.DataPublicacao)
+            @Html.HiddenFor(model => model.Status)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.LicitacaoModalidadeId)
+                </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.LicitacaoModalidadeId, (IEnumerable<SelectListItem>)ViewBag.Modalidades, new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(model => model.LicitacaoModalidadeId)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.StatusPublicacaoId)
+                </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.StatusPublicacaoId, (IEnumerable<SelectListItem>)ViewBag.Status, new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(model => model.StatusPublicacaoId)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.DataAbertura, new { @class = "form-label" })
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.DataAbertura, new { @class = "form-control datetimepicker" })
+                    @Html.ValidationMessageFor(model => model.DataAbertura)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Titulo)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Titulo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Titulo)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Descricao)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Numero)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Numero, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.DataAlteracaoEditavel, new { @class = "form-label" })
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.DataAlteracaoEditavel, new { @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.DataAlteracaoEditavel)
+                </div>
+            </div>
+            <div class="box-footer">
+                <a href="@Url.Action("Details", "Licitacoes", new { id= Model.Id })" class="btn btn-warning">Cancelar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+    <script>
+        ApplyCkEditor('Descricao');
+    </script>
+}

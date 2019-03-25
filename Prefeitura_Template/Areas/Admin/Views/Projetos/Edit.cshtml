@@ -1,0 +1,149 @@
+﻿@model Prefeitura_Template.Models.Projeto
+@{
+    ViewBag.Title = "Editar Projeto";
+    ViewBag.AreaTitle = "Editar Projeto";
+}
+
+@using (Html.BeginForm("Edit", "Projetos", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.DataCadastro)
+            @Html.HiddenFor(model => model.Status)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.ProjetoCategoriaId)
+                </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.ProjetoCategoriaId, (IEnumerable<SelectListItem>)ViewBag.Categorias, new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(model => model.ProjetoCategoriaId)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.SecretariaId)
+                </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.SecretariaId, (IEnumerable<SelectListItem>)ViewBag.Secretarias, new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(model => model.SecretariaId)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Titulo)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Titulo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.SubTitulo)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.SubTitulo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubTitulo, "", new { @class = "text-danger" })
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Descricao)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.LinkExterno)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.LinkExterno, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LinkExterno, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            @Html.LabelFor(model => model.Imagem, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Imagem, new { @style = "display: none;" })
+                            <input type="file" class="form-control" name="Imagem" title="Imagem" id="CampoArquivo" onchange="VerificaTamanho(this);" />
+                            @Html.ValidationMessageFor(model => model.Imagem)
+                            <span style="display:none;color:red" id="ErrorArquivo">Tamanho máximo permitido 15 MB</span>
+                            @if (!string.IsNullOrEmpty(Model.Imagem))
+                            {
+                                <div id="BotoesImagem">
+                                    <a href="@Url.Content(Model.CaminhoLogicoImagem)" class='btn btn-info btn-sm' alt='Visualizar' title='Visualizar' style="margin-top:5px;" target="_blank">Visualizar</a>
+                                    <a href="#" onclick="javascript:mensagemexcluirarquivo('@Url.Action("DeleteImagem", "Projetos", new { id= Model.Id })' , 'Imagem')" style="margin-top:5px;" class='btn btn-danger btn-sm' alt='Excluir' title='Excluir'>Remover</a>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="callout callout-info">
+                                <h4>Recomenda&ccedil;&otilde;es</h4>
+                                <div id="Tamanho">Tamanho: 1903x405</div>
+                                <p>Formatos aceitos: <b>jpg, gif e png</b></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-8">
+                            @Html.LabelFor(model => model.LinkVideo)
+                            @Html.TextBoxFor(model => model.LinkVideo, new { @class = "form-control", Maxlength = "300" })
+                        </div>
+                        <div class="col-md-4">
+                            <div class="callout callout-info">
+                                <h4>Somente  a chave do youtube</h4>
+                                <p>Ex.: https://www.youtube.com/watch?v=<b>ZnYwvDwwBcc</b></p>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.LinkVideo)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tags</label>
+                    <input name="Tags" id="Tags" value="@ViewBag.Tag" class="form-control">
+                </div>
+            </div>
+            <div class="box-footer">
+                <a href="@Url.Action("Details", "Projetos", new { id= Model.Id })" class="btn btn-warning">Cancelar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="@Url.Content("~/Areas/Admin/js/plugins/tagIT/tag-it.min.js")" type="text/javascript"></script>
+    <script>
+        $(document).ready(function(){
+            $('#Imagem').val(@Model.Imagem);
+        });
+        function VerificaTamanho(evt) {
+            $('#Imagem').val(@Model.Imagem);
+            $("#ErrorArquivo").hide();
+
+            var file = evt.files;
+
+
+            if (file && file.length) {
+                if (file[0].size > 15000000) {
+                    $("#ErrorArquivo").show();
+                    $("#CampoArquivo").val('');
+                }
+                else {
+                    $('#Imagem').val($(evt).val().split('\\').pop());
+                }
+            }
+        };
+
+        ApplyCkEditor('Descricao');
+
+        var sampleTags = @Html.Raw(Json.Encode(ViewBag.AutoCompleteTags));
+
+        $('#Tags').tagit({
+            availableTags: sampleTags
+        });
+</script>
+}

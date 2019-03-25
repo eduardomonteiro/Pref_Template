@@ -1,0 +1,102 @@
+﻿@model Prefeitura_Template.Models.ExPrefeito
+@{
+    ViewBag.Title = "Editar Ex-Prefeito";
+    ViewBag.AreaTitle = "Editar Ex-Prefeito";
+}
+
+@using (Html.BeginForm("Edit", "ExPrefeitos", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.DataCadastro)
+            @Html.HiddenFor(model => model.Status)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Nome)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            @Html.LabelFor(model => model.Imagem, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Imagem, new { @style = "display: none;" })
+                            <input type="file" class="form-control" name="Imagem" title="Imagem" id="CampoArquivo" onchange="VerificaTamanho(this);" />
+                            @Html.ValidationMessageFor(model => model.Imagem)
+                            <span style="display:none;color:red" id="ErrorArquivo">Tamanho máximo permitido 15 MB</span>
+                            @if (!string.IsNullOrEmpty(Model.Imagem))
+                            {
+                                <div id="BotoesImagem">
+                                    <a href="@Url.Content(Model.CaminhoLogicoImagem)" class='btn btn-info btn-sm' alt='Visualizar' title='Visualizar' style="margin-top:5px;" target="_blank">Visualizar</a>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="callout callout-info">
+                                <h4>Recomenda&ccedil;&otilde;es</h4>
+                                <div id="Tamanho"></div>
+                                <p>Formatos aceitos: <b>jpg, gif e png</b></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.DataInicioLegislatura, new { @class = "form-label" })
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.DataInicioLegislatura, new { @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.DataInicioLegislatura)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.DataFimLegislatura, new { @class = "form-label" })
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.DataFimLegislatura, new { @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.DataFimLegislatura)
+                </div>
+            </div>
+            <div class="box-footer">
+                <a href="@Url.Action("Details", "ExPrefeitos", new { id= Model.Id })" class="btn btn-warning">Cancelar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function(){
+            $('#Imagem').val(@Model.Imagem);
+        });
+
+        function VerificaTamanho(evt) {
+            $('#Imagem').val(@Model.Imagem);
+            $("#ErrorArquivo").hide();
+
+            var file = evt.files;
+
+
+            if (file && file.length) {
+                if (file[0].size > 15000000) {
+                    $("#ErrorArquivo").show();
+                    $("#CampoArquivo").val('');
+                }
+                else {
+                    $('#Imagem').val($(evt).val().split('\\').pop());
+                }
+            }
+        };
+    </script>
+}

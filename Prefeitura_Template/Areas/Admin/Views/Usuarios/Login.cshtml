@@ -1,0 +1,59 @@
+﻿@using Prefeitura_Template.Areas.Admin.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html class="bg-gray-light">
+<head>
+    <meta charset="UTF-8">
+    <title>Área Administrativa | Log in</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link href="@Url.Content("~/Areas/Admin/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Areas/Admin/Content/AdminLTE.css")" rel="stylesheet" type="text/css" />
+</head>
+<style type="text/css">
+    .validation-summary-errors li {
+        font-size: 13px;
+        color: red;
+    }
+</style>
+<body class="bg-gray-light">
+    <div class="form-box" id="login-box">
+        <div class="header">
+            <img src="@Url.Content("~/Areas/Admin/Images/logo.jpg")"> 
+        </div>
+        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="body">
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+
+                    @Html.TextBoxFor(m => m.Email, new { @placeholder = "E-mail", @class = "form-control", @MaxLength = "60" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.Password, new { @placeholder = "Senha", @class = "form-control", @MaxLength = "128" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <a href="@Url.Action("ForgotPassword", "Usuarios")">Esqueci minha senha</a>
+                <div class="form-group">
+                    @Html.CheckBoxFor(m => m.RememberMe) Manter logado?
+                </div>
+            </div>
+
+            <div class="footer">
+                <button type="submit" class="btn bg-am4 btn-block" style="background: #017faf; color: white">Entrar</button>
+
+            </div>
+        }
+    </div>
+</body>
+</html>
+
+@section Scripts {
+
+}

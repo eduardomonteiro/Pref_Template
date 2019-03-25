@@ -1,0 +1,163 @@
+﻿@using Prefeitura_Template.Models;
+@using Prefeitura_Template.Areas.Admin.Enums;
+@using Prefeitura_Template.Areas.Admin.Utils;
+@using GridMvc.Html
+@model Prefeitura_Template.Models.Usuario
+
+@{
+    ViewBag.Title = "Detalhes do Usuário";
+    ViewBag.AreaTitle = "Detalhes do Usuário";
+    ViewBag.AreaDescription = "";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="box box-warning">
+        @if (!string.IsNullOrEmpty(ViewBag.Retorno))
+        {
+            if (ViewBag.Retorno.Contains("sucesso"))
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+
+            else
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+        }
+        <div class="box-header">
+            <div class="box-tools pull-right">
+                <a href="@Url.Action("ChangePassword", new { email = Model.Email})" class="btn btn-success btn-sm bg-green">Alterar Senha do Usuário</a>
+            </div>
+        </div>
+        <div class="box-body">
+            <table class="table table-bordered table-striped responsive">
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Nome)</td>
+                        <td>@Html.DisplayFor(model => model.Nome)</td>
+                    </tr>
+
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Email)</td>
+                        <td>@Html.DisplayFor(model => model.Email)</td>
+                    </tr>
+
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Perfil)</td>
+                        <td>@Html.DisplayFor(model => model.Perfil.Descricao)</td>
+                    </tr>
+
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Status)</td>
+                        <td>@Html.DisplayFor(model => model.NomeStatus)</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="box-footer">
+            <a href="@Url.Action("Index", "Usuarios")" class="btn btn-info">< Voltar</a>
+            <a href="@Url.Action("Edit", "Usuarios", new { id = Model.Id })" class="btn btn-warning">Editar</a>
+            
+        </div>
+
+
+    </div>
+</div>
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Secretarias <small id="totalizadorpin"></small></h3>
+    </div>
+    <div class="box-body">
+        <form action="@Url.Action("CreateUsuarioSecretaria", "Usuarios")" id="frmSecretaria" method="POST" enctype="multipart/form-data">
+            <div class="row" style="display:-webkit-inline-box; margin-right:0px;margin-left:0px;width:1000px">
+                <input type="hidden" id="Id" name="Id" value="0" />
+                <input type="hidden" id="UsuarioId" name="UsuarioId" value="@Model.Id" />
+                <label style="display:block;margin-top:5px">Secretaria</label>
+                @Html.DropDownList("SecretariaId", (IEnumerable<SelectListItem>)ViewBag.Secretarias, "Selecione...", new { @class = "form-control chosen-select", @style = "width:500px;" })
+                <button type="button" class="btn btn-danger" id="BtnCancelar" value="Cancelar" style="display:none">
+                    <span>Cancelar</span>
+                </button>
+                <button type="button" class="btn btn-primary start" id="BtnSalvar" value="Salvar">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span id="lblbtn">Salvar</span>
+                </button>
+            </div>
+        </form>
+        @if (Model.UsuarioSecretaria != null && Model.UsuarioSecretaria.Count > 0)
+            {
+            <div class="content-body" style="margin-top:15px;">
+                @Html.Grid(Model.UsuarioSecretaria).Columns(columns =>
+               {
+                   columns.Add(m => m.SecretariaNome).RenderValueAs(m => m.Prefixo + " " + m.SecretariaNome).Titled("Secretaria");
+                   columns.Add(m => m.DataCadastro.Date).RenderValueAs(m => m.DataCadastro.ToString("dd/MM/yyyy")).Titled("Dt.Cadastro").FormatDate().Filterable(false);
+                   columns.Add(m => m.NomeStatus).Titled("Status").Label().RenderValueAs(m => HtmlExtensions.Label(m.NomeStatus, "Ativo")).SetFilterWidgetType("EnumFilter-Status");
+                   columns.Add(m => m.Id).Html().SetWidth(300).NoHeader().RenderValueAs(m => @Html.BotoesPadroesAnexos(Url, m.Status == 1, m.Id, "Usuarios", "BlockUsuarioSecretaria", "UnBlockUsuarioSecretaria", "DeleteUsuarioSecretaria", "EditUsuarioSecretaria"));
+               }).DefaultOptions().Filterable(true).WithPaging(20).WithGridItemsCount("")
+            </div>
+        }
+    </div>
+</div>
+
+<div class="col-xs-12">
+    @{Html.RenderAction("LogsHistory", "Logs", new { AreaId = ViewBag.codAreaAtual, id = Model.Id });}
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#BtnCancelar").click(function () {
+            $("#Id").val("0");
+            $("#SecretariaId").val("");
+            $("#BtnCancelar").hide();
+        });
+
+        function editarquivo(url, id) {
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: { id: id },
+                dataType: 'json',
+                success: function (data) {
+                    $("#Id").val(data.Id);
+                    $("#SecretariaId").val(data.SecretariaId);
+                    $("#BtnCancelar").show();
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        };
+
+        $('#BtnSalvar').click(function () {
+            $('#SecretariaId').removeClass('customerror');
+            if ($('#SecretariaId').val() == "") {
+                $('#SecretariaId').addClass('customerror');
+                return false;
+            }
+            $("#frmSecretaria").submit();
+        });
+
+        $(document).ready(function () {
+            pageGrids.mainGrid.addFilterWidget(new EnumFilter("Status", "@typeof(StatusPadrao).FullName"));
+        });
+        if (typeof $('.grid-itemscount-caption').html() != "undefined") {
+            $('#totalizador').append('(' + $('.grid-itemscount-caption').html() + ")");
+        }
+    </script>
+}
+
+

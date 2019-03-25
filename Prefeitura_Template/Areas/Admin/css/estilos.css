@@ -1,0 +1,149 @@
+﻿/*
+ * Component: Info Box
+ * -------------------
+ */
+.info-box {
+    display: block;
+    min-height: 90px;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    margin-bottom: 15px;
+}
+
+    .info-box small {
+        font-size: 14px;
+    }
+
+    .info-box .progress {
+        background: rgba(0, 0, 0, 0.2);
+        margin: 5px -10px 5px -10px;
+        height: 2px;
+    }
+
+        .info-box .progress,
+        .info-box .progress .progress-bar {
+            border-radius: 0;
+        }
+
+            .info-box .progress .progress-bar {
+                background: #fff;
+            }
+
+.info-box-icon {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 2px;
+    display: block;
+    float: left;
+    height: 90px;
+    width: 90px;
+    text-align: center;
+    font-size: 45px;
+    line-height: 90px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+    .info-box-icon > img {
+        max-width: 100%;
+    }
+
+.info-box-content {
+    padding: 5px 10px;
+    margin-left: 90px;
+}
+
+.info-box-number {
+    display: block;
+    font-size: 15px;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #ccc;
+}
+
+    .info-box-number:last-child {
+        border: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+.progress-description,
+.info-box-text {
+    display: block;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info-box-text {
+    text-transform: uppercase;
+}
+
+.info-box-more {
+    display: block;
+}
+
+.progress-description {
+    margin: 0;
+}
+
+.bg-green-active,
+.modal-success .modal-header,
+.modal-success .modal-footer {
+    background-color: #008d4c !important;
+    color: #fff !important;
+}
+
+.info-box-text {
+    color: #44433f;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+
+.btn-up {
+    position: absolute;
+    float: right;
+    right: 15px;
+    margin-top: -60px;
+}
+
+
+.grid-table > tbody > tr:hover, .grid-table > tbody > tr:hover > td {
+    background-color: #e3e4e5 !important;
+}
+
+.grid-table > tbody > tr, .grid-table > tbody > tr > td {
+    cursor: default;
+}
+
+td.center, th.center {
+    text-align: center !important;
+}
+
+th.header-hide div {
+    display: none;
+}
+
+.list-group-item {
+    border: none;
+}
+
+    .list-group-item a {
+        margin-left: 25px;
+    }
+
+.field-validation-error {
+    font-size: 13px;
+    color: red;
+}
+
+input[type="number"], input[data-val-range-min="0.01"] {
+    width: 60px;
+}
+
+

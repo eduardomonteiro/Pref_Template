@@ -1,0 +1,86 @@
+﻿@model Prefeitura_Template.Models.Turismo
+@{
+    ViewBag.Title = "Editar Ponto Turístico";
+    ViewBag.AreaTitle = "Editar Ponto Turístico";
+}
+
+@using (Html.BeginForm("Edit", "Turismo", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.DataCadastro)
+            @Html.HiddenFor(model => model.Status)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Nome)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Descricao)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.LinkMaps)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.LinkMaps, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LinkMaps, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            @Html.LabelFor(model => model.Imagem, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Imagem, new { @style = "display: none;" })
+                            <input type="file" class="form-control" name="Imagem" title="Imagem" id="Imagem" onchange="javascript: $('#Imagem').val($(this).val().split('\\').pop());" />
+                            @Html.ValidationMessageFor(model => model.Imagem)
+                            @if (!string.IsNullOrEmpty(Model.Imagem))
+                            {
+                                <div id="BotoesImagem">
+                                    <a href="@Url.Content(Model.CaminhoLogicoImagem)" class='btn btn-info btn-sm' alt='Visualizar' title='Visualizar' style="margin-top:5px;" target="_blank">Visualizar</a>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="callout callout-info">
+                                <h4>Recomenda&ccedil;&otilde;es</h4>
+                                <div id="Tamanho">Tamanho: 348x348</div>
+                                <p>Formatos aceitos: <b>jpg, gif e png</b></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <a href="@Url.Action("Details", "Turismo", new { id= Model.Id })" class="btn btn-warning">Cancelar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@section scripts{
+    <script type="text/javascript">
+        ApplyCkEditor('Descricao');
+    </script>
+}
+
+
+
+
+

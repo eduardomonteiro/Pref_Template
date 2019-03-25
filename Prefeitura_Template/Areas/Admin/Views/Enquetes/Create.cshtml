@@ -1,0 +1,83 @@
+﻿@model Prefeitura_Template.Models.Enquete
+@{
+    ViewBag.AreaTitle = "Cadastrar Enquete";
+    ViewBag.Title = "Cadastrar Enquete";
+}
+
+@using (Html.BeginForm("Create", "Enquetes", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Pergunta)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(model => model.Pergunta, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Pergunta)
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div class="editor-label">
+                                @Html.LabelFor(m => m.DataInicial, new { @class = "form-label" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.DataInicial, new { @class = "form-control datepicker" })
+                                @Html.ValidationMessageFor(model => model.DataInicial)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="margin-left:20px;">
+                        <div class="form-group">
+                            <div class="editor-label">
+                                @Html.LabelFor(m => m.DataEncerramento, new { @class = "form-label" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.DataEncerramento, new { @class = "form-control datepicker" })
+                                @Html.ValidationMessageFor(model => model.DataEncerramento)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-label">
+                    @Html.Label("Respostas")
+                </div>
+                <div class="col-md-12" style="padding-left: 0px;">
+
+                    <div class="input-group input-group-sm" style="margin-bottom: 5px;width:100%">
+                        <input type="text" class="form-control" name="Opcoes[0]" maxlength="256">
+                    </div>
+                    <div class="input-group input-group-sm" style="margin-bottom: 5px;width:100%">
+                        <input type="text" class="form-control" name="Opcoes[1]" maxlength="256">
+                    </div>
+                    <div class="input-group input-group-sm" style="margin-bottom: 5px;width:100%">
+                        <input type="text" class="form-control" name="Opcoes[2]" maxlength="256">
+                    </div>
+                    <div class="input-group input-group-sm" style="margin-bottom: 5px;width:100%">
+                        <input type="text" class="form-control" name="Opcoes[3]" maxlength="256">
+                    </div>
+                    <div class="input-group input-group-sm" style="margin-bottom: 5px;width:100%">
+                        <input type="text" class="form-control" name="Opcoes[4]" maxlength="256">
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <a href="@Url.Action("Index", "Enquetes")" class="btn btn-warning">Cancelar</a>
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@section scripts{
+    <script>
+        ApplyCkEditor('Pergunta');
+    </script> 
+}

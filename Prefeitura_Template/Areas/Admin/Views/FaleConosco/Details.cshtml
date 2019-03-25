@@ -1,0 +1,118 @@
+﻿@using Prefeitura_Template.Models;
+@model Contato
+
+@{
+    ViewBag.Title = "Detalhes do Fale Conosco";
+    ViewBag.AreaTitle = "Detalhes do Fale Conosco";
+    ViewBag.AreaDescription = "";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="box box-warning">
+        @if (!string.IsNullOrEmpty(ViewBag.Retorno))
+        {
+            if (ViewBag.Retorno.Contains("sucesso"))
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+
+            else
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+        }
+        <div class="box-body">
+            <table class="table table-bordered table-striped responsive">
+                <tbody>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.ContatoTipoId)</td>
+                        <td>@Html.DisplayFor(model => model.ContatoTipo.Descricao)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Nome)</td>
+                        <td>@Html.DisplayFor(model => model.Nome)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Email)</td>
+                        <td>@Html.DisplayFor(model => model.Email)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Telefone)</td>
+                        <td>@Html.DisplayFor(model => model.Telefone)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Celular)</td>
+                        <td>@Html.DisplayFor(model => model.Celular)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.BairroId)</td>
+                        <td>@Html.DisplayFor(model => model.Bairro.Descricao)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.CPF)</td>
+                        <td>@Html.DisplayFor(model => model.CPF)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.DataCadastro)</td>
+                        <td>@Html.DisplayFor(model => model.DataCadastro)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">@Html.DisplayNameFor(model => model.Mensagem)</td>
+                        <td>@Html.DisplayFor(model => model.Mensagem)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.StatusFaleConosco)</td>
+                        <td>@Html.DisplayFor(model => model.NomeStatusFaleConosco)</td>
+                    </tr>
+
+                    @if (Model.DataResposta == null)
+                    {
+                        using (Html.BeginForm("Responder", "FaleConosco", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+                        {
+                            <tr>
+                                <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+
+                                <td width="200">Resposta</td>
+                                <td><textarea class="form-control" id="Resposta" name="Resposta"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><div class="btn-group"><input type="submit" class="btn btn-success" value="Responder" name="btnEnvia" /></div></td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                            <tr>
+                                <td width="200">Resposta</td>
+                                <td>@Html.Raw(Model.Resposta)</td>
+                            </tr>
+                            <tr>
+                                <td width="200">Data da Resposta</td>
+                                <td>@Model.DataResposta</td>
+                            </tr>
+                            <tr>
+                                <td width="200">Respondido Por</td>
+                                <td>@Model.UsuarioReposta.Nome</td>
+                            </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="box-footer">
+            <a href="@Url.Action("Index", "FaleConosco")" class="btn btn-info">< Voltar</a>
+
+        </div>
+    </div>
+</div>

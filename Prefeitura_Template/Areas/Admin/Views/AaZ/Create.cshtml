@@ -1,0 +1,46 @@
+﻿@model Prefeitura_Template.Models.AaZ
+@{
+    ViewBag.AreaTitle = "Cadastrar Link";
+    ViewBag.Title = "Cadastrar Link";
+}
+
+@using (Html.BeginForm("Create", "AaZ", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.AaZCategoriaId)
+                </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.AaZCategoriaId, (IEnumerable<SelectListItem>)ViewBag.Categorias, new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(model => model.AaZCategoriaId)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Titulo)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Titulo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Url)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Url, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="box-footer">
+                <a href="@Url.Action("Index", "AaZ")" class="btn btn-warning">Cancelar</a>
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </div>
+        
+    </div>
+}

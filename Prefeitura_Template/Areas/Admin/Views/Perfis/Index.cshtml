@@ -1,0 +1,60 @@
+﻿@using Prefeitura_Template.Areas.Admin.Enums;
+@using Prefeitura_Template.Areas.Admin.Utils;
+@using Prefeitura_Template.Models;
+@using GridMvc.Html
+@model List<Prefeitura_Template.Models.Perfil>
+@{
+    ViewBag.Title = "Perfis";
+    ViewBag.AreaTitle = "Perfis";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xs-12">
+    <div class="box">
+        @if (!string.IsNullOrEmpty(ViewBag.Retorno))
+        {
+            if (ViewBag.Retorno.Contains("sucesso"))
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <i class="fa fa-check"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+
+            else
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <i class="fa fa-ban"></i>
+                    <button class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @ViewBag.Retorno
+                </div>
+            }
+        }
+        <div class="box-header">
+            <h3 class="box-title">Usuários <small id="totalizador"></small></h3>
+            <div class="box-tools pull-right">
+                <a href="@Url.Action("Create")" class="btn btn-success btn-sm bg-green">Cadastrar Perfil</a>
+            </div>
+        </div>
+        <div class="content-body">
+            @Html.Grid(Model).Columns(columns =>
+           {
+               columns.Add(m => m.Descricao).Titled("Descrição");
+               columns.Add(m => m.DataCadastro.Date).RenderValueAs(m => m.DataCadastro.ToString("dd/MM/yyyy")).Titled("Dt.Cadastro").FormatDate().Filterable(false);
+               columns.Add(m => m.NomeStatus).Titled("Status").Label().RenderValueAs(m => HtmlExtensions.Label(m.NomeStatus, "Ativo")).SetFilterWidgetType("EnumFilter-Status");
+               columns.Add(m => m.Id).Html().SetWidth(300).NoHeader().RenderValueAs(m => @Html.BotoesPadroes(Url, m.Id, m.Descricao, m.Status == 1));
+           }).DefaultOptions().Filterable(true).WithPaging(20).WithGridItemsCount()
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            pageGrids.mainGrid.addFilterWidget(new EnumFilter("Status", "@typeof(StatusPadrao).FullName"));
+        });
+        $('#totalizador').append('(' + $('.grid-itemscount-caption').html() + ")");
+    </script>
+}

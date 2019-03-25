@@ -1,0 +1,68 @@
+﻿@model Prefeitura_Template.Models.GaleriaFoto
+@{
+    ViewBag.AreaTitle = "Cadastrar Galeria de Fotos";
+    ViewBag.Title = "Cadastrar Galeria de Fotos";
+}
+
+@using (Html.BeginForm("Create", "GaleriaFotos", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+        <div class="box box-warning">
+            @Html.ValidationSummary(true)
+            <div class="box-body">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.GaleriaFotoCategoriaId)
+                </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.GaleriaFotoCategoriaId, (IEnumerable<SelectListItem>)ViewBag.Categorias, new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(model => model.GaleriaFotoCategoriaId)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Titulo)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Titulo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Descricao)
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Fotografo)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Fotografo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Fotografo, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Destaque)
+                </div>
+                <div class="form-group">
+                    @Html.EditorFor(m => m.Destaque, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Destaque, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="box-footer">
+                <a href="@Url.Action("Index", "GaleriaFotos")" class="btn btn-warning">Cancelar</a>
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@section scripts{
+    <script>
+        ApplyCkEditor('Descricao');
+    </script>
+}
