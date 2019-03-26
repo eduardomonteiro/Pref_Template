@@ -1,0 +1,59 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="container-general">
+    <div class="center">
+        <header class="filter-box">
+            <h2 class="title-area">Filtro</h2>
+            <form class="row-grid clearfix" ng-submit="searchFilter()">
+                <div class="grid-4">
+                    <label class="label-input">Palavra-Chave</label>
+                    <input type="text" placeholder="Digite um termo para filtrar" class="input-default total" ng-model="palavra">
+                </div>
+                <div class="grid-2">
+                    <label class="label-input">Status</label>
+                    <select class="input-default total" ng-model="statusid" ng-options="stat as stat.Descricao for stat in status track by stat.Id">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <div class="grid-2">
+                    <label class="label-input">Período Inicial</label>
+                    <input type="date" class="input-default total"  ng-model="datainicio">
+                </div>
+                <div class="grid-2">
+                    <label class="label-input">Período Final</label>
+                    <input type="date" class="input-default total" ng-model="datafim">
+                </div>
+                <div class="grid-2">
+                    <button class="bt-default total">Filtrar</button>
+                </div>
+            </form>
+        </header>
+        <ul class="list-news">
+            <li ng-repeat="item in lista">
+                <div class="content block-text" style="width: 100%">
+                    <header class="header">
+                        <span class="category-label">{{item.LegislacaoCategoria.Descricao}}</span>
+                    </header>
+                    <div class="infos-auxiliar">
+                        <p><strong>Data de Publicação:</strong> {{item.DataPublicacao}}</p>
+                    </div>
+                    <h2 class="title-bold">{{item.Titulo}}</h2>
+                    <div ng-bind-html="item.Descricao"></div>
+                    <div class="documents-wrapper">
+                        <nav class="list-documents clearfix">
+                            <a href="{{file.CaminhoLogicoArquivo}}" download class="card" ng-repeat="file in item.LegislacaoArquivo">
+                                <i class="fa fa-file-pdf-o"></i>
+                                <h3 class="title">{{file.ArquivoNome}}</h3>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="text-center block-text" ng-if="lista.length == 0">
+            <p>Nenhum resultado encontrado.</p>
+        </div>
+        <footer class="loading" ng-if="lista.length > 0">
+            <button class="bt-gray" ng-click="loadMore()" ng-disabled="disabled">Carregar mais</button>
+        </footer>
+    </div>
+</div>

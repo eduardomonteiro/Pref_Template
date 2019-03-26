@@ -1,0 +1,79 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<section class="container-general">
+        <div class="center">
+            <div class="row-grid clearfix">
+                <aside class="grid-3 side-contact">
+                    <h2 class="title-area">Contatos Úteis</h2>
+                    <div class="block-contact">
+                        <h3 class="title">Prefeitura</h3>
+                        <span class="label">
+                            <i class="fa fa-phone-square" aria-hidden="true"></i>Telefone
+                        </span>
+                        <p>{{info.PrefeituraTelefone}}</p>
+                        <span class="label">
+                            <i class="fa fa-envelope-square" aria-hidden="true"></i>E-mail
+                        </span>
+                        <p>{{info.PrefeituraEmail}}</p>
+                    </div>
+                    <div class="block-contact">
+                        <h3 class="title">Gabinete do Prefeito</h3>
+                        <span class="label">
+                            <i class="fa fa-phone-square" aria-hidden="true"></i>Telefone
+                        </span>
+                        <p>{{info.GabineteTelefone}}</p>
+                        <span class="label">
+                            <i class="fa fa-envelope-square" aria-hidden="true"></i>E-mail
+                        </span>
+                        <p>{{info.GabineteEmail}}</p>
+                    </div>
+                </aside>
+                <div class="grid-9 contact-box">
+                    <form ng-submit="postContact(user)">
+                        <p class="label-form required">CAMPOS OBRIGATÓRIOS</p>
+                        <br>
+                        <div class="row-grid">
+                            <div class="grid-12">
+                                <p class="label-form required">Nome</p>
+                                <input type="text" placeholder="Digite seu nome completo" required class="input-default total" ng-model="user.Nome">
+                            </div>
+                            <div class="grid-12">
+                                <p class="label-form required">E-mail</p>
+                                <input type="text" placeholder="Digite seu e-mail" required class="input-default total" ng-model="user.Email">
+                            </div>
+                            <div class="grid-4">
+                                <p class="label-form required">CPF</p>
+                                <input type="text" placeholder="Digite seu cpf" mask="999.999.999-99" class="input-default total" ng-model="user.CPF">
+                            </div>
+                            <div class="grid-4">
+                                <p class="label-form">Telefone</p>
+                                <input type="text" placeholder="(xxx) xxxxx-xxxx" class="input-default total" mask="(999) 99999-9999" ng-model="user.Telefone">
+                            </div>
+                            <div class="grid-4">
+                                <p class="label-form">Celular</p>
+                                <input type="text" placeholder="(xxx) xxxxx-xxxx"  class="input-default total" mask="(999) 99999-9999" ng-model="user.Celular">
+                            </div>
+                            <div class="grid-6">
+                                <p class="label-form required">Bairro</p>
+                                <select class="input-default total" required ng-model="bairro" ng-options="bairro as bairro.Descricao for bairro in bairros track by bairro.Id">
+                                    <option value="">Selecione seu bairro</option>
+                                </select>
+                            </div>
+                            <div class="grid-6">
+                                <p class="label-form required">Assunto</p>
+                                <select class="input-default total" ng-model="assunto.Id" ng-options="assunto as assunto.Descricao for assunto in assuntos track by assunto.Id">
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                            <div class="grid-12">
+                                <p class="label-form required">Mensagem</p>
+                                <textarea class="input-default total" placeholder="Digite sua mensagem" required ng-model="user.Mensagem"></textarea>
+                            </div>
+                            <div class="grid-12">
+                                <button class="bt-default" ng-click="clear()">Enviar</button>
+                            </div>
+                        </div>
+                    </form>    
+                </div>
+            </div>
+        </div>
+</section>

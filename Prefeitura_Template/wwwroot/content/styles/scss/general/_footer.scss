@@ -1,0 +1,224 @@
+.main-footer {
+  margin-top: 40px;
+  &.open-map {
+    .header-sitemap .fa {
+      transform: rotate(180deg);
+    }
+    .map-section {
+      padding-top: 60px;
+      overflow: visible;
+      height: auto;
+      padding-bottom: 60px;
+    }
+  }
+  .header-sitemap {
+    width: 100%;
+    cursor: pointer;
+    background: #003e78;
+    padding: 15px 0;
+    text-align: center;
+    color: $cor2;
+    font-size: 22px;
+    @include breakpoint(tablet) {
+      display: none;
+    }
+    .fa {
+      transition: all 0.3s ease;
+    }
+  }
+  .map-section {
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 0;
+    border-width: 0 1px;
+    background: $cor1;
+    -webkit-transition: height .3s linear, padding-top .3s linear, padding-bottom .3s linear, border-top-width .3s linear, border-top-width .3s linear;
+    transition: height .3s linear, padding-top .3s linear, padding-bottom .3s linear, border-top-width .3s linear, border-top-width .3s linear;
+    @include breakpoint(tablet) {
+      display: none;
+    }
+    .titles {
+      margin-bottom: 15px;
+      color: $cor2;
+      font-size: 2.4em;
+      line-height: 1.4em;
+    }
+    .block {
+      margin-bottom: 40px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    .link {
+      display: block;
+      color: white;
+      font-size: 1.4em;
+      padding: 5px 0;
+      transition: all 0.3s ease;
+      &:hover {
+        opacity: 0.7;
+      }
+      .fa {
+        margin-right: 5px;
+      }
+    }
+  }
+  .bottom-area {
+    padding: 20px 0;
+    .center {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @include breakpoint(tablet) {
+        flex-direction: column;
+        text-align: center;
+      }
+      .info {
+        flex-grow: 1;
+        @include breakpoint(tablet) {
+          margin-bottom: 15px;
+        }
+        img {
+          vertical-align: middle;
+          display: inline-block;
+        }
+        p {
+          display: inline-block;
+          vertical-align: middle;
+          margin-left: 2%;
+          font-size: 1.4em;
+          line-height: 1.4em;
+          strong {
+            text-transform: uppercase;
+          }
+        }
+      }
+      .links {
+        font-size: 1.4em;
+        .fa {
+          padding-left: 20px;
+          font-size: 22px;
+          color: #ccc;
+          transition: all 0.5s ease;
+          &.fa-youtube {
+            &:hover {
+              color: #fe0000;
+            }
+          }
+          &.fa-facebook {
+            &:hover {
+              color: #4867aa;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.block-enquete-form {
+  position: fixed;
+  right: 0;
+  top: 40%;
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+  @include breakpoint(desktop) {
+    display: none;
+  }
+  &.open {
+    transform: translateX(0%);
+  }
+  .button-open {
+    background: #002b68;
+    height: 50px;
+    padding: 0 15px;
+    border-radius: 5px 5px 0 0;
+    background: #002b68;
+    font-size: 16px;
+    position: absolute;
+    left: -146px;
+    top: 96px;
+    color: white;
+    -webkit-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+    strong, .fa {
+      color: $cor2;
+    }
+  }
+  .form {
+    background: $cor1 - 10%;
+    padding: 25px;
+    width: 280px;
+    h2 {
+      color: white;
+      text-transform: uppercase;
+      font-size: 1.6em;
+      line-height: 1.4em;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .msg {
+      color: white;
+      text-align: center;
+      font-size: 24px;
+      line-height: 30px;
+      font-weight: 300;
+      .fa {
+        color: $cor2;
+        font-size: 80px;
+        line-height: 75px;
+        display: block;
+        margin-bottom: 26px;
+      }
+    }
+    .options {
+      margin-bottom: 30px;
+      label {
+        display: block;
+        color: white;
+        cursor: pointer;
+        font-size: 1.4em;
+        font-weight: 300;
+        margin-bottom: 5px;
+        background: #142e5e;
+        padding: 10px;
+        &:nth-child(even) {
+          background: $cor1;
+        }
+        input {
+          border: 1px solid white;
+          width: 15px;
+          height: 15px;
+          vertical-align: bottom;
+          border-radius: 2px;
+          &:checked {
+            background: #fff;
+          }
+        }
+      }
+    }
+  }
+  
+}
+
+.box-error {
+  padding: 40px 0;
+  .fa {
+    font-size: 150px;
+    color: $cor2;
+    line-height: 160px;
+  }
+  .title-error {
+    font-size: 5em;
+    line-height: 1.4em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 2em;
+    line-height: 1.5em;
+    margin-bottom: 20px;
+  }
+}

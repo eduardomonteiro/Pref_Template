@@ -1,0 +1,24 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="container-general">
+    <div class="center">
+        <header class="filter-box">
+            <h2 class="title-area">
+                {{resultado.length}}</strong> Resultados encontrados para  <strong>{{palavra}}</strong>
+            </h2>
+        <ul class="list-news">
+            <li ng-repeat="item in resultado">
+                <a class="content block-text" href="#!/{{item.url}}/{{item.Slug}}">
+                    <header class="header">
+                        <span class="category-label">{{item.AreaDescricao}}</span>
+                        <span class="date">{{item.DataPublicacao | date:'MM/dd/yyyy'}}</span>
+                    </header>
+                    <h2 class="title-bold">{{item.Titulo}}</h2>
+                    <p>{{item.Descricao}}</p>
+                </a>
+            </li>
+        </ul>
+        <div class="text-center block-text" ng-if="resultado.length == 0">
+            <p>Nenhum resultado encontrado.</p>
+        </div>
+    </div>
+</div>

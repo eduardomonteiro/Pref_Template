@@ -1,0 +1,65 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="featured-home">
+    <div class="center">
+        <slick class="gallery-featured" settings="slickConfig" data="number">
+            <div style="background-image: url({{destaque.CaminhoLogicoImagem}}?width=1900)" class="item" ng-repeat="destaque in destaques">
+                <a href="#!/informativo/noticias/{{destaque.Slug}}">
+                    <div class="info">
+                        <h2 class="title">{{destaque.Titulo}}</h2>
+                        <p class="description">{{destaque.SubTitulo}}</p>
+                        <span class="bt-default">Saiba Mais</span>
+                    </div>
+                </a>
+            </div>
+        </slick>
+    </div>
+</div>
+<div class="container-general">
+    <div class="center">
+        <header class="filter-box">
+            <h2 class="title-area">Filtro</h2>
+            <form class="row-grid clearfix" ng-submit="searchFilter()">
+                <div class="grid-4">
+                    <label class="label-input">Palavra-Chave</label>
+                    <input type="text" class="input-default total" ng-model="palavra" placeholder="Digite um termo para filtrar">
+                </div>
+                <div class="grid-3">
+                    <label class="label-input">Categoria</label>
+                    <select class="input-default total" ng-model="categoriaid" ng-options="cat as cat.Descricao for cat in categorias track by cat.Id">
+                        <option value="">Selecione a Categoria</option>
+                    </select>
+                </div>
+                <div class="grid-3">
+                    <label class="label-input">Período</label>
+                    <select class="input-default total" ng-model="data" ng-options="data as data.Descricao for data in datas track by data.Id">
+                        <option value="">Selecione a Período</option>
+                    </select>
+                </div>
+                <div class="grid-2">
+                    <button class="bt-default total">Filtrar</button>
+                </div>
+            </form>
+        </header>
+        <ul class="list-news">
+            <li ng-repeat="item in noticias">
+                <a class="content block-text" href="#!/informativo/noticias/{{item.Slug}}">
+                    <header class="header">
+                        <span class="category-label">{{item.NoticiaCategoria.Descricao}}</span>
+                        <span class="date">{{item.DataPublicacao}}</span>
+                    </header>
+                    <h2 class="title-bold">{{item.Titulo}}</h2>
+                    <p>{{item.Titulo}}</p>
+                </a>
+                <a  href="#!/informativo/noticias/{{item.Slug}}">   
+                    <img ng-src="{{item.CaminhoLogicoImagem}}?width=600" src="../images/default.jpg" alt="{{item.Titulo}}" class="pic-news">
+                </a>
+            </li>
+        </ul>
+        <div class="text-center block-text" ng-if="noticias.length == 0">
+            <p>Nenhuma notícia encontrada.</p>
+        </div>
+        <footer class="loading" ng-if="noticias.length > 0">
+            <button class="bt-gray" ng-click="loadMore()" ng-disabled="disabled">Carregar mais</button>
+        </footer>
+    </div>
+</div>

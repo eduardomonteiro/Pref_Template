@@ -1,0 +1,24 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<section class="container-general">
+        <div class="center">
+            <div class="block-text" style="margin-bottom: 45px;" ng-bind-html="conteudo.Turismo"></div>
+            <div class="row-grid cards-default clearfix">
+                <div class="grid-4" ng-repeat="item in conteudo.ListaTurismo">
+                    <article class="card-locals" style="background-image: url({{item.CaminhoLogicoImagem}})">
+                        <div class="info">
+                            <!-- <span class="category-label">Categoria</span> -->
+                            <h2 class="title">{{item.Nome}}</h2>
+                            <p class="description">{{item.Descricao}}</p>
+                            <a href="{{item.LinkMaps}}" target="_blank" class="bt-white">
+                                <i class="fa fa-map-marker"></i>
+                                Ver Localização
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <!-- <footer class="loading">
+                <button class="bt-gray">Carregar mais</button>
+            </footer> -->
+        </div>
+</section>

@@ -1,0 +1,12 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="container-general">
+    <div class="center">
+        <ul class="gallery-box">
+            <li ng-repeat="item in conteudo.GaleriaFotoGaleria">
+                <a data-fancybox="images" href="{{item.CaminhoLogicoMidia}}" data-options='{"hash": false, "animationEffect": false}'>
+                    <img src="{{item.CaminhoLogicoImagem}}" alt="{{item.Legenda}}" title="{{item.Legenda}}">
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<section class="form-news">
+    <div class="info">
+        <h2>Receba as notícias da nossa cidade</h2>
+        <p>Cadastrando-se em nossa newsletter você recebe em seu <br/> e-mail notícias, eventos e tudo que acontece em Pinheiral.</p>
+    </div>
+    <form class="form" ng-submit="postNewsletter(news)"  name="registrForm">
+        <input type="email" required placeholder="Seu e-mail" ng-model="news.Email">
+        <input type="text" required placeholder="Nome" ng-model="news.Nome">
+        <select ng-model="news.Sexo" required>
+            <option value="">Sexo</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+            <option value="Outro">Outro</option>
+        </select>
+        <button class="bt-default" ng-disabled="!news.Nome || !news.Email || !news.Sexo">Cadastrar</button>
+    </form>
+</section>

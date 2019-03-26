@@ -1,0 +1,61 @@
+.bt-default {
+    display: inline-block;
+    vertical-align: middle;
+    outline: none;
+    height: 40px;
+    border-radius: 5px;
+    background: $cor2;
+    line-height: 40px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 20px;
+    transition: all 0.4s ease;
+    &:hover {
+        background: $cor2 - 50%;
+    }
+    &.total {
+        width: 100%;
+    }
+    &.large {
+        padding: 0 45px;
+    }
+    &:disabled {
+        opacity: 0.3;
+        cursor: default;
+    }
+}
+
+
+
+.bt-gray {
+    @extend .bt-default;
+    padding: 0 30px;
+    background: #dadada;
+}
+
+.bt-white {
+    @extend .bt-default;
+    background: white;
+    color: $cor1;
+    &:hover {
+        color: white;
+    }
+}
+
+.bt-black {
+    background: transparent;
+    font-size: 1.4em;
+}
+
+.label-form {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    display: block;
+    &.required {
+        &:after {
+            content: '*';
+            color: $cor2;
+        }
+    }
+}

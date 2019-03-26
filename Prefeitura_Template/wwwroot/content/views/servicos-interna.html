@@ -1,0 +1,36 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="banner-intern" ng-if="conteudo.CaminhoLogicoImagem" style="background-image: url({{conteudo.CaminhoLogicoImagem}})"></div>
+<div class="center container-white">
+    <div class="row-grid clearfix">
+        <aside class="grid-2 sidebar-tags">
+            <img src="{{conteudo.CaminhoLogicoIcone}}" alt="{{conteudo.ServicoCategoria.Descricao}}" class="ico-sidebar">
+            <div class="category-label contrast">{{conteudo.ServicoCategoria.Descricao}}</div>
+        </aside>
+        <div class="grid-10 main-grid">
+            <div class="block-text" style="margin-bottom: 40px" ng-bind-html="conteudo.Descricao"></div>
+            <a target="_blank" href="http://{{conteudo.LinkExterno}}" target="_target" class="bt-default" ng-if="LinkExterno">Link Externo</a>
+            <div ng-if="conteudo.ServicoPin.length > 0">
+                <h2 class="title-area" style="margin-top: 60px">Onde encontrar o serviço</h2>
+                <section class="map-wrapper" map-lazy-load="https://maps.google.com/maps/api/js" style="margin-top: 0">
+                    <ng-map center="-22.5448941,-44.2125165" zoom="8" class="map-box">
+                        <marker id="{{marker.id}}" position="{{marker.Latitude}},{{marker.Longitude}}" ng-repeat="marker in conteudo.ServicoPin" icon="../images/pin.png" on-click="map.showInfoWindow(marker.id)"></marker>
+                    </ng-map>
+                </section>
+            </div>
+            <div class="wrapper-bottom">
+                <header class="header-button">
+                    <h2 class="title-area">Documentos</h2>
+                </header>
+                <slick class="list-documents" settings="config">
+                    <a href="{{file.CaminhoLogicoArquivo}}" download class="card" ng-repeat="file in conteudo.ServicoArquivo">
+                        <i class="fa fa-file-pdf-o"></i>
+                        <h3 class="title">{{file.ArquivoNome}}</h3>
+                    </a>
+                </slick>
+                <div class="text-center block-text" ng-if="conteudo.ServicoArquivo.length == 0">
+                    <p>Nenhum arquivo encontrado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

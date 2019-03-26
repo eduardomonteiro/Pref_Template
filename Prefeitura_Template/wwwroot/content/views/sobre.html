@@ -1,0 +1,112 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="banner-intern" style="background-image: url('../images/bg-estacao.jpg');  background-position: center 25%"></div>
+<section class="container-general white">
+    <div class="center">
+        <div class="block-text" ng-bind-html="conteudo.Descricao"></div>
+    </div>
+    <section class="informations-box" style="margin-top: 65px;">
+        <div class="center row-grid clearfix">
+            <div class="grid-6">
+                <h2 class="title-area">Informações Técnicas</h2>
+                <table class="table-info">
+                    <tr>
+                        <td>
+                            <span>Data de Fundação</span>
+                            <p>{{conteudo.DataFundacao}}</p>
+                        </td>
+                        <td>
+                            <span>Clima</span>
+                            <p>{{conteudo.Clima}}</p>
+                        </td>
+                        <td>
+                            <span>Altitude</span>
+                            <p>{{conteudo.Altitude}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Atual Prefeito</span>
+                            <p>{{conteudo.AtualPrefeito}}</p>
+                        </td>
+                        <td>
+                            <span>Área</span>
+                            <p>{{conteudo.Area}}</p>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>População</span>
+                            <p>{{conteudo.Populacao}}</p>
+                        </td>
+                        <td>
+                            <span>Densidade</span>
+                            <p>{{conteudo.Densidade}}</p>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="grid-6">
+                <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117922.94915806573!2d-44.060787345949684!3d-22.538220144215494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9ea4d279061cd7%3A0xd821a598c0160ed8!2sPinheiral+-+RJ%2C+27197-000!5e0!3m2!1spt-BR!2sbr!4v1505223679801" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    <section class="informations-box">
+        <div class="center row-grid clearfix">
+            <div class="grid-3">
+                <ul class="list-options">
+                    <li ng-class="{'active': tabActive == 1}" ng-click="changeTab(1)">
+                        Brasão <i class="fa fa-angle-right"></i>
+                    </li>
+                    <li ng-class="{'active': tabActive == 2}" ng-click="changeTab(2)">
+                        Bandeira <i class="fa fa-angle-right"></i>
+                    </li>
+                    <li ng-class="{'active': tabActive == 3}" ng-click="changeTab(3)">
+                        Hino <i class="fa fa-angle-right"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid-9">
+                <div class="container-info">
+                    <div class="content row-grid clearfix" ng-show="showContent == 1">
+                        <div class="grid-4">
+                            <img class="img-border" src="{{conteudo.CaminhoLogicoImagemBrasao}}" alt="Brasão">
+                        </div>
+                        <div class="grid-8 block-text" ng-bind-html="conteudo.DescricaoBrasao"></div>
+                    </div>
+                    <div class="content row-grid clearfix" ng-show="showContent == 2">
+                        <div class="grid-4">
+                                <img class="img-border" src="{{conteudo.CaminhoLogicoImagemBandeira}}" alt="Bandeira">
+                        </div>
+                        <div class="grid-8 block-text" ng-bind-html="conteudo.DescricaoBandeira"></div>
+                    </div>
+                    <div class="content row-grid clearfix" ng-show="showContent == 3">
+                        <div class="grid-4 text-center">
+                            <audio controls class="audio-box">
+                                <source src="{{conteudo.CaminhoLogicoAudioHino}}" type="audio/mpeg">
+                                Seu navegador não suporta este tipo de mídia.
+                            </audio>
+                            <label class="label-description">Hino da Cidade</label>
+                        </div>
+                        <div class="grid-8 block-text" ng-bind-html="conteudo.DescricaoHino"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="timeline-box">
+        <div class="center">
+            <h2 class="title-area">Linha do Tempo</h2>
+            <slick class="list" settings="slickConfig" data="number">
+                <div class="item" ng-repeat="item in timeline">
+                    <img src="{{item.CaminhoLogicoImagem}}" alt="{{item.Descricao}}">
+                    <h3 class="year">{{item.Ano}}</h3>
+                    <div class="block-text">
+                        <p>{{item.Descricao}}</p>
+                    </div>
+                </div>
+            </slick>
+        </div>
+    </section>
+</section>

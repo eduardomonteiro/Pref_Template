@@ -1,0 +1,105 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="banner-intern" style="background-image: url({{conteudo.CaminhoLogicoImagem}})"></div>
+<div class="center container-white">
+    <div class="row-grid clearfix">
+        <aside class="grid-3 sidebar-tags">
+            <h4 class="sector">{{conteudo.Secretaria.Nome}}</h4>
+            <div class="tags-wrapper">
+                <h4 class="title">Tags</h4>
+                <div>
+                    <span ng-repeat="tag in conteudo.Tag">tag</span>
+                </div>
+            </div>
+        </aside>
+        <div class="grid-9 main-grid">
+            <h1 class="title-hero">{{conteudo.Titulo}}</h1>
+            <div class="block-text" ng-bind-html="conteudo.SubTitulo"></div>
+            <div class="wrapper-bottom">
+                    <header class="header-button">
+                        <h2 class="title-area">Documentos</h2>
+                        <a class="bt-default" href="#/documentos">Ver Todos</a>
+                    </header>
+                    <slick class="list-documents" settings="slickConfig2" data="number">
+                        <a href="#" class="card">
+                            <i class="fa fa-file-pdf-o"></i>
+                            <h3 class="title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        </a>
+                        <a href="#" class="card">
+                            <i class="fa fa-file-pdf-o"></i>
+                            <h3 class="title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        </a>
+                        <a href="#" class="card">
+                            <i class="fa fa-file-pdf-o"></i>
+                            <h3 class="title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        </a>
+                        <a href="#" class="card">
+                            <i class="fa fa-file-pdf-o"></i>
+                            <h3 class="title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        </a>
+                        <a href="#" class="card">
+                            <i class="fa fa-file-pdf-o"></i>
+                            <h3 class="title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        </a>
+                        <a href="#" class="card">
+                            <i class="fa fa-file-pdf-o"></i>
+                            <h3 class="title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        </a>
+                        <a href="#" class="card">
+                            <i class="fa fa-file-pdf-o"></i>
+                            <h3 class="title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        </a>
+                        <a href="#" class="card">
+                            <i class="fa fa-file-pdf-o"></i>
+                            <h3 class="title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        </a>
+                        <a href="#" class="card">
+                            <i class="fa fa-file-pdf-o"></i>
+                            <h3 class="title">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                        </a>
+                    </slick>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="news-wrapper layout-2"  style="background: #fafafa; padding-top: 40px; margin-top: 0">
+    <div class="center">
+        <header class="header-button">
+            <h2 class="title-area">Notícias Relacionadas</h2>
+            <a class="bt-default" href="#!/informativo/noticias">Ver Todos</a>
+        </header>
+        <ul class="list">
+            <li class="container" ng-repeat="item in conteudo.Noticias">
+                <a href="#!/informativo/noticias/{{item.Slug}}">
+                    <span class="category-label">{{item.NoticiaCategoria.Descricao}}</span>
+                    <p class="date">{{item.DataPublicacao}}</p>
+                    <h3 class="title-bold">{{item.Titulo}}</h3>
+                    <div class="block-text">
+                        <p>{{item.SubTitulo}}</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+<section class="events-card">
+    <div class="center">
+        <header class="header-button">
+            <h2 class="title-area">Eventos Relacionadas</h2>
+            <a class="bt-default" href="#!/informativo/eventos">Ver Todos</a>
+        </header>
+        <ul class="list">
+            <li ng-repeat="item in conteudo.Eventos">
+                <header class="header">
+                    <span>{{item.DataHorarioEvento | createDate}}</span>
+                </header>
+                <a class="content" href="#!/informativo/eventos/{{item.slug}}">
+                    <span class="category-label">{{item.EventoCategoria.Descricao}}</span>
+                    <h2 class="title-bold">{{item.Titulo}}</h2>
+                    <div class="block-text">
+                        <p>{{item.Texto}}</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>

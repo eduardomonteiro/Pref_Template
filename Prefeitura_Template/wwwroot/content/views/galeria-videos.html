@@ -1,0 +1,71 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="featured-home">
+    <div class="center">
+        <slick class="gallery-featured" settings="slickConfig" data="number">
+            <div style="background-image: url({{destaque.ImagemVideo}})" class="item" ng-repeat="destaque in destaques">
+                <a href="https://www.youtube.com/watch?v={{destaque.LinkVideo}}" target="_blank">
+                    <div class="info">
+                        <h2 class="title">{{destaque.Titulo}}</h2>
+                        <p class="description">{{destaque.Descricao}}</p>
+                        <span class="bt-default">Saiba Mais</span>
+                    </div>
+                </a>
+            </div>
+        </slick>
+    </div>
+</div>
+<div class="container-general">
+    <div class="center">
+        <header class="filter-box">
+            <h2 class="title-area">Filtro</h2>
+            <form class="row-grid clearfix" ng-submit="searchFilter()">
+                <div class="grid-4">
+                    <label class="label-input">Palavra-Chave</label>
+                    <input type="text" class="input-default total" ng-model="palavra" placeholder="Digite um termo para filtrar">
+                </div>
+                <div class="grid-3">
+                    <label class="label-input">Categoria</label>
+                    <select class="input-default total" ng-model="categoriaid" ng-options="cat as cat.Descricao for cat in categorias track by cat.Id">
+                        <option value="">Selecione a Categoria</option>
+                    </select>
+                </div>
+                <div class="grid-3">
+                    <label class="label-input">Período</label>
+                    <select class="input-default total" ng-model="data" ng-options="data as data.Descricao for data in datas track by data.Id">
+                        <option value="">Selecione a Período</option>
+                    </select>
+                </div>
+                <div class="grid-2">
+                    <button class="bt-default total">Filtrar</button>
+                </div>
+            </form>
+        </header>
+        <ul class="articles-general intern">
+            <li ng-repeat="item in videos">
+                <figure>
+                    <a href="https://www.youtube.com/watch?v={{item.LinkVideo}}" target="_blank">
+                        <i class="fa fa-play-circle"></i>
+                        <img src="{{item.ImagemVideo}}" alt="{{item.Titulo}}" style="width: 100%; border: 0">
+                    </a>
+                </figure>
+                <div class="content">
+                    <a href="https://www.youtube.com/watch?v={{item.LinkVideo}}">
+                        <div class="category-label">{{item.GaleriaVideoCategoria.Descricao}}</div>
+                        <p class="date">{{item.DataPublicacao}}</p>
+                        <h3 class="title-bold">{{item.Titulo}}</h3>
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <div class="spinner" ng-show="loading">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+        </div>
+        <div class="text-center block-text" ng-if="videos.length  == 0">
+            <p>Nenhum resultado encontrado.</p>
+        </div>
+        <footer class="loading" ng-if="videos.length > 0">
+            <button class="bt-gray" ng-click="loadMore()" ng-disabled="disabled">Carregar mais</button>
+        </footer>
+    </div>
+</div>

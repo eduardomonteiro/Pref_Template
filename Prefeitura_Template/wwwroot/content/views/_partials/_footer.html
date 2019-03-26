@@ -1,0 +1,140 @@
+<footer id="rodape" class="main-footer" ng-class="{'open-map': open}">
+    <header class="header-sitemap" ng-click="open = !open">
+        Mapa do Site <i class="fa fa-angle-down"></i>
+    </header>
+    <div class="map-section">
+        <div class="center">
+            <div class="row-grid clearfix">
+                <div class="grid-3">
+                    <div class="block">
+                        <h2 class="titles">A Cidade</h2>
+                        <a href="#!/a-cidade/sobre" class="link">
+                            <i class="fa fa-angle-right"></i> Sobre a cidade
+                        </a>
+                        <a href="/#!/a-cidade/patromonio" class="link">
+                            <i class="fa fa-angle-right"></i> Patrimônio Histórico/Cultural
+                        </a>
+                        <a href="/#!/a-cidade/perfil-socioeconomico" class="link">
+                            <i class="fa fa-angle-right"></i> Perfil Sócio-econômico
+                        </a>
+                        <a href="/#!/a-cidade/atracoes-turisticas" class="link">
+                            <i class="fa fa-angle-right"></i> Atrações Turísticas
+                        </a>
+                        <a href="/#!/a-cidade/invista-cidade" class="link">
+                            <i class="fa fa-angle-right"></i> Invista na Cidade
+                        </a>
+                    </div>
+                    <div class="block">
+                        <h2 class="titles">Informativo</h2>
+                        <a href="#!/informativo/noticias" class="link">
+                            <i class="fa fa-angle-right"></i> Notícias
+                        </a>
+                        <a href="#!/informativo/eventos" class="link">
+                            <i class="fa fa-angle-right"></i> Eventos
+                        </a>
+                        <!-- <a href="#!/informativo/informativos" class="link">
+                            <i class="fa fa-angle-right"></i> Informativos
+                        </a> -->
+                    </div>
+                    <div class="block">
+                        <h2 class="titles">Multimídia</h2>
+                        <a href="#!/multimidia/galeria-fotos" class="link">
+                            <i class="fa fa-angle-right"></i> Galeria de Fotos
+                        </a>
+                        <a href="#!/multimidia/galeria-videos" class="link">
+                            <i class="fa fa-angle-right"></i> Galeria de Vídeos
+                        </a>
+                        <a href="#!/multimidia/galeria-audios" class="link">
+                            <i class="fa fa-angle-right"></i> Galeria de Aúdios
+                        </a>
+                    </div>
+                </div>
+                <div class="grid-3">
+                    <div class="block">
+                        <h2 class="titles">Governo</h2>
+                        <!-- <a href="#!/o-governo/projetos/" class="link">
+                            <i class="fa fa-angle-right"></i> Projetos
+                        </a> -->
+                        <a href="#!/o-governo/secretarias/" class="link">
+                            <i class="fa fa-angle-right"></i> Secretarias
+                        </a>
+                    </div>
+                    <div class="block">
+                        <h2 class="titles">Secretarias</h2>
+                        <a href="#!/o-governo/gabinete-prefeito/" class="link">
+                            <i class="fa fa-angle-right"></i> Gabinete do Prefeito
+                        </a>
+                        <!-- <a href="#!/o-governo/galeria-exprefeitos" class="link">
+                            <i class="fa fa-angle-right"></i> Galeria de Ex.Prefeitos
+                        </a> -->
+                    </div>
+                </div>
+                <div class="grid-3">
+                    <div class="block">
+                        <h2 class="titles">Serviços</h2>
+                        <a href="#!/servicos/{{servico.Slug}}" class="link"  ng-repeat="servico in servicoslista"> <i class="fa fa-angle-right"></i> {{servico.Nome}}</a>
+                    </div>
+                    <div class="block">
+                        <h2 class="titles">Participe</h2>
+                        <a href="#!/participe/enquetes" class="link"><i class="fa fa-angle-right"></i> Enquetes</a>
+                        <a href="#!/participe/faca-uma-sugestao" class="link"><i class="fa fa-angle-right"></i> Faça uma Sugestão</a>
+                    </div>
+                </div>
+                <div class="grid-3">
+                    <div class="block">
+                        <a href="#!/transparencia" class="titles">Transparência</a>
+                    </div>
+                    <div class="block">
+                        <h2 class="titles">Publicações</h2>
+                        <a href="#!/publicacoes-oficiais/licitacoes" class="link"><i class="fa fa-angle-right"></i> Licitações</a>
+                        <a href="#!/publicacoes-oficiais/legislacao" class="link"><i class="fa fa-angle-right"></i> Legislação</a>
+                        <a href="#!/publicacoes-oficiais/concursos" class="link"><i class="fa fa-angle-right"></i> Concursos</a>
+                        <a href="#!/multimidia/documentos" class="link">
+                            <i class="fa fa-angle-right"></i> Documentos
+                        </a>
+                    </div>
+                    <div class="block">
+                        <h2 class="titles">Contato</h2>
+                        <a href="#!/contato/fale-conosco" class="link"><i class="fa fa-angle-right"></i> Fale Conosco</a>
+                        <a href="#!/contato/perguntas-frequentes" class="link"><i class="fa fa-angle-right"></i> Perguntas Frequentes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-area">
+        <div class="center">
+            <div class="info">
+                <img src="images/logo.jpg" alt="{{nameProject}}">
+                <p><strong>{{nameProject}}</strong> <br/>{{endereco}} <br>{{telefone}}</p>
+            </div>
+            <nav class="links">
+                <span>Siga-nos</span>
+                <a href="#" target="_blank" class="fa fa-youtube" title="Youtube"></a>
+                <a href="https://www.facebook.com/PrefeituradePinheiralOficial" target="_blank" class="fa fa-facebook" title="Facebook"></a>
+            </nav>
+        </div>
+    </div>
+</footer>
+
+<div class="block-enquete-form" ng-class="{'open': enable}">
+    <button class="button-open" ng-click="enable = !enable">
+        <i class="fa fa-list"></i> Responda nossa <strong>Enquete</strong>
+    </button>
+    <form  class="form" ng-submit="postEnquete(); javotou = true" ng-init="javotou = false">
+        <h2 class="title">{{enquete.Pergunta}}</h2>
+        <div class="options">
+            <li ng-repeat="option in enquete[0].EnqueteOpcao">
+                <label>
+                    <input type="radio" ng-model="selected" value="{{option.Id}}" ng-if="!enquete.Encerrado" ng-hide="javotou" name="select-options" ng-change="getValue(selected)">
+                    {{option.Opcao}} <strong  ng-if="enquete.Encerrado || javotou"> - {{option.PorcentagemResposta}} %</strong>
+                </label>
+            </li>
+        </div>
+        <button class="bt-default total" ng-if="!item.Encerrado && !enquete.length == 0" ng-hide="javotou">Votar</button>
+        <div ng-if="enquete.length == 0" class="msg">
+            <i class="fa fa-frown-o"></i>
+            Nenhuma enquete <br/>no momento.
+        </div>
+    </form>
+</div>

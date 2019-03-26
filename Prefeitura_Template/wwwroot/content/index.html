@@ -1,0 +1,105 @@
+<!-- Desenvolvimento Front: Iago Machado -->
+<!doctype html>
+<html xml:lang="pt-br" lang="pt-br" ng-app="app">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="author" content="AM4 - A Internet de Resultados" />
+        <meta name="resource-type" content="document"/>
+        <meta name="content-language" content="pt-br"/>
+        <meta name="ICBM" content="-22.5382201,-44.0607873"/>
+        <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+        <meta name="DC.title" content="Prefeitura Municipal de Pinheiral"/>
+        <meta property="og:type" content="#"/>
+        <meta property="og:image" content="images/ico-facebook.jpg"/>
+        <meta property="og:url" content=""/>
+        <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+        <link rel="apple-touch-icon" href="/images/touch-icon-iphone.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="../images/touch-icon-ipad.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="../images/touch-icon-iphone-retina.png" />
+        <title>{{title}}</title>
+
+        <link rel="stylesheet" href="styles/styles.min.css" type="text/css">
+        <link rel="stylesheet" href="styles/weather-icons.css" type="text/css">
+        <link rel="stylesheet" href="styles/angular-bootstrap-lightbox.css" type="text/css">
+        <link rel="stylesheet" href="styles/jquery.fancybox.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+
+        
+        <script src="scripts/jquery.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
+        <script src="scripts/sweetalert2.js" type="text/javascript"></script>
+        <script src="scripts/angular/libs/angular.min.js" type="text/javascript"></script>
+        <script src="scripts/angular/libs/angular-route.js" type="text/javascript"></script>
+        <script src="scripts/angular/libs/angular-sanitize.js" type="text/javascript"></script>
+        <script src="scripts/angular/libs/angular-animate.js" type="text/javascript"></script>
+        <script src="scripts/angular/libs/angulartics.min.js" type="text/javascript"></script>
+        <script src="scripts/angular/libs/angulartics-google-tag-manager.min.js" type="text/javascript"></script>
+        <script src="scripts/angular/libs/hotkeys.js" type="text/javascript"></script>
+        <script src="scripts/angular/libs/slick.js" type="text/javascript"></script>
+        <script src="scripts/angular/libs/ng-map.min.js" type="text/javascript"></script>
+        <script src="scripts/angular/libs/angular-slick.js" type="text/javascript"></script>
+        <script src="scripts/angular/app.js" type="text/javascript"></script>
+        <script src="scripts/angular/services/appService.js" type="text/javascript"></script>
+        <script src="scripts/angular/directives/appDirective.js" type="text/javascript"></script>
+        <script src="scripts/angular/libs/ngMask.js" type="text/javascript"></script>
+
+        <!-- CONTROLLERS -->
+
+        <script src="scripts/angular/controllers/appCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/homeCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/sobreCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/patrimonioCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/secretariaInternaCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/projetosInternaCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/noticiasCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/noticiaInternaCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/servicosCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/exPrefeitoCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/atracoesCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/eventosCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/eventoInternaCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/perfilSocioCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/documentosCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/galeriaFotosCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/galeriaVideosCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/galeriaFotosInternaCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/galeriaAudioCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/servicosInternaCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/informativosCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/informativoInternaCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/faleConoscoCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/sugestaoCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/galeriaVideosInternaCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/concursoCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/concursoInternaCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/legislacaoCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/licitacoesCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/licitacaoInternaCtrl.js" type="text/javascript"></script> 
+        <script src="scripts/angular/controllers/enquetesCtrl.js" type="text/javascript"></script>  
+        <script src="scripts/angular/controllers/buscaCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/prefeituraAzCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/secretariaCtrl.js" type="text/javascript"></script>
+        <script src="scripts/angular/controllers/projetosCtrl.js" type="text/javascript"></script> 
+        <script src="scripts/angular/controllers/perguntasCtrl.js" type="text/javascript"></script>
+    </head>
+    <body ng-controller="appCtrl" ng-class="{'contrast': contrast}" >
+
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.10&appId=706213679541635";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+
+        <div ng-include="'views/_partials/_header.html'"></div>
+        <div class="pager" ng-view id="conteudo"></div>
+        <route-loading-indicator></route-loading-indicator>
+        <div ng-include="'views/_partials/_footer.html'"></div>
+    </body>
+</html>
+

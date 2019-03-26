@@ -1,0 +1,29 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<section class="container-general">
+    <div class="center">
+        <div class="block-text" style="margin-bottom: 40px;">
+            <ul class="card-default">
+                <li ng-repeat="item in lista">
+                    <a class="content" href="#!/o-governo/projetos/{{item.Slug}}">
+                        <img src="{{item.CaminhoLogicoImagem}}" alt="{{item.Titulo}}">
+                        <div class="content block-text">
+                            <span class="sector">{{item.ProjetoCategoria.Descricao}}</span>
+                            <h2 class="title-bold">{{item.Titulo}} </h2>
+                            <p>{{item.Subtitulo}}</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="spinner" ng-show="loading">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+        </div>
+        <div class="text-center block-text" ng-if="lista.length == 0">
+            <p>Nenhum projeto encontrado.</p>
+        </div>
+        <footer class="loading">
+            <button class="bt-gray" ng-click="loadMore()" ng-disabled="disabled">Carregar mais</button>
+        </footer>
+    </div>
+</section>

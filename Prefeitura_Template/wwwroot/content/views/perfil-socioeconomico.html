@@ -1,0 +1,14 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<section class="container-general">
+        <div class="center">
+            <ul class="list-pic-text">
+                <li class="card" ng-repeat="item in conteudo">
+                    <div class="figure" style="background-image: url({{item.CaminhoLogicoImagem}})"></div>
+                    <div class="info">
+                        <h2 class="title">{{item.Titulo}}</h2>
+                        <div class="block-text" ng-bind-html="item.Descricao"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+</section>

@@ -1,0 +1,49 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="banner-intern" style="background-image: url({{conteudo.CaminhoLogicoImagem}})"></div>
+<div style="background: #fafafa;">
+    <div class="center container-white">
+        <div class="row-grid clearfix">
+            <aside class="grid-3 sidebar-tags">
+                <p class="date-publish">{{conteudo.DataHorarioEvento}}</p>
+                <span class="category-label contrast">{{conteudo.EventoCategoria.Descricao}}</span>
+                <br>
+                <div class="tags-wrapper">
+                    <h4 class="title">Tags</h4>
+                    <div>
+                        <span ng-repeat="tag in conteudo.Tag">{{tag.Descricao}},</span>
+                    </div>
+                </div>
+            </aside>
+            <div class="grid-9 main-grid">
+                <h1 class="title-hero">{{conteudo.Titulo}}</h1>
+                <blockquote class="description-block">{{conteudo.SubTitulo}}</blockquote>
+                <div class="block-text" ng-bind-html="conteudo.Texto"></div>
+                <ul class="gallery-box two-columns" style="margin-top: 40px">
+                    <li ng-repeat="item in conteudo.EventoGaleria">
+                        <a data-fancybox="images" data-options='{"hash": false, "animationEffect": false}' href="{{item.CaminhoLogicoMidia}}">
+                            <img src="{{item.CaminhoLogicoMidia}}" alt="{{item.Legenda}}" title="{{item.Legenda}}">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <section class="news-wrapper layout-2"  style="background: #fafafa; border-top: 1px solid #dddddd; padding-top: 60px">
+        <div class="center">
+            <header class="header-button">
+                <h2 class="title-area">Outros Eventos</h2>
+                <a class="bt-default" href="#!/informativo/eventos">Ver Todos</a>
+            </header>
+            <ul class="list">
+                <li class="container" ng-repeat="item in eventos">
+                    <a href="#!/informativo/eventos/{{item.Slug}}">
+                        <span class="category-label">{{item.EventoCategoria.Descricao}}</span>
+                        <p class="date">{{item.DataHorarioEvento}}</p>
+                        <h3 class="title-bold">{{item.Titulo}}</h3>
+                        <div class="block-text" ng-bind-html="item.Texto"></div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>

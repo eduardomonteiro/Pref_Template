@@ -1,0 +1,31 @@
+<div class="center breadcumb-box">
+    <div class="info">
+        <a href="javascript:window.history.go(-1)" class="bt-back fa fa-angle-left" title="Voltar"></a>
+        <div class="data">
+            <h1 class="title-page" ng-bind="titlePage"></h1>
+            <div class="breadcumb">
+                <a href="/">Home |</a>
+                <a ng-if="rootArea != ''">{{rootArea}} |</a>
+                <strong ng-bind="titlePage">Subseção</strong>
+            </div>
+        </div>
+    </div>
+    <div class="buttons">
+        <button class="fa fa-share-alt" ng-click="openShare = !openShare"></button>
+        <button class="fa fa-print" ng-click="printPage()"></button>
+        <ul class="list-share" ng-class="{'enable': openShare}">
+            <li>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{linkPage}}" target="_blank">
+                    <i class="fa fa-facebook"></i> Facebook
+                </a>
+            </li>
+            <li>
+                <a href="https://twitter.com/home?status={{linkPage}}" target="_blank">
+                    <i class="fa fa-twitter"></i> Twitter
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+    
+    

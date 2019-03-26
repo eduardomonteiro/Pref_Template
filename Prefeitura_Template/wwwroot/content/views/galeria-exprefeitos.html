@@ -1,0 +1,21 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<section class="container-general">
+        <div class="center">
+            <div class="block-text" style="margin-bottom: 30px;" ng-bind-html="conteudo.ExPrefeito"></div>
+            <ul class="list-governaments">
+                <li ng-repeat="item in conteudo.ListaExPrefeitos">
+                    <img src="{{item.CaminhoLogicoImagem}}" alt="{{item.Nome}}">
+                    <div class="content">
+                        <h2 class="title">{{item.Nome}}</h2>
+                        <p>{{item.DataInicioLegislatura}} - {{item.DataFimLegislatura}}</p>
+                    </div>
+                </li>
+            </ul>
+            <div ng-if="conteudo == 0" class="title-area text-center">
+                <i class="fa fa-frown-o"></i> Nenhum conteúdo encontrado.
+            </div>
+            <footer class="loading" ng-if="conteudo.length > 1">
+                <button class="bt-gray">Carregar mais</button>
+            </footer>
+        </div>
+</section>

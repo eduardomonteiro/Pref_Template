@@ -1,0 +1,51 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="container-general">
+    <div class="center">
+        <header class="filter-box">
+            <h2 class="title-area">Filtro</h2>
+            <form class="row-grid clearfix" ng-submit="searchFilter()">
+                <div class="grid-4">
+                    <label class="label-input">Palavra-Chave</label>
+                    <input type="text" class="input-default total" ng-model="palavra" placeholder="Digite um termo para filtrar">
+                </div>
+                <div class="grid-3">
+                    <label class="label-input">Categoria</label>
+                    <select class="input-default total" ng-model="categoriaid" ng-options="cat as cat.Descricao for cat in categorias track by cat.Id">
+                        <option value="">Selecione a Categoria</option>
+                    </select>
+                </div>
+                <div class="grid-3">
+                    <label class="label-input">Período</label>
+                    <select class="input-default total" ng-model="data" ng-options="data as data.Descricao for data in datas track by data.Id">
+                        <option value="">Selecione a Período</option>
+                    </select>
+                </div>
+                <div class="grid-2">
+                    <button class="bt-default total">Filtrar</button>
+                </div>
+            </form>
+        </header>
+        <section class="events-card layout-2">
+            <div class="center">
+                <ul class="list">
+                    <li ng-repeat="item in eventos">
+                        <header class="header">
+                            <span>{{item.DataHorarioEvento | createDate}}</span>
+                        </header>
+                        <a class="content" href="#!/informativo/eventos/{{item.Slug}}">
+                            <span class="category-label">{{item.EventoCategoria.Descricao}}</span>
+                            <h2 class="title-bold">{{item.Titulo}}</h2>
+                            <div class="block-text" ng-bind-html="item.Texto"></div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="block-text" ng-if="eventos.length == 0">
+                    <p class="text-center">Nenhum evento encontrado.</p>
+                </div>
+            </div>
+        </section>
+        <footer class="loading" ng-if="eventos.length > 0">
+            <button class="bt-gray" ng-click="loadMore()" ng-disabled="disabled">Carregar mais</button>
+        </footer>
+    </div>
+</div>

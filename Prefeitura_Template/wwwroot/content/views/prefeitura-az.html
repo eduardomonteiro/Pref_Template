@@ -1,0 +1,22 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="container-general">
+    <div class="center">
+        <ul class="list-news">
+            <li ng-repeat="item in lista | orderBy: 'Titulo'">
+                <a class="content block-text" href="{{item.Url}}">
+                    <header class="header">
+                        <span class="category-label">{{item.AaZCategoria.Descricao}}</span>
+                        <span class="date">{{item.DataPublicacao}}</span>
+                    </header>
+                    <h2 class="title-bold">{{item.Titulo}}</h2>
+                </a>
+            </li>
+        </ul>
+        <div class="text-center block-text" ng-if="lista.length == 0">
+            <p>Nenhum resultado encontrado.</p>
+        </div>
+        <footer class="loading">
+            <button class="bt-gray" ng-click="loadMore()" ng-disabled="disabled">Carregar mais</button>
+        </footer>
+    </div>
+</div>

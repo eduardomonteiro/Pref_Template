@@ -1,0 +1,120 @@
+<header class="main-header" id="topo">
+    <button class="fa button-menu fa-bars" ng-click="clickMenu()"></button>
+    <button class="fa button-close fa-times" ng-show="menu" ng-click="clickMenu()"></button>
+    <div class="bar-top">
+        <div class="center">
+            <nav class="buttons-acessibility">
+                <button class="fa fa-adjust" title="Contraste" ng-click="addContrast()"></button>
+                <!-- <a class="fa" href="#" target="_blank"><img src="images/ico-hand.png" ></a> -->
+                <button class="fa font" font-resize ng-click="minus()">A-</button>
+                <button class="fa font" font-resize ng-click="plus()">A+</button>
+                <a class="link" href="#!/acessibilidade">Acessibilidade</a>
+            </nav>
+            <nav class="go-to">
+                <a ng-click="scrollPage('#conteudo')">Ir para o conteúdo <strong>1</strong></a>
+                <a ng-click="scrollPage('#menu')">Ir para o menu <strong>2</strong></a>
+                <a ng-click="scrollPage('#busca')">Ir para a busca <strong>3</strong></a>
+                <a ng-click="scrollPage('#rodape')">Ir para o rodapé <strong>4</strong></a>
+            </nav>
+        </div>
+    </div>
+    <div class="featured-section">
+        <div class="center">
+            <a href="/" class="brand">
+                <img src="images/logo.jpg" alt="Prefeitura Municipal de Pinheiral">
+            </a>
+            <div class="box">
+                <div class="informations">
+                    <div class="buttons">
+                        <div class="share">
+                            <span>Siga-nos:</span>
+                            <a href="#" target="_blank" class="fa fa-youtube"></a>
+                            <a href="https://www.facebook.com/PrefeituradePinheiralOficial/" target="_blank" class="fa fa-facebook"></a>
+                        </div>
+                        <a class="alphabet" href="#!/prefeitura-az  ">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                            Prefeitura de A a Z
+                        </a>
+                    </div>
+                    <form class="search-general" ng-submit="searchForm(palavra)">
+                        <input type="text" placeholder="Buscar no site" maxlength="70" id="busca" ng-model="palavra">
+                        <button class="fa fa-search"></button>
+                    </form>
+                </div>
+                <div class="card-climate">
+                    <i title="{{clima.tempo}}" class="ico wi" ng-class="callClass(clima.tempo)"></i>
+                    <p>
+                        {{clima.minima}} <i class="fa fa-angle-down"></i>
+                        {{clima.maxima}} <i class="fa fa-angle-up"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul id="menu" class="menu-navigation center" ng-class="{'enabled': menu}">
+        <li>
+            <a class="title-item">A Cidade <i class="fa fa-angle-down"></i></a>
+            <nav class="submenu">
+                <a href="#!/a-cidade/sobre">Sobre a Cidade</a>
+                <a href="/#!/a-cidade/patromonio">Patrimônio Histórico/Cultural</a>
+                <a href="/#!/a-cidade/perfil-socioeconomico">Perfil Sócio-econômico</a>
+                <a href="/#!/a-cidade/atracoes-turisticas">Atrações Turísticas</a>
+                <a href="/#!/a-cidade/invista-cidade">Invista na Cidade</a>
+            </nav>
+        </li>
+        <li>
+            <a class="title-item">Governo <i class="fa fa-angle-down"></i></a>
+            <nav class="submenu">
+                <a href="#!/o-governo/gabinete-prefeito/">Gabinete do Prefeito</a>
+                <!-- <a href="#!/o-governo/galeria-exprefeitos">Galeria de Ex.Prefeitos</a> -->
+                <a href="#!/o-governo/secretarias/">Secretarias</a>
+                <!-- <a href="#!/o-governo/projetos/">Projetos</a> -->
+            </nav>
+        </li>
+        <li>
+            <a class="title-item">Multimídia <i class="fa fa-angle-down"></i></a>
+            <nav class="submenu">
+                <a href="#!/multimidia/galeria-fotos">Fotos</a>
+                <a href="#!/multimidia/galeria-videos">Vídeos</a>
+                <a href="#!/multimidia/galeria-audios">Áudios</a>
+            </nav>
+        </li>
+        <li>
+            <a  class="title-item">Informativo <i class="fa fa-angle-down"></i></a>
+            <nav class="submenu">
+                <a href="#!/informativo/noticias">Notícias</a>
+                <a href="#!/informativo/eventos">Eventos</a>
+                <!-- <a href="#!/informativo/informativos">Informativos</a> -->
+            </nav>
+        </li>
+        <li>
+            <a href="#!/servicos/" class="title-item">Serviços</a>
+        </li>
+        <li>
+            <a class="title-item">Participe <i class="fa fa-angle-down"></i></a>
+            <nav class="submenu">
+                <a href="#!/participe/enquetes">Enquetes</a>
+                <a href="#!/participe/faca-uma-sugestao">Faça uma sugestão</a>
+            </nav>
+        </li>
+        <li>
+            <a href="#!/transparencia" class="title-item">Transparência</a>
+        </li>
+        <li>
+            <a class="title-item">Publicações Oficiais <i class="fa fa-angle-down"></i></a>
+            <nav class="submenu">
+                <a href="#!/publicacoes-oficiais/licitacoes">Licitações</a>
+                <a href="#!/publicacoes-oficiais/legislacao">Legislação</a>
+                <a href="#!/publicacoes-oficiais/concursos">Concursos</a>
+                <a href="#!/multimidia/documentos">Documentos</a>
+            </nav>
+        </li>
+        <li>
+            <a class="title-item">Contato <i class="fa fa-angle-down"></i></a>
+            <nav class="submenu">
+                <a href="#!/contato/fale-conosco">Fale Conosco</a>
+                <a href="#!/contato/perguntas-frequentes">Perguntas Frequentes</a>
+            </nav>
+        </li>
+    </ul>
+</header>

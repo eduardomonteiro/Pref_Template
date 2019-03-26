@@ -1,0 +1,202 @@
+<div class="featured-home">
+    <div class="center">
+        <slick class="gallery-featured" settings="slickConfig">
+            <div style="background-image: url({{destaque.CaminhoLogicoImagem}}?width=1900)" class="item" ng-repeat="destaque in destaques">
+                <a href="#!/informativo/noticias/{{destaque.Slug}}">
+                    <div class="info">
+                        <h2 class="title">{{destaque.Titulo}}</h2>
+                        <p class="description">{{destaque.SubTitulo}}</p>
+                        <span class="bt-default">Saiba Mais</span>
+                    </div>
+                </a>
+            </div>
+        </slick>
+        <section class="services-featured">
+            <h2 class="title">Serviços mais Acessados</h2>
+            <slick class="services-slider" settings="slickConfig2">
+                <a class="card" href="#!/servicos/{{item.Slug}}" ng-repeat="item in servicos">
+                    <img src="{{item.CaminhoLogicoIcone}}" alt="{{item.Nome}}">
+                    <h4>{{item.Nome}}</h4>
+                </a>
+            </slick>
+            <div ng-if="servicos.length == 0" class="text-center block-text">
+                <p>Nenhum serviço em destaque.</p>
+            </div>
+        </section>  
+    </div>
+</div>
+<div class="center">
+    <section class="news-wrapper">
+        <header class="header-button">
+            <h2 class="title-area">Notícias</h2>
+            <a class="bt-default" href="#!/informativo/noticias">Ver Todos</a>
+        </header>
+        <ul class="list">
+            <li style="background-image: url({{item.CaminhoLogicoImagem}}?width=1000)" ng-repeat="item in noticias">
+                <a href="#!/informativo/noticias/{{item.Slug}}">
+                    <span class="category-label">{{item.NoticiaCategoria.Descricao}}</span>
+                    <h3 class="title">{{item.Titulo}}</h3>
+                </a>
+            </li>
+        </ul>
+        <div class="block-text text-center" ng-if="noticias.length == 0">
+            <p>Nenhuma notícia encontrada.</p>
+        </div>
+    </section>
+    <div class="row-grid clearfix">
+        <div class="grid-6">
+            <header class="header-button">
+                <h2 class="title-area">Vídeos</h2>
+                <a class="bt-default" href="#!/multimidia/galeria-videos">Ver Todos</a>
+            </header>
+            <ul class="articles-general">
+                <li ng-repeat="item in videos">
+                    <figure>
+                        <i class="fa fa-play-circle"></i>
+                        <a href="https://www.youtube.com/watch?v={{item.LinkVideo}}" target="_blank">
+                            <img src="{{item.ImagemVideo}}" alt="{Titulo da Notícia}">
+                        </a>
+                    </figure>
+                    <div class="content">
+                        <a href="https://www.youtube.com/watch?v={{item.LinkVideo}}" target="_blank">
+                            <div class="category-label">{{item.GaleriaVideoCategoria.Descricao}}</div>
+                            <h3 class="title" style="color: black">{{item.Titulo}}</h3>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <div class="block-text text-center" ng-if="videos.length == 0">
+                <p>Nenhum vídeo encontrado.</p>
+            </div>
+        </div>
+        <div class="grid-6">
+            <header class="header-button">
+                <h2 class="title-area">Eventos</h2>
+                <a class="bt-default" href="#!/informativo/eventos">Ver Todos</a>
+            </header>
+            <ul class="list-events">
+                <li ng-repeat="item in eventos">
+                    <a href="#!/informativo/eventos/{{item.Slug}}">
+                        <span class="date">
+                            {{item.DataHorarioEvento | createDate}}
+                        </span>
+                        <h3 class="title">{{item.Titulo}}</h3>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div> 
+</div>
+<section class="map-wrapper" map-lazy-load="https://maps.google.com/maps/api/js">
+    <header class="filter-map">
+        <h2 class="title">Mapa de Serviços</h2>
+        <nav class="buttons">
+            <button ng-repeat="item in categoriasServico" ng-class="{'active': catSelect == item.Id}" ng-click="changePin(item.Id)">{{item.Descricao}}</button>
+        </nav>
+    </header>
+    <ng-map id="map" center="[{{centerMap.Latitude}}, {{centerMap.Longitude}}]" geo-fallback-center="-22.546952, -44.005339" zoom="12" class="map-box">
+        
+        <marker position="{{marker.ServicoPin[0].Latitude}},{{marker.ServicoPin[0].Longitude}}" title="{{marker.Nome}}" icon="../images/pin.png" on-click="map.showInfoWindow('bar')" ng-repeat="marker in markers" id="marker1">
+            <info-window id="bar">
+                <div>
+                    <div class="info-window">
+                        <div class="ico">
+                            <img src="{{marker.CaminhoLogicoIcone}}" alt="{{marker.Nome}}">
+                        </div>
+                        <div class="info">
+                            <span class="category-label contrast">{{marker.ServicoCategoria.Descricao}}</span>
+                            <h3 class="title-bold">{{marker.Nome}}</h3>
+                            <div class="block-text" ng-bind-html="marker.Descricao"></div>
+                        </div>
+                    </div>
+                </div>
+            </info-window>  	
+        </marker>
+        
+    </ng-map>
+</section>
+<section class="cards-portals">
+    <ul class="center list">
+        <li class="portal">
+            <a href="#">
+                <img src="images/ico-portal.png" class="ico" alt="Portal da Transparência">
+                <h2 class="title">
+                    Portal da <strong>Transparência</strong>
+                </h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendu.</p>
+            </a>
+        </li>
+        <li class="acesso">
+            <a href="#">
+                <img src="images/ico-acesso.png" class="ico" alt="Acesso à Informação">
+                <h2 class="title">
+                    Acesso à <strong>Informação</strong>
+                </h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendu.</p>
+            </a>
+        </li>
+        <li class="ouvidoria">
+            <a href="#">
+                <img src="images/ico-ouvidoria.png" class="ico" alt="Ouvidoria">
+                <h2 class="title">
+                    <strong>Ouvidoria</strong>
+                </h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendu.</p>
+            </a>
+        </li>
+        <li class="duvidas">
+            <a href="#">
+                <img src="images/ico-duvidas.png" class="ico" alt="Dúvidas Frequentes">
+                <h2 class="title">
+                    Dúvidas <strong>Frequentes</strong>
+                </h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendu.</p>
+            </a>
+        </li>
+    </ul>
+</section>
+<section class="secretary-card">
+    <div class="center">
+        <header class="header-button">
+            <h2 class="title-area">Secretarias</h2>
+            <a class="bt-default" href="#!/o-governo/secretarias">Ver Todas</a>
+        </header>
+        <slick class="list-secretary" settings="slickConfig3" data="number">
+            <div class="card" ng-repeat="item in secretarias">
+                <a href="#!/o-governo/secretarias/{{item.Slug}}">
+                    <img src="{{item.CaminhoLogicoIcone}}" class="ico" alt="{{item.Nome}}">
+                    <h2 class="title">
+                        {{item.Prefixo}} <strong>{{item.Nome}}</strong>
+                    </h2>
+                    <ul class="contacts">
+                        <li>
+                            <h3 ng-if="item.PincipaisServicos != ''">Serviços</h3>
+                            <p>{{item.PincipaisServicos}}</p>
+                        </li>
+                        <li>
+                            <h3>Contato</h3>
+                            <p>{{item.Telefone}} <br>{{item.Email}}</p>
+                        </li>
+                    </ul>
+                </a>
+            </div>
+        </slick>
+    </div>
+</section>
+<section class="wrapper-socials">
+    <div class="center">
+        <div class="row-grid clearfix">
+            <div class="grid-6">
+                <h2 class="title-area"> <i class="fa fa-facebook"></i> Facebook</h2>
+                <div class="fb-page" data-href="https://www.facebook.com/PrefeituradePinheiralOficial/" data-tabs="timeline" data-width="500" data-height="300" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/facebook" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/facebook">Facebook</a></blockquote></div>
+            </div>
+            <div class="grid-6">
+                <h2 class="title-area"> <i class="fa fa-youtube"></i> Youtube</h2>
+                <iframe src="https://www.youtube.com/channel/UC5NeIjQEoQBRupY0KnxbzKQ" width="100%" height="300"></iframe>
+            </div>
+            <div class="grid-12">
+                <div ng-include="'views/_partials/_newsletter.html'"></div>
+            </div>
+        </div>
+    </div>
+</section>

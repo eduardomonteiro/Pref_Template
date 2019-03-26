@@ -1,0 +1,221 @@
+body.contrast {
+    background: black;
+    font-size: 11px;
+    .main-header .menu-navigation li > .title-item {
+        color: white;
+    }
+    .bt-default, .bt-gray, .bt-white {
+        background: white;
+        border: 1px solid black;
+        color: black;
+        font-weight: bold;
+    }
+    .slick-dots li {
+        border-color: #fff;
+        &.slick-active {
+            background: #fff;
+        }
+    }
+    .list-news li, .list-enquetes > li {
+        background: #101010;
+        .title-bold, .content .header .category-label, .content .header .date, .block-text p, .header .status, .header p {
+            color: white !important;
+        }
+        .content .header .category-label {
+            border: 1px solid white !important;
+        }
+
+    }
+    .card-default li, .list-governaments li {
+        border: 1px solid white;
+        background: transparent;
+        .category-label {
+            color: white;
+            border-color: white;
+        }
+        .title-bold, .title, p {
+            color: white;
+        }
+    }
+    .bt-black {
+        color: #fff;
+    }
+    .breadcumb-box .info .bt-back {
+        background: transparent;
+    }
+    .card-climate {
+        background: black;
+        color: white;
+        > .ico {
+            color: white;
+        }
+    }
+    .title-area {
+        color: white;
+    }
+    .articles-general li .content .category-label {
+        border-color: black;
+        color: black;
+    }
+    .map-wrapper .filter-map {
+        background: black;
+    }
+    .map-wrapper .filter-map .buttons button {
+        color: #ccc;
+        &.active {
+            color: white;
+        }
+    }
+    .form-news {
+        background: #272829;
+    }
+    .main-footer {
+        .header-sitemap {
+            background: black;
+            color: white;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+        }
+        .map-section {
+            background: #0E0E0E;
+            .titles {
+                color: white;
+            }
+        }
+    }
+    .breadcumb-box .info .title-page, .breadcumb-box .info .breadcumb a, .breadcumb-box .info .breadcumb strong{
+        color: white;
+    }
+    .container-general {
+        background: black;
+    }
+    .block-text, .block-text p {
+        color: white;
+    }
+    .table-info {
+        td  {
+            span, p {
+                color: white;
+            }
+        }
+    }
+    .list-options li.active {
+        background: #111111;
+    }
+    .main-header .featured-section {
+        background: #2d2d2d;
+    }
+    .main-header .featured-section .box .informations .buttons .share span, .main-header .featured-section .box .informations .buttons .share a, .main-header .bar-top .go-to a {
+        color: white;
+    }
+    .search-general .fa-search, .main-header .featured-section .box .informations .buttons .alphabet {
+        background: black;
+        border-color: white;
+    }
+    .main-header .bar-top {
+        background: black;
+    }
+    .main-header .bar-top .link, .main-header .bar-top button {
+        background: #333; color: white;
+    }
+    .block-enquete-form .button-open {
+        background: black;
+    }
+    .secretary-card, .main-header .menu-navigation li .submenu, .wrapper-questions .list-acordion li {
+        background: #0E0E0E;
+    }
+    .wrapper-questions .list-acordion li .header .title {
+        color: white;
+    }
+    .main-header .menu-navigation li .submenu > a {
+        color: white;
+    }
+    .bt-white {
+        background: black;
+        color: white;
+    }
+    .list-secretary .card {
+        background: black;
+        border: 1px solid white;
+        .title, .contacts li h3, .contacts li p {
+            color: white;
+        }
+    }
+    .sk-circle .sk-child:before  {
+        background: white;
+    }
+    .info-governament, .list-events li .date {
+        background: black;
+    }
+    .info-governament span {
+        color: white;
+    }
+    .info-governament .grid-2, .info-governament .grid-4, .info-governament .grid-3 {
+        border-color: white;
+    }
+    .wrapper-documents, .events-card .list li .header {
+        background: #161616;
+    }
+    .category-label.contrast, .list-news li .content .header .category-label {
+        color: black;
+        border-color: black;
+    }
+    .label-form, .links-default a {
+        color: white;
+    }
+    .list-news .block-text, .list-news .block-text p {
+        color: black;
+    }
+    .list-documents li a .block-file {
+        background: black;
+    }
+    .side-contact .block-contact .title, .side-contact .block-contact .label {
+        color: white; 
+    }
+    .wrapper-questions .list-acordion li .content p {
+        color: white !important;
+    }
+    .featured-home {
+        background: black;
+    }
+    .block-enquete-form .form {
+        background: #0e0e0e;
+    }
+    .main-footer .bottom-area .center .info p {
+        color: white;
+    }
+    .breadcumb-box {
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .list-documents .card, .card-locals {
+        background: #101010;
+        color: white;
+    }
+    .list-documents .card .fa {
+        color: white;
+    }
+    .table-comand {
+        color: white;
+    }
+    .table-comand tr .button-command {
+        background: #4c4c4c;
+    }
+    .table-comand tr.header td, .card-default li .description {
+        color: white;
+        border-color: white;
+    }
+    .articles-general li {
+        background: #101010;
+        border: 1px solid #fff;
+        .title-bold, .date {
+            color: white;
+        }
+        .category-label {
+            color: #fff !important; border-color: #fff !important
+        }
+    }
+    .input-default {
+        background: black;
+        color: white;
+    }
+}

@@ -1,0 +1,20 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+
+<div class="container-general">
+    <div class="center">
+        <section class="wrapper-questions">
+            <div class="block">
+                <h2 class="title-area">Assuntos</h2>
+                <ul class="list-acordion">
+                    <li ng-repeat="item in lista" acordion ng-click="open()">
+                        <header class="header">
+                            <h3 class="title">{{item.Titulo}}</h3>
+                            <button class="bt-more"></button>
+                        </header>
+                        <div class="content block-text" ng-bind-html="item.Descricao"></div>
+                    </li>
+                </ul>   
+            </div>
+        </section>
+    </div>
+</div>

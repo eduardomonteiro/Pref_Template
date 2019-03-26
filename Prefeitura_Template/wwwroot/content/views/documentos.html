@@ -1,0 +1,53 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="container-general">
+    <div class="center">
+        <header class="filter-box">
+            <h2 class="title-area">Filtro</h2>
+            <form class="row-grid clearfix" ng-submit="searchFilter()">
+                <div class="grid-4">
+                    <label class="label-input">Palavra-Chave</label>
+                    <input type="text" class="input-default total" placeholder="Digite um termo para filtrar" ng-model="palavra">
+                </div>
+                <div class="grid-3">
+                    <label class="label-input">Categoria</label>
+                    <select class="input-default total" ng-model="categoriaid" ng-options="cat as cat.Descricao for cat in categorias track by cat.Id">
+                        <option value="">Selecione a Categoria</option>
+                    </select>
+                </div>
+                <div class="grid-3">
+                    <label class="label-input">Data</label>
+                    <select class="input-default total" ng-model="data" ng-options="data as data.Descricao for data in datas track by data.Id">
+                        <option value="">Selecione a Período</option>
+                    </select>
+                </div>
+                <div class="grid-2">
+                    <button class="bt-default total">Filtrar</button>
+                </div>
+            </form>
+        </header>
+        <ul class="list-documents">
+            <li ng-repeat="item in documentos">
+                <a href="{{item.DocumentoArquivoAtual.CaminhoLogicoArquivo}}" download>
+                    <div class="block-file">
+                        <i class="fa fa-file-pdf-o"></i>
+                        <small>{{item.DocumentoArquivoAtual.Tamanho}}</small>
+                    </div>
+                    <div class="content block-text">
+                        <header>
+                            <span class="category-label contrast">{{item.DocumentoCategoria.Descricao}}</span>
+                            <span class="date">{{item.DataPublicacao}}</span>
+                        </header>
+                        <h2 class="title-bold">{{item.Titulo}}</h2>
+                        <p>{{item.Texto}}</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="text-center block-text" ng-if="documentos.length == 0">
+            <p>Nenhum resultado encontrado.</p>
+        </div>
+        <footer class="loading">
+            <button class="bt-gray" ng-click="loadMore()" ng-disabled="disabled">Carregar mais</button>
+        </footer>
+    </div>
+</div>

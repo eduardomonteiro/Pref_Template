@@ -1,0 +1,54 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="banner-intern" style="background-image: url({{conteudo.CaminhoLogicoImagem}})"></div>
+<div style="background: #fafafa;">
+    <div class="center container-white">
+        <div class="row-grid clearfix">
+            <aside class="grid-3 sidebar-tags">
+                <p class="date-publish">{{conteudo.DataPublicacao}}</p>
+                <span class="category-label contrast">{{conteudo.NoticiaCategoria.Descricao}}</span>
+                <br>
+                <div class="tags-wrapper">
+                    <h4 class="title">Tags</h4>
+                    <div ng-repeat="tag in conteudo.Tag">
+                        <span>{{tag.Descricao}}</span>
+                    </div>
+                </div>
+            </aside>
+            <div class="grid-9 main-grid">
+                <h1 class="title-hero">{{conteudo.Titulo}}</h1>
+                <blockquote class="description-block">{{conteudo.SubTitulo}}</blockquote>
+                <div class="block-text" ng-bind-html="conteudo.Texto"></div>
+                <ul class="gallery-box two-columns" style="margin-top: 40px">
+                    <li ng-repeat="item in conteudo.NoticiaGaleria">
+                        <a data-fancybox="images" href="{{item.CaminhoLogicoMidia}}" 
+                            data-options='{"hash": false, "animationEffect": false}'>
+                            <img src="{{item.CaminhoLogicoMidia}}" alt="{{item.Legenda}}" title="{{item.Legenda}}">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <section class="events-card layout-2"  style="background: #fafafa; border-top: 1px solid #dddddd; padding-top: 60px">
+        <div class="center">
+            <header class="header-button">
+                <h2 class="title-area">Notícias</h2>
+                <a class="bt-default" href="#!/informativo/noticias">Ver Todos</a>
+            </header>
+            <ul class="list">
+                <li ng-repeat="item in noticias">
+                    <header class="header">
+                        <span>{{item.DataPublicacao | createDate}}</span>
+                    </header>
+                    <a class="content" href="#!/informativo/noticias/{{item.Slug}}">
+                        <span class="category-label">{{item.NoticiaCategoria.Descricao}}</span>
+                        <h2 class="title-bold">{{item.Titulo}}</h2>
+                        <div class="block-text">
+                            <p>{{item.SubTitulo}}</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>

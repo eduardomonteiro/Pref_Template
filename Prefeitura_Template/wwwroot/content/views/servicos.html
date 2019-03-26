@@ -1,0 +1,68 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<section class="map-wrapper" map-lazy-load="https://maps.google.com/maps/api/js">
+    <header class="filter-map">
+        <h2 class="title">Mapa de Serviços</h2>
+        <nav class="buttons">
+            <button ng-repeat="item in categoriasServico" ng-class="{'active': catSelect == item.Id}" ng-click="changePin(item.Id)">{{item.Descricao}}</button>
+        </nav>
+    </header>
+    <ng-map id="map" center="[{{centerMap.Latitude}}, {{centerMap.Longitude}}]" geo-fallback-center="-22.546952, -44.005339" zoom="12" class="map-box">
+            
+        <marker position="{{marker.ServicoPin[0].Latitude}},{{marker.ServicoPin[0].Longitude}}" title="{{marker.Nome}}" icon="../images/pin.png" on-click="map.showInfoWindow('bar')" ng-repeat="marker in markers" id="marker1">
+            <info-window id="bar">
+                <div>
+                    <div class="info-window">
+                        <div class="ico">
+                            <img src="{{marker.CaminhoLogicoIcone}}" alt="{{marker.Nome}}">
+                        </div>
+                        <div class="info">
+                            <span class="category-label contrast">{{marker.ServicoCategoria.Descricao}}</span>
+                            <h3 class="title-bold">{{marker.Nome}}</h3>
+                            <div class="block-text" ng-bind-html="marker.Descricao"></div>
+                        </div>
+                    </div>
+                </div>
+            </info-window>  	
+        </marker>
+        
+    </ng-map>
+</section>
+<div class="container-general">
+    <div class="center">
+        <header class="filter-box">
+            <h2 class="title-area">Filtro</h2>
+            <form class="row-grid clearfix" ng-submit="searchFilter()">
+                <div class="grid-7">
+                    <label class="label-input">Palavra-Chave</label>
+                    <input type="text" placeholder="Digite um termo para filtrar" class="input-default total" ng-model="palavra">
+                </div>
+                <div class="grid-3">
+                    <label class="label-input">Categoria</label>
+                    <select class="input-default total" ng-model="categoriaid" ng-options="cat as cat.Descricao for cat in categoriasServico track by cat.Id">
+                        <option value="">Selecione a Categoria</option>
+                    </select>
+                </div>
+                <div class="grid-2">
+                    <button class="bt-default total">Filtrar</button>
+                </div>
+            </form>
+        </header>
+        <ul class="card-default padding ">
+            <li class="card-default" ng-repeat="item in servicos">
+                <a href="#!/servicos/{{item.Slug}}">
+                    <img src="{{item.CaminhoLogicoIcone}}" alt="{{item.Descricao}}" class="ico">
+                    <span class="category-label contrast">{{item.ServicoCategoria.Descricao}}</span>
+                    <h2 class="title-bold">{{item.Nome}}</h2>
+                    <h4 class="description" ng-bind-html="item.Chamada"></h4>
+                    <div class="block-text" ng-bind-html="item.Descricao | limitTo: 100"></div>
+                </a>
+            </li>
+        </ul>
+        <div class="block-text" ng-if="servicos.length == 0">
+            <p class="text-center">Nenhum resultado encontrado.</p>
+        </div>
+        <footer class="loading" ng-if="servicos.length > 0">
+            <button class="bt-gray" ng-click="loadMore()" ng-disabled="disabled">Carregar mais</button>
+        </footer>
+    </div>
+</div>

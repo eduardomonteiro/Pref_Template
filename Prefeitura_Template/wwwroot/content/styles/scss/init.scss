@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+
+// Variaveis de reutilização
+$total: 1100;
+$cor1: #002b68;
+$cor1_light: #003c76;
+$cor2: #017faf;
+$cor3: #28a6d6;
+$gray: #f8f8f8;
+$corcancela: #e62f38;
+$corconfirma: #66bf3e;
+$cortext: #333333;
+$font: 'Open Sans', sans-serif;
+
+@import 'config/_mixins';
+@import 'general/*.scss';
+@import 'components/*.scss';
+
+.center {
+	max-width: $total + px;
+	margin: 0 auto;
+	position: relative;
+	box-sizing: border-box;
+}
+
+.pager {
+    opacity: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.8s ease;
+    &.ng-enter {
+    	opacity: 0;
+    	.spinner  {
+    		opacity: 0;
+    	}
+    }
+    &.ng-leave {
+    	opacity: 0;
+    }
+}

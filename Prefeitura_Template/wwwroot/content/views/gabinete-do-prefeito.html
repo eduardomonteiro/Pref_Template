@@ -1,0 +1,169 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<section class="map-wrapper" map-lazy-load="https://maps.google.com/maps/api/js" style="margin: 0">
+    <div class="center">
+        <div class="list-secretary row-grid clearfix">
+            <div class="grid-3">
+                <div class="card">
+                    <img src="{{conteudo.CaminhoLogicoIcone}}" class="ico" alt="{{conteudo.Cargo}}">
+                    <h2 class="title">
+                        <strong>Gabinete <br> do Prefeito</strong>
+                    </h2>
+                    <ul class="contacts">
+                        <li>
+                            <h3>Secretário</h3>
+                            <p>{{conteudo.NomeResponsavel}}</p>
+                        </li>
+                        <li>
+                            <h3>Contato</h3>
+                            <p>{{conteudo.Telefone}} <br>{{conteudo.Email}}</p>
+                        </li>
+                    </ul>
+                    <a href="https://www.google.com.br/maps/dir/{{conteudo.Latitude}},{{conteudo.Longitude}}/Pinheiral+-+RJ,+27197-000/@-22.5445961,-44.1530325,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x9ea4d279061cd7:0xd821a598c0160ed8!2m2!1d-44.0103922!2d-22.5383309" class="bt-default">Ver Rota</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-map center="{{conteudo.Latitude}},{{conteudo.Longitude}}" zoom="14" class="map-box">
+        <marker position="{{conteudo.Latitude}}, {{conteudo.Longitude}}" title="{{marker.name}}" icon="../images/pin.png"></marker>
+    </ng-map>
+</section>
+<div class="info-governament">
+    <div class="center row-grid clearfix">
+        <div class="grid-3 user">
+            <img src="{{conteudo.CaminhoLogicoImagemResponsavel}}" class="pic" alt="{{conteudo.NomeResponsavel}}">
+            <div class="text">
+                <span>Prefeito</span>
+                <p>{{conteudo.NomeResponsavel}}</p>
+            </div>
+        </div>
+        <div class="grid-2">
+            <span>Telefone</span>
+            <p>{{conteudo.Telefone}}</p>
+        </div>
+        <div class="grid-3">
+            <span>Email</span>
+            <p>{{conteudo.Email}}</p>
+        </div>
+        <div class="grid-4">
+            <span>Horário</span>
+            <p>{{conteudo.HorarioAtendimento}}</p>
+        </div>
+    </div>
+</div>
+<section class="secretary-card" style="background: #fafafa;">
+    <div class="center">
+        <header class="header-button">
+            <h2 class="title-area">Projetos</h2>
+            <a class="bt-default" href="#!/o-governo/projetos">Ver Todas</a>
+        </header>
+        <slick class="list-secretary layout-2" settings="slickConfig3" data="number">
+            <div class="card" ng-repeat="item in conteudo.Projetos">
+                <a href="#!/o-governo/projetos/{{item.Slug}}">
+                    <h2 class="title-bold">
+                        {{item.Titulo}}
+                    </h2>
+                    <div class="block-text">
+                        <p>{{item.SubTitulo}}</p>
+                    </div>
+                </a>    
+            </div>
+        </slick>
+    </div>
+</section>
+<section class="news-wrapper layout-2"  style="background: #fafafa; margin-top: 0">
+    <div class="center">
+        <header class="header-button">
+            <h2 class="title-area">Notícias Relacionadas</h2>
+            <a class="bt-default" href="#!/informativo/noticias">Ver Todos</a>
+        </header>
+        <ul class="list">
+            <li style="background-image: url({{conteudo.Noticias[0].NoticiaCategoria.Descricao}})">
+                <a href="#!/informativo/noticias/{{conteudo.Noticias[0].Slug}}">
+                    <span class="category-label">{{conteudo.Noticias[0].NoticiaCategoria.Descricao}}</span>
+                    <h3 class="title">{{conteudo.Noticias[0].Titulo}}</h3>
+                </a>
+            </li>
+            <li ng-if="conteudo.Noticias.length >= 2">
+                <a href="#!/informativo/noticias/{{conteudo.Noticias[1].Slug}}">
+                    <span class="category-label">{{conteudo.Noticias[1].NoticiaCategoria.Descricao}}</span>
+                    <p class="date">{{conteudo.Noticias[1].DataPublicacao</p>
+                    <h3 class="title-bold">{{conteudo.Noticias[1].Titulo}}</h3>
+                    <div class="block-text">
+                        <p>{{conteudo.Noticias[1].Titulo.SubTitulo}}</p>
+                    </div>
+                </a>
+            </li>
+            <li ng-if="conteudo.Noticias.length >= 3">
+                <a href="#!/informativo/noticias/{{conteudo.Noticias[2].Slug}}">
+                    <span class="category-label">{{conteudo.Noticias[1].NoticiaCategoria.Descricao}}</span>
+                    <p class="date">{{conteudo.Noticias[1].DataPublicacao</p>
+                    <h3 class="title-bold">{{conteudo.Noticias[1].Titulo}}</h3>
+                    <div class="block-text">
+                        <p>{{conteudo.Noticias[1].Titulo.SubTitulo}}</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+<section class="events-card">
+    <div class="center">
+        <header class="header-button">
+            <h2 class="title-area">Eventos Relacionadas</h2>
+            <a class="bt-default" href="#!/informativo/eventos">Ver Todos</a>
+        </header>
+        <ul class="list">
+            <li ng-repeat="item in conteudo.Eventos">
+                <header class="header">
+                    <span>{{item.DataHorarioEvento | createDate}}</span>
+                </header>
+                <a class="content" href="#!/informativo/eventos/{{item.Slug}}">
+                    <span class="category-label">{{item.EventoCategoria.Descricao}}</span>
+                    <h2 class="title-bold">{{item.Titulo}}</h2>
+                    <div class="block-text">
+                        <p>{{item.Texto}}</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+<section class="wrapper-documents">
+    <div class="center">
+        <h2 class="title-area">Documentos</h2>
+        <slick class="list-documents" settings="slickConfig2" data="number">
+            <a href="{{item.CaminhoLogicoArquivo}}" download class="card" ng-repeat="item in conteudo.Documentos">
+                <i class="fa fa-file-pdf-o"></i>
+                <h3 class="title">{{item.Nome}}</h3>
+            </a>
+        </slick>
+    </div>
+</section>
+<section class="secretary-card" style="padding-bottom: 0">
+    <div class="center">
+        <header class="header-button">
+            <h2 class="title-area">Outras Secretarias</h2>
+            <a class="bt-default" href="#!/o-governo/secretarias">Ver Todas</a>
+        </header>
+        <slick class="list-secretary" settings="slickConfig3" data="number">
+            <div class="card" ng-repeat="item in conteudo.Secretarias">
+                <a href="#!/o-governo/secretarias/{{item.Slug}}">
+                    <img src="{{item.CaminhoLogicoIcone}}" class="ico" alt="{{item.Nome}}">
+                    <h2 class="title">
+                        Secretaria Municipal de <strong>{{item.Nome}}</strong>
+                    </h2>
+                    <ul class="contacts">
+                        <li>
+                            <h3>Secretário</h3>
+                            <p>{{item.NomeResponsavel}}</p>
+                        </li>
+                        <li>
+                            <h3>Contato</h3>
+                            <p>{{item.Telefone}} <br>{{item.Email}}</p>
+                        </li>
+                    </ul>
+                </a>
+            </div>
+        </slick>
+    </div>
+</section>

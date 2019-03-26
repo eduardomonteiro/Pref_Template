@@ -1,0 +1,32 @@
+<div ng-include="'views/_partials/_breadcumb.html'"></div>
+<div class="container-general">
+    <div class="center">
+        </header>
+        <ul class="list-news intern">
+            <li>
+                <a class="content block-text" href="#">
+                    <header class="header">
+                        <span class="category-label">{{conteudo.LicitacaoModalidade.Descricao}}</span>
+                        <span class="date">{{conteudo.StatusPublicacao.Descricao}}</span>
+                    </header>
+                    <h2 class="title-bold">{{conteudo.Titulo}}</h2>
+                    <p>{{conteudo.Descricao}}</p>
+                    <div class="infos-auxiliar">
+                        <p><strong>Número:</strong> {{conteudo.Numero}}</p>
+                        <p><strong>Data de Abertura:</strong> {{conteudo.DataAbertura}}</p>
+                        <p><strong>Data de Publicação:</strong> {{conteudo.DataPublicacao}}</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <section class="documents-wrapper">
+            <h2 class="title-area">Documentos</h2>
+            <nav class="list-documents clearfix">
+                <a href="{{item.CaminhoLogicoArquivo}}" download class="card" ng-repeat="item in conteudo.LicitacaoArquivo">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <h3 class="title">{{item.ArquivoNome}}</h3>
+                </a>
+            </nav>
+        </section>
+    </div>
+</div>
