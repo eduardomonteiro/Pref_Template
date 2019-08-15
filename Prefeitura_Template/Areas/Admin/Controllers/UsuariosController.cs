@@ -364,7 +364,7 @@ namespace Prefeitura_Template.Areas.Admin.Controllers
             if (result == SignInStatus.Success)
             {
                 Usuario User = db.Usuario.Where(x => x.Email == model.Email).FirstOrDefault();
-                if (User.Email != "admin@am4.com.br" && User.Status != (int)StatusPadrao.Ativo)
+                if (User.Email != "admin@mysite.com.br" && User.Status != (int)StatusPadrao.Ativo)
                 {
                     ModelState.AddModelError("", "Usuário bloqueado");
                     return View(model);

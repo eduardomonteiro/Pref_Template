@@ -163,7 +163,7 @@ namespace Prefeitura_Template.Areas.Admin.Utils
                 using (db)
                 {
                     Usuario Usuario = db.Usuario.Where(x => x.Id == CodUser).FirstOrDefault();
-                    if (Usuario.Email != "admin@am4.com.br")
+                    if (Usuario.Email != "admin@mysite.com.br")
                     {
                         var pu = db.Perfil_Area.Where(x => x.AreaId == AreaId && x.PerfilId == Usuario.PerfilId).AsQueryable().ToList();
                         if (filtrarCriacao)
@@ -205,7 +205,7 @@ namespace Prefeitura_Template.Areas.Admin.Utils
                 using (db)
                 {
                     Usuario Usuario = db.Usuario.Where(x => x.Id == CodUser).FirstOrDefault();
-                    if (Usuario.Email != "admin@am4.com.br")
+                    if (Usuario.Email != "admin@mysite.com.br")
                     {
                         var pu = db.Perfil_Area.Where(x => x.AreaId == AreaId && x.PerfilId == Usuario.PerfilId).AsQueryable().ToList();
                         if (filtrarCriacao)

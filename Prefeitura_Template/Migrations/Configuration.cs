@@ -276,7 +276,7 @@ namespace Prefeitura_Template.Migrations
                 //            AudioHino = "hino.mp3",
                 //            Altitude = "18.000",
                 //            Area = "15.000 M2",
-                //            AtualPrefeito = "João Ninguém",
+                //            AtualPrefeito = "Joï¿½o Ninguï¿½m",
                 //            Clima = "Seco",
                 //            Densidade = "10.000",
                 //            Populacao = "30 mil",
@@ -299,7 +299,7 @@ namespace Prefeitura_Template.Migrations
                       new Area
                       {
                           Id = 1,
-                          Descricao = "Usuários",
+                          Descricao = "Usuï¿½rios",
                           Nome = "Usuarios",
                           Action = "Index",
                           LinkClass = "fa fa-user",
@@ -347,7 +347,7 @@ namespace Prefeitura_Template.Migrations
                       new Area
                       {
                           Id = 5,
-                          Descricao = "Atrações Turísticas",
+                          Descricao = "Atraï¿½ï¿½es Turï¿½sticas",
                           Nome = "Turismo",
                           Action = "Index",
                           LinkClass = "fa fa-picture-o",
@@ -383,7 +383,7 @@ namespace Prefeitura_Template.Migrations
                       new Area
                       {
                           Id = 8,
-                          Descricao = "Notícias",
+                          Descricao = "Notï¿½cias",
                           Nome = "Noticias",
                           Action = "Index",
                           LinkClass = "fa fa-newspaper-o",
@@ -479,7 +479,7 @@ namespace Prefeitura_Template.Migrations
                       new Area
                       {
                           Id = 16,
-                          Descricao = "Faça uma Sugestão",
+                          Descricao = "Faï¿½a uma Sugestï¿½o",
                           Nome = "Sugestoes",
                           Action = "Index",
                           LinkClass = "fa fa-comments",
@@ -491,7 +491,7 @@ namespace Prefeitura_Template.Migrations
                       new Area
                       {
                           Id = 17,
-                          Descricao = "Licitações",
+                          Descricao = "Licitaï¿½ï¿½es",
                           Nome = "Licitacoes",
                           Action = "Index",
                           LinkClass = "fa fa-folder-o",
@@ -551,7 +551,7 @@ namespace Prefeitura_Template.Migrations
                       new Area
                       {
                           Id = 22,
-                          Descricao = "Legislação",
+                          Descricao = "Legislaï¿½ï¿½o",
                           Nome = "Legislacoes",
                           Action = "Index",
                           LinkClass = "fa fa-file",
@@ -575,7 +575,7 @@ namespace Prefeitura_Template.Migrations
                       new Area
                       {
                           Id = 24,
-                          Descricao = "Patrimonio Histórico",
+                          Descricao = "Patrimonio Histï¿½rico",
                           Nome = "PatrimonioHistoricoCultural",
                           Action = "Index",
                           LinkClass = "fa fa-university",
@@ -587,7 +587,7 @@ namespace Prefeitura_Template.Migrations
                       new Area
                       {
                           Id = 25,
-                          Descricao = "Perfil Sócio-Econômico",
+                          Descricao = "Perfil Sï¿½cio-Econï¿½mico",
                           Nome = "PerfilSocioEconomico",
                           Action = "Index",
                           LinkClass = "fa fa-mouse-pointer",
@@ -611,7 +611,7 @@ namespace Prefeitura_Template.Migrations
                       new Area
                       {
                           Id = 27,
-                          Descricao = "Serviços",
+                          Descricao = "Serviï¿½os",
                           Nome = "Servicos",
                           Action = "Index",
                           LinkClass = "fa fa-arrows",
@@ -635,7 +635,7 @@ namespace Prefeitura_Template.Migrations
                       new Area
                       {
                           Id = 29,
-                          Descricao = "À Cidade",
+                          Descricao = "ï¿½ Cidade",
                           Nome = "",
                           Action = "",
                           LinkClass = "fa fa-building-o",
@@ -659,7 +659,7 @@ namespace Prefeitura_Template.Migrations
                       new Area
                       {
                           Id = 31,
-                          Descricao = "Multimídia",
+                          Descricao = "Multimï¿½dia",
                           Nome = "",
                           Action = "",
                           LinkClass = "fa fa-file-text",
@@ -696,7 +696,7 @@ namespace Prefeitura_Template.Migrations
                       new Area
                       {
                           Id = 34,
-                          Descricao = "Publicações Oficias",
+                          Descricao = "Publicaï¿½ï¿½es Oficias",
                           Nome = "",
                           Action = "",
                           LinkClass = "fa fa-newspaper-o",
@@ -720,24 +720,6 @@ namespace Prefeitura_Template.Migrations
                       }
                     );
                 context.SaveChanges();
-
-                //var passwordHash = new PasswordHasher();
-                //string password = passwordHash.HashPassword("Admin#4ma");
-                //context.Users.AddOrUpdate(u => u.Id,
-                //    new Usuario
-                //    {
-                //        Id = 1,
-                //        Email = "admin@am4.com.br",
-                //        UserName = "admin@am4.com.br",
-                //        PasswordHash = password,
-                //        Nome = "Administrador",
-                //        SecurityStamp = Guid.NewGuid().ToString(),
-                //        Status = (int)StatusPadrao.Excluido,
-                //        DataCadastro = DateTime.Now,
-                //        Tema = "sknPadrao",
-                //        PerfilId = 1
-                //    });
-                //context.SaveChanges();
 
                 //for (int I = 1; I <= 35; I++)
                 //{
@@ -784,7 +766,7 @@ namespace Prefeitura_Template.Migrations
                 //    {
                 //        Id = 1,
                 //        Arquivo = "Teste.pdf",
-                //        ArquivoNome = "Nome de exibição",
+                //        ArquivoNome = "Nome de exibiï¿½ï¿½o",
                 //        Tamanho = "15MB",
                 //        DocumentoId = 1,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -837,7 +819,7 @@ namespace Prefeitura_Template.Migrations
                 //    {
                 //        Id = 1,
                 //        Midia = "Teste.jpg",
-                //        Credito = "Crédito Imagem Teste",
+                //        Credito = "Crï¿½dito Imagem Teste",
                 //        Legenda = "Legenda Imagem Teste",
                 //        EventoId = 1,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -904,7 +886,7 @@ namespace Prefeitura_Template.Migrations
                 //    {
                 //        Id = 1,
                 //        Midia = "Teste.jpg",
-                //        Credito = "Crédito Imagem Teste",
+                //        Credito = "Crï¿½dito Imagem Teste",
                 //        Legenda = "Legenda Imagem Teste",
                 //        NoticiaId = 1,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1027,31 +1009,6 @@ namespace Prefeitura_Template.Migrations
                 //    });
                 //context.SaveChanges();
 
-                //context.Secretaria.AddOrUpdate(u => u.Id,
-                //    new Secretaria
-                //    {
-                //        Id = 1,
-                //        Nome = "Teste Gabinete",
-                //        Slug = "teste-gabinete",
-                //        Atribuicao = "Atribuicoes gabinete",
-                //        Cargo = "Cargo gabinete",
-                //        Email = "gabinete@am4.com.br",
-                //        Endereco = "rua do gabinete 168",
-                //        Icone = "TesteIcone.jpg",
-                //        ImagemLocal = "TesteLocal.jpg",
-                //        ImagemResponsavel = "TesteResponsavel.jpg",
-                //        HorarioAtendimento = "Das 8:00 às 16:00",
-                //        Latitude = "-22.550057",
-                //        Longitude = "-44.176994",
-                //        NomeResponsavel = "Joao gabinete",
-                //        SecretariaCategoriaId = 1,
-                //        SecretariaNomePrefixoId = 1,
-                //        Telefone = "(99)9999-99999",
-                //        Status = (int)StatusPadrao.Ativo,
-                //        DataCadastro = DateTime.Now
-                //    });
-                //context.SaveChanges();
-
                 //context.Tag.AddOrUpdate(u => u.Id,
                 //    new Tag
                 //    {
@@ -1060,31 +1017,6 @@ namespace Prefeitura_Template.Migrations
                 //        AreaId = 11,
                 //        Descricao = "Teste",
                 //        Slug = "teste",
-                //        Status = (int)StatusPadrao.Ativo,
-                //        DataCadastro = DateTime.Now
-                //    });
-                //context.SaveChanges();
-
-                //context.Secretaria.AddOrUpdate(u => u.Id,
-                //    new Secretaria
-                //    {
-                //        Id = 2,
-                //        Nome = "Teste Secretaria",
-                //        Slug = "teste-secretaria",
-                //        Atribuicao = "Atribuicoes teste",
-                //        Cargo = "Cargo teste",
-                //        Email = "joaoninguem@am4.com.br",
-                //        Endereco = "rua do ze 168",
-                //        Icone = "TesteIcone.jpg",
-                //        ImagemLocal = "TesteLocal.jpg",
-                //        ImagemResponsavel = "TesteResponsavel.jpg",
-                //        HorarioAtendimento = "Das 8:00 às 16:00",
-                //        Latitude = "-22.550057",
-                //        Longitude = "-44.176994",
-                //        NomeResponsavel = "Joao ninguem",
-                //        SecretariaCategoriaId = 2,
-                //        SecretariaNomePrefixoId = 1,
-                //        Telefone = "(99)9999-99999",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    });
@@ -1136,7 +1068,7 @@ namespace Prefeitura_Template.Migrations
                 //    {
                 //        Id = 1,
                 //        Arquivo = "Teste.pdf",
-                //        ArquivoNome = "Nome de exibição",
+                //        ArquivoNome = "Nome de exibiï¿½ï¿½o",
                 //        Tamanho = "15MB",
                 //        ProjetoId = 1,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1181,7 +1113,7 @@ namespace Prefeitura_Template.Migrations
                 //     new InformativoCategoria
                 //     {
                 //         Id = 2,
-                //         Descricao = "Informativo ao Servidor e Informativos de Gestão",
+                //         Descricao = "Informativo ao Servidor e Informativos de Gestï¿½o",
                 //         Status = (int)StatusPadrao.Ativo,
                 //         DataCadastro = DateTime.Now
                 //     });
@@ -1210,7 +1142,7 @@ namespace Prefeitura_Template.Migrations
                 //    {
                 //        Id = 1,
                 //        Midia = "Teste.jpg",
-                //        Credito = "Crédito Imagem Teste",
+                //        Credito = "Crï¿½dito Imagem Teste",
                 //        Legenda = "Legenda Imagem Teste",
                 //        InformativoId = 1,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1262,7 +1194,7 @@ namespace Prefeitura_Template.Migrations
                 //    {
                 //        Id = 1,
                 //        Imagem = "Teste.jpg",
-                //        Credito = "Crédito Imagem Teste",
+                //        Credito = "Crï¿½dito Imagem Teste",
                 //        Legenda = "Legenda Imagem Teste",
                 //        GaleriaFotoId = 1,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1364,7 +1296,7 @@ namespace Prefeitura_Template.Migrations
                 //    new ServicoCategoria
                 //    {
                 //        Id = 1,
-                //        Descricao = "Cidadão",
+                //        Descricao = "Cidadï¿½o",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    },
@@ -1385,7 +1317,7 @@ namespace Prefeitura_Template.Migrations
                 //    new ServicoCategoria
                 //    {
                 //        Id = 4,
-                //        Descricao = "Servidor Público",
+                //        Descricao = "Servidor Pï¿½blico",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    });
@@ -1473,7 +1405,7 @@ namespace Prefeitura_Template.Migrations
                 //    new EnqueteOpcao
                 //    {
                 //        Id = 1,
-                //        Opcao = "Opção 1",
+                //        Opcao = "Opï¿½ï¿½o 1",
                 //        EnqueteId = 1,
                 //        Ordem = 0,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1485,7 +1417,7 @@ namespace Prefeitura_Template.Migrations
                 //    new EnqueteOpcao
                 //    {
                 //        Id = 2,
-                //        Opcao = "Opção 2",
+                //        Opcao = "Opï¿½ï¿½o 2",
                 //        EnqueteId = 1,
                 //        Ordem = 1,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1497,7 +1429,7 @@ namespace Prefeitura_Template.Migrations
                 //    new EnqueteOpcao
                 //    {
                 //        Id = 3,
-                //        Opcao = "Opção 3",
+                //        Opcao = "Opï¿½ï¿½o 3",
                 //        EnqueteId = 1,
                 //        Ordem = 2,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1509,7 +1441,7 @@ namespace Prefeitura_Template.Migrations
                 //    new EnqueteOpcao
                 //    {
                 //        Id = 4,
-                //        Opcao = "Opção 4",
+                //        Opcao = "Opï¿½ï¿½o 4",
                 //        EnqueteId = 1,
                 //        Ordem = 3,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1521,7 +1453,7 @@ namespace Prefeitura_Template.Migrations
                 //    new EnqueteOpcao
                 //    {
                 //        Id = 5,
-                //        Opcao = "Opção 5",
+                //        Opcao = "Opï¿½ï¿½o 5",
                 //        EnqueteId = 1,
                 //        Ordem = 4,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1555,7 +1487,7 @@ namespace Prefeitura_Template.Migrations
                 //    new EnqueteOpcao
                 //    {
                 //        Id = 6,
-                //        Opcao = "Opção 1",
+                //        Opcao = "Opï¿½ï¿½o 1",
                 //        EnqueteId = 2,
                 //        Ordem = 0,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1567,7 +1499,7 @@ namespace Prefeitura_Template.Migrations
                 //    new EnqueteOpcao
                 //    {
                 //        Id = 7,
-                //        Opcao = "Opção 2",
+                //        Opcao = "Opï¿½ï¿½o 2",
                 //        EnqueteId = 2,
                 //        Ordem = 1,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1579,7 +1511,7 @@ namespace Prefeitura_Template.Migrations
                 //    new EnqueteOpcao
                 //    {
                 //        Id = 8,
-                //        Opcao = "Opção 3",
+                //        Opcao = "Opï¿½ï¿½o 3",
                 //        EnqueteId = 2,
                 //        Ordem = 2,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1591,7 +1523,7 @@ namespace Prefeitura_Template.Migrations
                 //    new EnqueteOpcao
                 //    {
                 //        Id = 9,
-                //        Opcao = "Opção 4",
+                //        Opcao = "Opï¿½ï¿½o 4",
                 //        EnqueteId = 2,
                 //        Ordem = 3,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1603,7 +1535,7 @@ namespace Prefeitura_Template.Migrations
                 //    new EnqueteOpcao
                 //    {
                 //        Id = 10,
-                //        Opcao = "Opção 5",
+                //        Opcao = "Opï¿½ï¿½o 5",
                 //        EnqueteId = 2,
                 //        Ordem = 4,
                 //        Status = (int)StatusPadrao.Ativo,
@@ -1641,7 +1573,7 @@ namespace Prefeitura_Template.Migrations
                 //    new ContatoCategoria
                 //    {
                 //        Id = 2,
-                //        Descricao = "Sugestões",
+                //        Descricao = "Sugestï¿½es",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    }
@@ -1663,47 +1595,13 @@ namespace Prefeitura_Template.Migrations
                 //    new ContatoTipo
                 //    {
                 //        Id = 2,
-                //        Descricao = "Tipo Sugestão teste",
+                //        Descricao = "Tipo Sugestï¿½o teste",
                 //        ContatoCategoriaId = 2,
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    });
                 //context.SaveChanges();
 
-                //context.Contato.AddOrUpdate(u => u.Id,
-                //    new Contato
-                //    {
-                //        Id = 1,
-                //        Nome = "Alguém",
-                //        ContatoTipoId = 1,
-                //        BairroId = 1,
-                //        Celular = "(24)9999-99999",
-                //        CPF = "111.111.111-11",
-                //        Email = "weslei.stange@am4.com.br",
-                //        Mensagem = "teste de fale conosco",
-                //        StatusFaleConosco = 1,
-                //        Telefone = "(24)1111-11111",
-                //        Status = (int)StatusPadrao.Ativo,
-                //        DataCadastro = DateTime.Now
-                //    });
-                //context.SaveChanges();
-
-                //context.Contato.AddOrUpdate(u => u.Id,
-                //    new Contato
-                //    {
-                //        Id = 2,
-                //        Nome = "Alguém",
-                //        ContatoTipoId = 2,
-                //        BairroId = 1,
-                //        Celular = "(24)9999-99999",
-                //        CPF = "111.111.111-11",
-                //        Email = "weslei.stange@am4.com.br",
-                //        Mensagem = "teste de sugestão",
-                //        Telefone = "(24)1111-11111",
-                //        Status = (int)StatusPadrao.Ativo,
-                //        DataCadastro = DateTime.Now
-                //    });
-                //context.SaveChanges();
 
                 //context.StatusPublicacao.AddOrUpdate(u => u.Id,
                 //    new StatusPublicacao
@@ -1754,7 +1652,7 @@ namespace Prefeitura_Template.Migrations
                 //    new LicitacaoModalidade
                 //    {
                 //        Id = 1,
-                //        Descricao = "Tomada de Preço",
+                //        Descricao = "Tomada de Preï¿½o",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    },
@@ -1768,21 +1666,21 @@ namespace Prefeitura_Template.Migrations
                 //    new LicitacaoModalidade
                 //    {
                 //        Id = 3,
-                //        Descricao = "Chamada Pública",
+                //        Descricao = "Chamada Pï¿½blica",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    },
                 //    new LicitacaoModalidade
                 //    {
                 //        Id = 4,
-                //        Descricao = "Concorrência Pública",
+                //        Descricao = "Concorrï¿½ncia Pï¿½blica",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    },
                 //    new LicitacaoModalidade
                 //    {
                 //        Id = 5,
-                //        Descricao = "Dispensa de Licitação",
+                //        Descricao = "Dispensa de Licitaï¿½ï¿½o",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    },
@@ -1796,21 +1694,21 @@ namespace Prefeitura_Template.Migrations
                 //    new LicitacaoModalidade
                 //    {
                 //        Id = 7,
-                //        Descricao = "Leilão",
+                //        Descricao = "Leilï¿½o",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    },
                 //    new LicitacaoModalidade
                 //    {
                 //        Id = 8,
-                //        Descricao = "Pregão Eletrônico",
+                //        Descricao = "Pregï¿½o Eletrï¿½nico",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    },
                 //    new LicitacaoModalidade
                 //    {
                 //        Id = 9,
-                //        Descricao = "Pregão Presencial",
+                //        Descricao = "Pregï¿½o Presencial",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    });
@@ -1820,9 +1718,9 @@ namespace Prefeitura_Template.Migrations
                 //    new Licitacao
                 //    {
                 //        Id = 1,
-                //        Titulo = "Licitação Teste",
+                //        Titulo = "Licitaï¿½ï¿½o Teste",
                 //        NumeroNome = "123",
-                //        Descricao = "Descrição da Licitação Teste",
+                //        Descricao = "Descriï¿½ï¿½o da Licitaï¿½ï¿½o Teste",
                 //        LicitacaoModalidadeId = 1,
                 //        Slug = "licitacao-teste",
                 //        DataAbertura = DateTime.Now.AddDays(-10),
@@ -1858,7 +1756,7 @@ namespace Prefeitura_Template.Migrations
                 //    new ConcursoModalidade
                 //    {
                 //        Id = 2,
-                //        Descricao = "Convocação e Processo Seletivo",
+                //        Descricao = "Convocaï¿½ï¿½o e Processo Seletivo",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    });
@@ -1869,7 +1767,7 @@ namespace Prefeitura_Template.Migrations
                 //    {
                 //        Id = 1,
                 //        Titulo = "Concurso Teste",
-                //        Descricao = "Descrição da Concurso Teste",
+                //        Descricao = "Descriï¿½ï¿½o da Concurso Teste",
                 //        ConcursoModalidadeId = 1,
                 //        Slug = "concurso-teste",
                 //        DataInicio = DateTime.Now.AddDays(-10),
@@ -1898,14 +1796,14 @@ namespace Prefeitura_Template.Migrations
                 //    new LegislacaoCategoria
                 //    {
                 //        Id = 1,
-                //        Descricao = "Código de Obras",
+                //        Descricao = "Cï¿½digo de Obras",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    },
                 //    new LegislacaoCategoria
                 //    {
                 //        Id = 2,
-                //        Descricao = "Código Tributário",
+                //        Descricao = "Cï¿½digo Tributï¿½rio",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    },
@@ -1926,14 +1824,14 @@ namespace Prefeitura_Template.Migrations
                 //    new LegislacaoCategoria
                 //    {
                 //        Id = 5,
-                //        Descricao = "Lei Orgânica",
+                //        Descricao = "Lei Orgï¿½nica",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    },
                 //    new LegislacaoCategoria
                 //    {
                 //        Id = 6,
-                //        Descricao = "Lei Ordinária",
+                //        Descricao = "Lei Ordinï¿½ria",
                 //        Status = (int)StatusPadrao.Ativo,
                 //        DataCadastro = DateTime.Now
                 //    },
@@ -1957,8 +1855,8 @@ namespace Prefeitura_Template.Migrations
                 //    new Legislacao
                 //    {
                 //        Id = 1,
-                //        Titulo = "Legislação Teste",
-                //        Descricao = "Descrição da Legislação Teste",
+                //        Titulo = "Legislaï¿½ï¿½o Teste",
+                //        Descricao = "Descriï¿½ï¿½o da Legislaï¿½ï¿½o Teste",
                 //        LegislacaoCategoriaId = 1,
                 //        DataPublicacao = DateTime.Now,
                 //        Status = (int)StatusPadrao.Ativo,
